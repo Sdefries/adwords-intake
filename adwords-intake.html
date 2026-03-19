@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Ads Intake — SponsorAPurpose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#0083C6;--primary-dark:#006aa0;--primary-light:#e8f4fb;
+  --secondary:#3DAA69;--navy:#0a1628;--bg:#f0f6fb;--card:#ffffff;
+  --border:#e2e8f0;--text:#0a1628;--muted:#64748b;--subtle:#94a3b8;
+  --ads-accent:#F59E0B;--ads-accent-light:#FEF3C7;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Rethink Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#0a1628 0%,#0f2442 60%,#0a1628 100%);position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,131,198,.15) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(245,158,11,.08) 0%,transparent 50%)}
+.header-inner{position:relative;max-width:900px;margin:0 auto;padding:40px 32px 44px}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.header-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;color:#FCD34D;letter-spacing:.08em;text-transform:uppercase}
+.header-eyebrow::before{content:'●';font-size:7px;color:#F59E0B}
+.header-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.header h1{font-size:clamp(22px,3.5vw,32px);font-weight:800;color:white;line-height:1.15;margin-bottom:8px;letter-spacing:-.5px}
+.header h1 span{color:#7dd3fc}
+.header-desc{color:rgba(255,255,255,.5);font-size:13px;line-height:1.6;max-width:500px}
+.progress-bar-wrap{display:flex;align-items:center;gap:12px;min-width:200px}
+.progress-track{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--primary),var(--ads-accent));transition:width .4s ease;width:0%}
+.progress-pct{font-size:12px;font-weight:700;color:rgba(255,255,255,.5);min-width:36px;text-align:right}
+
+/* STEP NAV */
+.step-nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.06)}
+.step-nav-inner{max-width:900px;margin:0 auto;padding:0 32px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.step-nav-inner::-webkit-scrollbar{display:none}
+.step-tab{display:flex;align-items:center;gap:7px;padding:14px 16px;font-size:12px;font-weight:700;color:var(--subtle);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;flex-shrink:0;font-family:inherit}
+.step-tab:hover{color:var(--primary)}
+.step-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.step-tab.done{color:var(--secondary)}
+.step-tab .step-dot{width:18px;height:18px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:var(--subtle);flex-shrink:0;transition:all .15s}
+.step-tab.active .step-dot{background:var(--primary);color:white}
+.step-tab.done .step-dot{background:var(--secondary);color:white}
+
+/* LAYOUT */
+.form-wrap{max-width:900px;margin:0 auto;padding:24px 32px 80px}
+@media(max-width:600px){.form-wrap{padding:16px 16px 60px}.header-inner{padding:24px 20px 28px}.step-nav-inner{padding:0 16px}.step-tab{padding:12px 10px;font-size:11px}}
+
+/* SECTIONS */
+.form-section{display:none}
+.form-section.active{display:block}
+
+/* SECTION CARDS */
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:visible;margin-bottom:16px;transition:box-shadow .2s}
+.section-card:focus-within{box-shadow:0 0 0 3px rgba(0,131,198,.12)}
+.section-header{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--border);background:var(--card);border-radius:20px 20px 0 0}
+.section-icon{font-size:18px;line-height:1;flex-shrink:0}
+.section-title{font-weight:800;font-size:14px;color:var(--navy)}
+.section-subtitle{font-size:12px;color:var(--muted);margin-left:auto}
+.section-body{padding:20px;display:flex;flex-direction:column;gap:18px}
+
+/* FIELDS */
+.field-group{display:flex;flex-direction:column;gap:6px}
+.field-group.half{flex:1}
+.field-row{display:flex;gap:14px}
+@media(max-width:560px){.field-row{flex-direction:column}}
+label{font-size:13px;font-weight:700;color:#334155;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+label .req{color:var(--primary);font-size:15px;line-height:1}
+label .hint{font-weight:400;color:var(--subtle);font-size:12px;margin-left:4px}
+input[type=text],input[type=email],input[type=tel],input[type=url],input[type=number],textarea,select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:12px;font-family:inherit;font-size:14px;color:var(--text);background:white;transition:border-color .15s,box-shadow .15s;outline:none;-webkit-appearance:none}
+input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,131,198,.12)}
+textarea{resize:vertical;min-height:90px;line-height:1.5}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer}
+
+/* CHIPS */
+.chip-group{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:7px 14px;border:1.5px solid var(--border);border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;transition:all .12s;background:white;color:var(--muted);user-select:none;font-family:inherit}
+.chip:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
+.chip.on{border-color:var(--primary);background:var(--primary-light);color:#004f78}
+.chip.on-amber{border-color:var(--ads-accent);background:var(--ads-accent-light);color:#92400E}
+
+/* TOGGLE */
+.toggle-group{display:flex;gap:8px;flex-wrap:wrap}
+.toggle-btn{flex:1;min-width:100px;padding:10px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:all .12s;background:white;color:var(--muted);font-family:inherit;text-align:center}
+.toggle-btn:hover{border-color:var(--primary);color:var(--primary)}
+.toggle-btn.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark)}
+
+/* STATUS BADGES */
+.status-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.status-card{border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;cursor:pointer;transition:all .15s;background:white}
+.status-card:hover{border-color:var(--primary)}
+.status-card.selected{border-color:var(--primary);background:var(--primary-light)}
+.status-card.selected-yes{border-color:var(--secondary);background:#f0fdf4}
+.status-card.selected-no{border-color:#ef4444;background:#fef2f2}
+.status-card.selected-unsure{border-color:var(--ads-accent);background:var(--ads-accent-light)}
+.status-card-label{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.status-card-opts{display:flex;gap:6px;flex-wrap:wrap}
+.status-opt{padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--muted);font-family:inherit;transition:all .12s}
+.status-opt:hover{border-color:var(--primary);color:var(--primary)}
+.status-opt.yes{border-color:var(--secondary);background:#f0fdf4;color:#166534}
+.status-opt.no{border-color:#ef4444;background:#fef2f2;color:#991b1b}
+.status-opt.unsure{border-color:var(--ads-accent);background:var(--ads-accent-light);color:#92400E}
+.status-opt.applied{border-color:#8b5cf6;background:#f5f3ff;color:#6d28d9}
+
+/* KEYWORD BUILDER */
+.keyword-input-row{display:flex;gap:8px}
+.keyword-input-row input{flex:1}
+.keyword-add-btn{padding:11px 16px;background:var(--primary);color:white;border:none;border-radius:12px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .15s}
+.keyword-add-btn:hover{background:var(--primary-dark)}
+.keyword-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:10px}
+.keyword-tag{display:flex;align-items:center;gap:5px;padding:5px 10px 5px 12px;border-radius:100px;font-size:12px;font-weight:600}
+.keyword-tag.include{background:#f0fdf4;border:1.5px solid #bbf7d0;color:#166534}
+.keyword-tag.exclude{background:#fef2f2;border:1.5px solid #fecaca;color:#991b1b}
+.keyword-tag-remove{cursor:pointer;opacity:.6;font-size:14px;line-height:1}
+.keyword-tag-remove:hover{opacity:1}
+
+/* URL LIST */
+.url-list{display:flex;flex-direction:column;gap:8px}
+.url-row{display:flex;gap:8px;align-items:center}
+.url-row input{flex:1}
+.url-row-label{font-size:12px;font-weight:700;color:var(--muted);min-width:90px;text-align:right;flex-shrink:0}
+.url-remove{color:var(--subtle);cursor:pointer;font-size:18px;line-height:1;flex-shrink:0;transition:color .1s}
+.url-remove:hover{color:#ef4444}
+.url-add-btn{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:10px;border:1.5px dashed rgba(0,131,198,.4);background:rgba(0,131,198,.05);color:var(--primary);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;margin-top:4px;width:fit-content}
+.url-add-btn:hover{background:rgba(0,131,198,.12);border-color:var(--primary)}
+
+/* INFO BOX */
+.info-box{background:rgba(0,131,198,.06);border:1px solid rgba(0,131,198,.2);border-radius:12px;padding:12px 16px;font-size:12px;color:#334155;line-height:1.6;display:flex;gap:10px}
+.info-box-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.info-box.amber{background:var(--ads-accent-light);border-color:rgba(245,158,11,.3)}
+
+/* NAV BUTTONS */
+.nav-buttons{display:flex;gap:12px;margin-top:24px;align-items:center}
+.btn-back{padding:14px 24px;border:1.5px solid var(--border);border-radius:14px;font-family:inherit;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;background:white;transition:all .15s}
+.btn-back:hover{border-color:var(--primary);color:var(--primary)}
+.btn-next{flex:1;padding:15px 24px;background:linear-gradient(135deg,#0083C6,#006aa0);color:white;font-family:inherit;font-size:15px;font-weight:800;border:none;border-radius:14px;cursor:pointer;transition:all .2s;letter-spacing:-.2px;box-shadow:0 4px 16px rgba(0,131,198,.3)}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,131,198,.4)}
+.btn-submit{flex:1;padding:15px 24px;background:linear-gradient(135deg,#F59E0B,#D97706);color:white;font-family:inherit;font-size:15px;font-weight:800;border:none;border-radius:14px;cursor:pointer;transition:all .2s;letter-spacing:-.2px;box-shadow:0 4px 16px rgba(245,158,11,.3)}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(245,158,11,.4)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.step-counter{font-size:12px;color:var(--subtle);font-weight:600;margin-left:auto}
+
+/* THANK YOU */
+#thankYouScreen{display:none;min-height:100vh;background:var(--bg)}
+.thankyou-hero{background:linear-gradient(135deg,#0a1628 0%,#0f2442 100%);padding:60px 24px;text-align:center;position:relative;overflow:hidden}
+.thankyou-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(245,158,11,.15) 0%,transparent 70%)}
+.thankyou-hero-inner{position:relative;max-width:520px;margin:0 auto}
+.thankyou-icon{width:80px;height:80px;background:linear-gradient(135deg,#F59E0B,#D97706);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 24px;box-shadow:0 12px 40px rgba(245,158,11,.4)}
+.thankyou-hero h2{font-size:clamp(26px,5vw,34px);font-weight:800;color:white;margin-bottom:12px;letter-spacing:-.5px}
+.thankyou-hero p{color:rgba(255,255,255,.55);font-size:15px;line-height:1.6}
+.thankyou-body{max-width:560px;margin:0 auto;padding:40px 24px 80px}
+.thankyou-card{background:white;border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:16px}
+.thankyou-card h3{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:10px}
+.thankyou-card p{font-size:14px;color:var(--muted);line-height:1.6}
+.thankyou-steps{display:flex;flex-direction:column;gap:14px}
+.thankyou-step{display:flex;gap:14px;align-items:flex-start}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--ads-accent-light);color:var(--ads-accent);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-text{font-size:13px;color:#475569;line-height:1.5}
+.step-text strong{color:var(--navy)}
+.thankyou-footer{text-align:center;margin-top:24px;font-size:13px;color:var(--subtle)}
+.thankyou-footer a{color:var(--primary);font-weight:600;text-decoration:none}
+
+/* TYPE PICKER (reused from original) */
+.type-picker{position:relative;width:100%}
+.type-trigger{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;min-height:52px;border:1.5px solid var(--border);border-radius:12px;background:white;cursor:pointer;transition:border-color .15s,box-shadow .15s;user-select:none}
+.type-trigger:hover,.type-trigger.open{border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,131,198,.12)}
+.type-trigger-inner{display:flex;align-items:center;gap:10px;flex:1}
+.type-trigger-emoji{font-size:20px;line-height:1;flex-shrink:0}
+.type-trigger-label{font-size:15px;font-weight:700;color:var(--navy);flex:1}
+.type-trigger-label.empty{font-size:13px;font-weight:400;color:var(--subtle);font-style:italic}
+.type-trigger-arrow{color:var(--subtle);font-size:12px;margin-left:8px;transition:transform .2s;flex-shrink:0}
+.type-trigger.open .type-trigger-arrow{transform:rotate(180deg)}
+.type-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:white;border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.13);z-index:200;overflow:hidden}
+.type-search-wrap{padding:10px 10px 6px;border-bottom:1px solid var(--border);background:#f8fafc}
+.type-search{width:100%;border:1.5px solid var(--border);border-radius:9px;padding:8px 12px;font-size:13px;font-family:inherit;color:var(--navy);outline:none;background:white;box-sizing:border-box}
+.type-search:focus{border-color:var(--primary)}
+.type-list{max-height:300px;overflow-y:auto;padding:6px}
+.type-list::-webkit-scrollbar{width:5px}.type-list::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+.type-option{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;transition:background .1s}
+.type-option:hover{background:var(--primary-light)}
+.type-option.selected{background:rgba(0,131,198,.12)}
+.type-option-emoji{font-size:18px;width:24px;text-align:center;flex-shrink:0}
+.type-option-name{font-size:13px;font-weight:600;color:var(--navy);flex:1}
+.type-option-check{color:var(--primary);font-weight:800;font-size:14px}
+.type-no-results{padding:20px;text-align:center;font-size:13px;color:var(--subtle);font-style:italic}
+</style>
+</head>
+<body>
+
+<!-- THANK YOU -->
+<div id="thankYouScreen">
+  <div class="thankyou-hero">
+    <div class="thankyou-hero-inner">
+      <div style="margin-bottom:24px;display:flex;justify-content:center">
+        <img src="https://www.sponsorapurpose.org/header-logo.svg" alt="Sponsor a Purpose" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.9">
+      </div>
+      <div class="thankyou-icon">🎯</div>
+      <h2>We're on it — thank you!</h2>
+      <p>Your Google Ads intake has been submitted. Our team will review your account details and campaign goals within 1–2 business days.</p>
+    </div>
+  </div>
+  <div class="thankyou-body">
+    <div class="thankyou-card">
+      <h3>What happens next?</h3>
+      <div class="thankyou-steps">
+        <div class="thankyou-step"><div class="step-num">1</div><div class="step-text"><strong>We audit your technical setup</strong> — GA4, GTM, Search Console, and existing campaign structure (if any).</div></div>
+        <div class="thankyou-step"><div class="step-num">2</div><div class="step-text"><strong>We build your campaign strategy</strong> — keyword research, ad copy, conversion goals, and targeting based on your intake.</div></div>
+        <div class="thankyou-step"><div class="step-num">3</div><div class="step-text"><strong>We schedule a kickoff call</strong> to walk through everything before any campaigns go live.</div></div>
+      </div>
+    </div>
+    <div class="thankyou-card">
+      <h3>Questions in the meantime?</h3>
+      <p>Email us at <a href="mailto:hello@sponsorapurpose.org">hello@sponsorapurpose.org</a> or visit <a href="https://sponsorapurpose.org" target="_blank">sponsorapurpose.org</a>.</p>
+    </div>
+    <div class="thankyou-footer">Powered by <a href="https://sponsorapurpose.org" target="_blank">SponsorAPurpose</a> · Nonprofit Google Ads Management</div>
+  </div>
+</div>
+
+<!-- MAIN FORM -->
+<div id="mainForm">
+  <div class="header">
+    <div class="header-inner">
+      <div class="header-top">
+        <img src="https://www.sponsorapurpose.org/header-logo.svg" alt="Sponsor a Purpose" style="height:34px;width:auto;filter:brightness(0) invert(1);display:block;">
+        <div class="header-eyebrow">Google Ads Intake</div>
+      </div>
+      <div class="header-bottom">
+        <div>
+          <h1>Let's launch your <span>Google Ad Grants</span> campaign.</h1>
+          <p class="header-desc">Tell us about your organization, goals, and current setup. Takes about 10–15 minutes — goes directly to our ads team.</p>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="progress-pct" id="progressPct">0%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP NAV -->
+  <div class="step-nav">
+    <div class="step-nav-inner" id="stepNav">
+      <div class="step-tab active" onclick="goToStep(0)" id="stab0"><div class="step-dot">1</div>Organization</div>
+      <div class="step-tab" onclick="goToStep(1)" id="stab1"><div class="step-dot">2</div>Audience</div>
+      <div class="step-tab" onclick="goToStep(2)" id="stab2"><div class="step-dot">3</div>Campaigns</div>
+      <div class="step-tab" onclick="goToStep(3)" id="stab3"><div class="step-dot">4</div>Messaging</div>
+      <div class="step-tab" onclick="goToStep(4)" id="stab4"><div class="step-dot">5</div>Assets</div>
+      <div class="step-tab" onclick="goToStep(5)" id="stab5"><div class="step-dot">6</div>Technical</div>
+      <div class="step-tab" onclick="goToStep(6)" id="stab6"><div class="step-dot">7</div>Access</div>
+      <div class="step-tab" onclick="goToStep(7)" id="stab7"><div class="step-dot">8</div>Contact</div>
+    </div>
+  </div>
+
+  <div class="form-wrap">
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 0 — ORGANIZATION
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section active" id="step0">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">🏢</span><span class="section-title">Your Organization</span></div>
+        <div class="section-body">
+          <div class="field-row">
+            <div class="field-group half">
+              <label>Organization Name <span class="req">*</span></label>
+              <input type="text" id="org_name" placeholder="e.g. Flathead Animal Shelter" oninput="updateProgress()">
+            </div>
+            <div class="field-group half">
+              <label>Website URL <span class="req">*</span></label>
+              <input type="url" id="org_url" placeholder="https://yourorg.org" oninput="updateProgress()">
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Organization Type <span class="req">*</span></label>
+            <div class="type-picker" id="typePicker">
+              <div class="type-trigger" onclick="toggleTypePicker()" id="typeTrigger">
+                <div class="type-trigger-inner">
+                  <span class="type-trigger-emoji" id="typeTriggerEmoji" style="display:none"></span>
+                  <span class="type-trigger-label empty" id="typeTriggerLabel">Select your organization type</span>
+                </div>
+                <span class="type-trigger-arrow">▾</span>
+              </div>
+              <div class="type-dropdown" id="typeDropdown" style="display:none">
+                <div class="type-search-wrap">
+                  <input class="type-search" id="typeSearch" type="text" placeholder="Search types…" oninput="filterTypes(this.value)" autocomplete="off">
+                </div>
+                <div class="type-list" id="typeList"></div>
+              </div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group half">
+              <label>EIN / 501(c)(3) Confirmed?</label>
+              <div class="toggle-group">
+                <button type="button" class="toggle-btn" id="einYes" onclick="setToggle('ein','yes')">Yes ✓</button>
+                <button type="button" class="toggle-btn" id="einNo" onclick="setToggle('ein','no')">Not yet</button>
+                <button type="button" class="toggle-btn" id="einPending" onclick="setToggle('ein','pending')">Pending</button>
+              </div>
+            </div>
+            <div class="field-group half">
+              <label>Year Founded <span class="hint">Optional</span></label>
+              <input type="number" id="founded" placeholder="e.g. 2018" min="1800" max="2025">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group half">
+              <label>City <span class="req">*</span></label>
+              <input type="text" id="city" placeholder="e.g. Kalispell" oninput="updateProgress()">
+            </div>
+            <div class="field-group half">
+              <label>State <span class="req">*</span></label>
+              <select id="state" onchange="updateProgress()">
+                <option value="">Select…</option>
+                <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Service Areas <span class="hint">Where do you serve? Check all that apply</span></label>
+            <div class="chip-group" id="serviceAreaGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Mission Statement <span class="req">*</span></label>
+            <textarea id="mission" placeholder="In a few sentences, describe your mission and the community you serve…" oninput="updateProgress()"></textarea>
+          </div>
+          <div class="field-group">
+            <label>Elevator Pitch <span class="hint">One sentence — what makes you unique?</span></label>
+            <input type="text" id="elevator_pitch" placeholder="e.g. We're the only no-kill shelter in Flathead County serving 1,200+ animals per year.">
+          </div>
+          <div class="field-group">
+            <label>Key Stats / Proof Points <span class="hint">Numbers that show your impact</span></label>
+            <textarea id="key_stats" placeholder="e.g. Rescued 847 animals last year, 94% adoption rate, 0% euthanasia policy…" style="min-height:70px"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-next" onclick="nextStep()">Continue to Audience →</button>
+        <span class="step-counter">Step 1 of 8</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 1 — AUDIENCE
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section" id="step1">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">👥</span><span class="section-title">Target Audience</span></div>
+        <div class="section-body">
+          <div class="field-group">
+            <label>Who are you trying to reach? <span class="hint">Select all that apply</span></label>
+            <div class="chip-group" id="audienceTypeGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Describe your ideal supporter / visitor</label>
+            <textarea id="ideal_supporter" placeholder="e.g. Local families with children aged 30–50, dog lovers, homeowners in the metro area who care about animal welfare…" style="min-height:80px"></textarea>
+          </div>
+          <div class="field-group">
+            <label>Age Range of Primary Audience</label>
+            <div class="chip-group" id="ageRangeGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Geographic Targeting for Ads</label>
+            <div class="chip-group" id="geoGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Specific Cities / Regions to Target <span class="hint">Optional — paste if known</span></label>
+            <input type="text" id="specific_geo" placeholder="e.g. Greater Seattle area, King County, Bellevue, Kirkland…">
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Continue to Campaigns →</button>
+        <span class="step-counter">Step 2 of 8</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 2 — CAMPAIGNS
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section" id="step2">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">🎯</span><span class="section-title">Campaign Goals</span></div>
+        <div class="section-body">
+          <div class="info-box amber">
+            <span class="info-box-icon">💡</span>
+            <div>Google Ad Grants provides <strong>$10,000/month</strong> in free Search ads. Performance Max campaigns can also be included. Select all types relevant to your organization.</div>
+          </div>
+          <div class="field-group">
+            <label>Types of Campaigns You Want to Run <span class="req">*</span><span class="hint">Select all that apply</span></label>
+            <div class="chip-group" id="campaignTypeGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Primary Conversion Goal <span class="req">*</span><span class="hint">The #1 action you want from visitors</span></label>
+            <div class="chip-group" id="primaryGoalGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Secondary Conversion Goals</label>
+            <div class="chip-group" id="secondaryGoalGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>What does success look like in 90 days?</label>
+            <textarea id="success_definition" placeholder="e.g. 50 new monthly donors, 200 volunteer sign-ups, 30 pet adoptions driven by ads…" style="min-height:70px"></textarea>
+          </div>
+          <div class="field-row">
+            <div class="field-group half">
+              <label>Monthly Non-Grant Budget <span class="hint">Optional paid spend beyond grants</span></label>
+              <select id="paid_budget">
+                <option value="">Not planning paid spend</option>
+                <option>Under $500/mo</option>
+                <option>$500–$1,000/mo</option>
+                <option>$1,000–$2,500/mo</option>
+                <option>$2,500–$5,000/mo</option>
+                <option>$5,000+/mo</option>
+              </select>
+            </div>
+            <div class="field-group half">
+              <label>Seasonal Priorities</label>
+              <input type="text" id="seasonal" placeholder="e.g. End of year giving, spring adoption events, GivingTuesday">
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Upcoming Campaigns or Events to Promote</label>
+            <textarea id="upcoming_campaigns" placeholder="e.g. Annual gala on March 15th, spring adoption event, annual fund drive starting October…" style="min-height:70px"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Continue to Messaging →</button>
+        <span class="step-counter">Step 3 of 8</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 3 — MESSAGING
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section" id="step3">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">✍️</span><span class="section-title">Messaging & Content</span></div>
+        <div class="section-body">
+          <div class="field-group">
+            <label>Tone / Personality <span class="hint">Select all that apply</span></label>
+            <div class="chip-group" id="toneGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Tagline <span class="hint">If you have one</span></label>
+            <input type="text" id="tagline" placeholder="e.g. Every animal deserves a second chance.">
+          </div>
+          <div class="field-group">
+            <label>✅ Keywords / Phrases to INCLUDE <span class="hint">Words that resonate with your audience</span></label>
+            <div class="keyword-input-row">
+              <input type="text" id="includeKeywordInput" placeholder="e.g. rescue, adopt, no-kill, community…" onkeydown="if(event.key==='Enter'){event.preventDefault();addKeyword('include')}">
+              <button type="button" class="keyword-add-btn" onclick="addKeyword('include')">+ Add</button>
+            </div>
+            <div class="keyword-tags" id="includeKeywordTags"></div>
+          </div>
+          <div class="field-group">
+            <label>🚫 Keywords / Phrases to EXCLUDE <span class="hint">Words you never want in your ads</span></label>
+            <div class="keyword-input-row">
+              <input type="text" id="excludeKeywordInput" placeholder="e.g. free dogs, cheap, euthanasia…" onkeydown="if(event.key==='Enter'){event.preventDefault();addKeyword('exclude')}">
+              <button type="button" class="keyword-add-btn" onclick="addKeyword('exclude')" style="background:#ef4444">+ Add</button>
+            </div>
+            <div class="keyword-tags" id="excludeKeywordTags"></div>
+          </div>
+          <div class="field-group">
+            <label>Legal / Compliance Restrictions <span class="hint">Anything we legally cannot say?</span></label>
+            <input type="text" id="legal_restrictions" placeholder="e.g. Cannot claim 100% no-kill, cannot guarantee outcomes, no pricing claims…">
+          </div>
+          <div class="field-group">
+            <label>Success Stories We Can Reference <span class="hint">Real examples for ad copy</span></label>
+            <textarea id="success_stories" placeholder="e.g. Buddy was rescued from a hoarding situation and adopted within 3 days — this kind of story resonates with our donors…" style="min-height:80px"></textarea>
+          </div>
+          <div class="field-group">
+            <label>Any Specific Messaging We Should Avoid?</label>
+            <textarea id="avoid_messaging" placeholder="e.g. Avoid guilt-based language, don't mention euthanasia statistics, avoid comparing to other shelters…" style="min-height:70px"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Continue to Assets →</button>
+        <span class="step-counter">Step 4 of 8</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 4 — ASSETS
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section" id="step4">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">🖼️</span><span class="section-title">Creative Assets & Presence</span></div>
+        <div class="section-body">
+          <div class="field-group">
+            <label>Do you have photos / videos we can use in ads?</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" id="assetsYes" onclick="setToggle('assets','yes')">Yes — lots</button>
+              <button type="button" class="toggle-btn" id="assetsSome" onclick="setToggle('assets','some')">Some</button>
+              <button type="button" class="toggle-btn" id="assetsNo" onclick="setToggle('assets','no')">Not really</button>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Asset Drive Link <span class="hint">Google Drive, Dropbox, etc.</span></label>
+            <input type="url" id="asset_link" placeholder="https://drive.google.com/drive/folders/…">
+          </div>
+          <div class="field-group">
+            <label>Do you have a YouTube Channel?</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" id="ytYes" onclick="setToggle('yt','yes');showIf('ytFields',true)">Yes</button>
+              <button type="button" class="toggle-btn" id="ytNo" onclick="setToggle('yt','no');showIf('ytFields',false)">No</button>
+            </div>
+          </div>
+          <div id="ytFields" style="display:none;flex-direction:column;gap:14px">
+            <div class="field-row">
+              <div class="field-group half">
+                <label>YouTube Channel URL</label>
+                <input type="url" id="yt_url" placeholder="https://youtube.com/@yourchannel">
+              </div>
+              <div class="field-group half">
+                <label>Subscriber Count (approx)</label>
+                <input type="text" id="yt_subs" placeholder="e.g. ~500">
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Do you have video content usable in ads?</label>
+              <div class="toggle-group">
+                <button type="button" class="toggle-btn" id="ytVidYes" onclick="setToggle('ytVid','yes')">Yes</button>
+                <button type="button" class="toggle-btn" id="ytVidNo" onclick="setToggle('ytVid','no')">No</button>
+              </div>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Social Media Presence <span class="hint">Select all active platforms</span></label>
+            <div class="chip-group" id="socialGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Social Media Handles <span class="hint">Optional</span></label>
+            <input type="text" id="social_handles" placeholder="@yourorg on Instagram, facebook.com/yourorg…">
+          </div>
+          <div class="field-group">
+            <label>Do you have a Google Business Profile?</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" id="gbpYes" onclick="setToggle('gbp','yes')">Yes</button>
+              <button type="button" class="toggle-btn" id="gbpNo" onclick="setToggle('gbp','no')">No</button>
+              <button type="button" class="toggle-btn" id="gbpUnsure" onclick="setToggle('gbp','unsure')">Not sure</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Continue to Technical →</button>
+        <span class="step-counter">Step 5 of 8</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 5 — TECHNICAL
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section" id="step5">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">⚙️</span><span class="section-title">Technical Setup</span></div>
+        <div class="section-body">
+          <div class="info-box">
+            <span class="info-box-icon">ℹ️</span>
+            <div>These questions help us understand what's already in place and what we need to set up before campaigns can launch.</div>
+          </div>
+          <div class="field-group">
+            <label>Website Builder</label>
+            <select id="website_builder">
+              <option value="">Select…</option>
+              <option>WordPress</option><option>Squarespace</option><option>Wix</option>
+              <option>Webflow</option><option>Shopify</option><option>Flipcause</option>
+              <option>GoDaddy Website Builder</option><option>Weebly</option>
+              <option>Custom / Developer Built</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Who manages the website?</label>
+            <div class="chip-group" id="webManagerGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Can you install code / GTM on the site?</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" id="installYes" onclick="setToggle('install','yes')">Yes</button>
+              <button type="button" class="toggle-btn" id="installNo" onclick="setToggle('install','no')">No</button>
+              <button type="button" class="toggle-btn" id="installHelp" onclick="setToggle('install','help')">Need help</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Current Setup Status <span class="hint">Click each to set status</span></label>
+            <div class="status-row" id="techStatusRow"></div>
+          </div>
+
+          <div class="field-group">
+            <label>Current Donation Processor</label>
+            <select id="donation_processor">
+              <option value="">Select…</option>
+              <option>GiveButter</option><option>Donorbox</option><option>Zeffy</option>
+              <option>Give Lively</option><option>Network for Good</option><option>Bloomerang</option>
+              <option>Classy</option><option>Blackbaud</option><option>PayPal</option>
+              <option>Stripe (direct)</option><option>Square</option><option>Qgiv</option>
+              <option>Kindful</option><option>Salesforce NPSP</option><option>Charity Proud</option>
+              <option>Flipcause</option><option>GoFundMe Charity</option><option>Pushpay</option>
+              <option>Virtuous</option><option>SponsorAPurpose (SAP)</option><option>None yet</option><option>Other</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label>Do you have off-site forms or iFrames for key conversions?</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" id="iframeYes" onclick="setToggle('iframe','yes');showIf('iframeUrlFields',true)">Yes</button>
+              <button type="button" class="toggle-btn" id="iframeNo" onclick="setToggle('iframe','no');showIf('iframeUrlFields',false)">No</button>
+            </div>
+            <div id="iframeUrlFields" style="display:none;margin-top:12px">
+              <div class="info-box amber" style="margin-bottom:10px">
+                <span class="info-box-icon">⚠️</span>
+                <div>Off-site iFrames can break conversion tracking. List each one so we can set up the right workarounds.</div>
+              </div>
+              <textarea id="iframe_urls" placeholder="e.g. Donate: givebutter.com/widget&#10;Adopt: shelterluv.com/matchme/adopt&#10;Foster: airtable.com/form/foster" style="min-height:80px"></textarea>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Key Conversion Pages <span class="hint">Paste URLs for pages we'll be driving traffic to</span></label>
+            <div class="url-list" id="conversionUrlList"></div>
+            <button type="button" class="url-add-btn" onclick="addConversionUrl()">+ Add conversion page</button>
+          </div>
+
+          <div class="field-group">
+            <label>Other Tools / Integrations You Use</label>
+            <input type="text" id="other_tools" placeholder="e.g. Bloomerang CRM, Mailchimp, Salesforce, ShelterLuv, PetFinder, Pawlytics…">
+          </div>
+          <div class="field-group">
+            <label>Staging Site URL <span class="hint">If applicable</span></label>
+            <input type="url" id="staging_url" placeholder="https://staging.yoursite.org">
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Continue to Access →</button>
+        <span class="step-counter">Step 6 of 8</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 6 — ACCESS
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section" id="step6">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">🔑</span><span class="section-title">Account Access Needed</span></div>
+        <div class="section-body">
+          <div class="info-box">
+            <span class="info-box-icon">🔒</span>
+            <div>We'll send you invitations for each platform — you never need to share passwords. This just tells us what to request access to.</div>
+          </div>
+          <div class="field-group">
+            <label>Access Required <span class="hint">Select all that apply</span></label>
+            <div class="chip-group" id="accessGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Google Ads Account Status</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" id="adsAcctExists" onclick="setToggle('adsAcct','exists')">Account exists</button>
+              <button type="button" class="toggle-btn" id="adsAcctNew" onclick="setToggle('adsAcct','new')">Need to create</button>
+              <button type="button" class="toggle-btn" id="adsAcctGrant" onclick="setToggle('adsAcct','grant')">Have Ad Grants</button>
+              <button type="button" class="toggle-btn" id="adsAcctSuspended" onclick="setToggle('adsAcct','suspended')">Suspended</button>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Existing Google Ads / Analytics Links <span class="hint">Paste share links or account IDs if you have them</span></label>
+            <textarea id="existing_links" placeholder="e.g. Google Ads Customer ID: 123-456-7890&#10;Analytics Property ID: G-XXXXXXXXXX&#10;Looker Studio report: https://lookerstudio.google.com/…" style="min-height:80px"></textarea>
+          </div>
+          <div class="field-group">
+            <label>Website Backend Access</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" id="webAccessYes" onclick="setToggle('webAccess','yes')">Yes — can provide</button>
+              <button type="button" class="toggle-btn" id="webAccessNo" onclick="setToggle('webAccess','no')">No</button>
+              <button type="button" class="toggle-btn" id="webAccessMaybe" onclick="setToggle('webAccess','maybe')">Maybe</button>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Have you worked with a Google Ads manager before?</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" id="prevAdsYes" onclick="setToggle('prevAds','yes');showIf('prevAdsFields',true)">Yes</button>
+              <button type="button" class="toggle-btn" id="prevAdsNo" onclick="setToggle('prevAds','no');showIf('prevAdsFields',false)">No — first time</button>
+            </div>
+          </div>
+          <div id="prevAdsFields" style="display:none;flex-direction:column;gap:14px">
+            <div class="field-group">
+              <label>What worked well with your previous manager?</label>
+              <textarea id="prev_worked" placeholder="e.g. Good reporting, responsive communication…" style="min-height:60px"></textarea>
+            </div>
+            <div class="field-group">
+              <label>What didn't work or could be improved?</label>
+              <textarea id="prev_issues" placeholder="e.g. Slow to respond, campaigns weren't optimized, no clear reporting…" style="min-height:60px"></textarea>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>How did you hear about SponsorAPurpose?</label>
+            <select id="referral_source">
+              <option value="">Select…</option>
+              <option>Google Search</option><option>Referral from another nonprofit</option>
+              <option>Social Media</option><option>Conference / Event</option>
+              <option>Email Outreach</option><option>Google Ad Grants program</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Anything Else We Should Know?</label>
+            <textarea id="extra_notes" placeholder="Special requirements, timeline, things to avoid, context about your situation…"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Continue to Contact →</button>
+        <span class="step-counter">Step 7 of 8</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 7 — CONTACT
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section" id="step7">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">👤</span><span class="section-title">Contact Information</span></div>
+        <div class="section-body">
+          <div class="field-row">
+            <div class="field-group half">
+              <label>Your Name <span class="req">*</span></label>
+              <input type="text" id="contact_name" placeholder="First and last name" oninput="updateProgress()">
+            </div>
+            <div class="field-group half">
+              <label>Title / Role</label>
+              <input type="text" id="contact_title" placeholder="e.g. Executive Director, Marketing Manager">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group half">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" id="contact_email" placeholder="you@organization.org" oninput="updateProgress()">
+            </div>
+            <div class="field-group half">
+              <label>Phone <span class="hint">Optional</span></label>
+              <input type="tel" id="contact_phone" placeholder="(555) 000-0000">
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Preferred Communication Method</label>
+            <div class="chip-group" id="commMethodGroup"></div>
+          </div>
+          <div class="field-group">
+            <label>Best Time to Reach You</label>
+            <input type="text" id="best_time" placeholder="e.g. Weekdays 9am–5pm PT, prefer email first">
+          </div>
+          <div class="field-group">
+            <label>Secondary Contact <span class="hint">Optional — name + email</span></label>
+            <input type="text" id="secondary_contact" placeholder="e.g. Jane Smith — jane@organization.org">
+          </div>
+          <div class="field-group">
+            <label>Executive Director Name <span class="hint">If different from above</span></label>
+            <input type="text" id="ed_name" placeholder="e.g. John Williams">
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card" style="border-color:rgba(245,158,11,.3);background:linear-gradient(135deg,#fffbeb,#fff)">
+        <div class="section-header" style="background:transparent;border-bottom-color:rgba(245,158,11,.2)">
+          <span class="section-icon">✅</span>
+          <span class="section-title">Ready to submit?</span>
+          <span class="section-subtitle">Review your information above before sending</span>
+        </div>
+        <div class="section-body">
+          <div class="info-box amber">
+            <span class="info-box-icon">🎯</span>
+            <div>Your intake goes directly to our Google Ads team. We'll review your setup and campaign goals, then reach out within <strong>1–2 business days</strong> to schedule your kickoff.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">Submit Intake Form 🎯</button>
+        <span class="step-counter">Step 8 of 8</span>
+      </div>
+    </div>
+
+  </div><!-- /form-wrap -->
+</div><!-- /mainForm -->
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────
+const NP_TYPES=[
+  {name:'Advocacy / Policy',emoji:'📣'},{name:'Animal Welfare',emoji:'🐾'},
+  {name:'Arts & Culture',emoji:'🎭'},{name:'Civic Engagement',emoji:'🗳️'},
+  {name:'Community Development',emoji:'🏘️'},{name:'Disability Services',emoji:'♿'},
+  {name:'Disaster Relief',emoji:'🆘'},{name:'Economic Development',emoji:'📈'},
+  {name:'Education',emoji:'📚'},{name:'Environmental',emoji:'🌿'},
+  {name:'Faith-Based',emoji:'✝️'},{name:'Food Security',emoji:'🥗'},
+  {name:'Foundation / Grantmaking',emoji:'🏦'},{name:'Health & Medical',emoji:'🏥'},
+  {name:'Historical Preservation',emoji:'🏛️'},{name:'Homeless & Housing',emoji:'🏠'},
+  {name:'Human Services',emoji:'🤝'},{name:'Immigration & Refugee',emoji:'🤲'},
+  {name:'International Aid',emoji:'🌍'},{name:'Legal Aid',emoji:'⚖️'},
+  {name:'LGBTQ+',emoji:'🏳️‍🌈'},{name:'Library & Literacy',emoji:'📖'},
+  {name:'Mental Health',emoji:'🧠'},{name:'Racial Justice',emoji:'✊'},
+  {name:'Science & Research',emoji:'🔬'},{name:'Sports & Recreation',emoji:'⚽'},
+  {name:'Substance Recovery',emoji:'💙'},{name:'Technology Access',emoji:'💻'},
+  {name:'Veterans & Military',emoji:'🎖️'},{name:'Youth & Children',emoji:'🧒'}
+];
+
+const SERVICE_AREAS=['Local (city/county)','Statewide','Regional (multi-state)','National','International'];
+const AUDIENCE_TYPES=['General public donors','Major gift donors','Corporate sponsors','Volunteers','Potential adopters','Foster families','Event attendees','Grant funders','Legal / professional community','Students / youth','Seniors','Families with children','Pet owners','Local businesses','Media / press','Other'];
+const AGE_RANGES=['18–24','25–34','35–44','45–54','55–64','65+','All ages'];
+const GEO_TARGETING=['Hyperlocal (city only)','Metro area','County','Statewide','Regional (multi-state)','National'];
+const CAMPAIGN_TYPES=['Donations — one-time','Donations — recurring/monthly','Adopt a pet / person / animal','Foster program','Volunteer recruitment','Event promotion','General awareness','Shop / merchandise','Job opportunities','Professional services (legal, consulting, etc.)','Program enrollment','Membership','Sponsorships','Grant awareness','Education / training','Newsletter signups','Eco-tourism / experiences','Emergency fundraising','Capital campaign','Other'];
+const CONVERSION_GOALS=['Donate / Give Now','Volunteer Sign-Up','Adopt','Foster','Event Registration','Contact Form','Program Application','Newsletter Signup','Membership Sign-Up','Sponsorship Inquiry','Job Application','Schedule a Visit','Download Resource','Watch Video'];
+const TONES=['Warm & Hopeful','Bold & Urgent','Professional & Trustworthy','Playful & Friendly','Faith-Centered','Community-Driven','Creative & Artistic','Educational / Informative','Inspirational','Activist / Advocacy-driven'];
+const SOCIAL_PLATFORMS=['Facebook','Instagram','TikTok','LinkedIn','X / Twitter','YouTube','Pinterest','Threads','None'];
+const WEB_MANAGERS=['Ourselves (staff)','A volunteer','An agency','A developer / contractor','No one currently'];
+const TECH_ITEMS=['Google Ads Account','Google Ad Grants','Google Analytics (GA4)','Google Tag Manager','Google Search Console','Google Business Profile'];
+const ACCESS_ITEMS=['Google Ads (Admin)','Google Analytics (Admin)','Google Tag Manager (Admin)','Google Search Console','YouTube Channel','Website Backend'];
+const COMM_METHODS=['Email','Phone call','Text / SMS','Slack','Zoom / Video call'];
+const CONV_URL_LABELS=['Donate page','Adopt page','Foster page','Volunteer page','Events page','Contact page','Other'];
+
+// ─── STATE ──────────────────────────────────────────────────────────
+let state={
+  currentStep:0,
+  npType:'',npEmoji:'',
+  ein:'',assets:'',yt:'',ytVid:'',gbp:'',install:'',iframe:'',
+  adsAcct:'',webAccess:'',prevAds:'',
+  serviceAreas:[],audienceTypes:[],ageRanges:[],geo:[],
+  campaignTypes:[],primaryGoal:'',secondaryGoals:[],
+  tones:[],socialPlatforms:[],webManagers:[],accessItems:[],commMethods:[],
+  techStatus:{},
+  includeKeywords:[],excludeKeywords:[],
+  conversionUrls:[{label:'Donate page',url:''},{label:'',url:''}]
+};
+
+// ─── INIT ───────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  renderChips('serviceAreaGroup',SERVICE_AREAS,'serviceAreas',false);
+  renderChips('audienceTypeGroup',AUDIENCE_TYPES,'audienceTypes',false);
+  renderChips('ageRangeGroup',AGE_RANGES,'ageRanges',false);
+  renderChips('geoGroup',GEO_TARGETING,'geo',false);
+  renderChips('campaignTypeGroup',CAMPAIGN_TYPES,'campaignTypes',false);
+  renderChips('primaryGoalGroup',CONVERSION_GOALS,'primaryGoal',true);
+  renderChips('secondaryGoalGroup',CONVERSION_GOALS,'secondaryGoals',false);
+  renderChips('toneGroup',TONES,'tones',false);
+  renderChips('socialGroup',SOCIAL_PLATFORMS,'socialPlatforms',false);
+  renderChips('webManagerGroup',WEB_MANAGERS,'webManagers',false);
+  renderChips('accessGroup',ACCESS_ITEMS,'accessItems',false);
+  renderChips('commMethodGroup',COMM_METHODS,'commMethods',false);
+  renderTechStatus();
+  renderConversionUrls();
+  updateProgress();
+});
+
+// ─── CHIPS ──────────────────────────────────────────────────────────
+function renderChips(id,items,key,single){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.innerHTML=items.map(v=>`<button type="button" class="chip" onclick="toggleChip(this,'${key}','${escQ(v)}',${single})">${v}</button>`).join('');
+}
+function toggleChip(el,key,val,single){
+  if(single){
+    el.parentElement.querySelectorAll('.chip').forEach(c=>c.className='chip');
+    el.className='chip on';state[key]=val;
+  } else {
+    const arr=state[key],i=arr.indexOf(val);
+    if(i!==-1){arr.splice(i,1);el.className='chip';}
+    else{arr.push(val);el.className='chip on';}
+  }
+  updateProgress();
+}
+function escQ(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+
+// ─── TYPE PICKER ────────────────────────────────────────────────────
+function buildTypeList(filter){
+  const listEl=document.getElementById('typeList');if(!listEl)return;
+  const q=(filter||'').toLowerCase().trim();
+  const matches=NP_TYPES.filter(t=>!q||t.name.toLowerCase().includes(q));
+  if(!matches.length){listEl.innerHTML=`<div class="type-no-results">No results for "${filter}"</div>`;return;}
+  listEl.innerHTML=matches.map(t=>{
+    const sel=state.npType===t.name;
+    return`<div class="type-option${sel?' selected':''}" onclick="selectType('${escQ(t.name)}','${t.emoji}')">
+      <span class="type-option-emoji">${t.emoji}</span>
+      <span class="type-option-name">${t.name}</span>
+      ${sel?'<span class="type-option-check">✓</span>':''}
+    </div>`;
+  }).join('');
+}
+function toggleTypePicker(){
+  const dd=document.getElementById('typeDropdown'),tr=document.getElementById('typeTrigger');
+  const open=dd.style.display!=='none';
+  if(open){dd.style.display='none';tr.classList.remove('open');}
+  else{buildTypeList('');dd.style.display='block';tr.classList.add('open');setTimeout(()=>document.getElementById('typeSearch')?.focus(),50);}
+}
+function filterTypes(v){buildTypeList(v);}
+function selectType(name,emoji){
+  state.npType=name;state.npEmoji=emoji;
+  const lbl=document.getElementById('typeTriggerLabel'),em=document.getElementById('typeTriggerEmoji');
+  if(lbl){lbl.textContent=name;lbl.classList.remove('empty');lbl.style.cssText='font-size:15px;font-weight:700;color:var(--navy)';}
+  if(em){em.textContent=emoji;em.style.display='inline';}
+  document.getElementById('typeDropdown').style.display='none';
+  document.getElementById('typeTrigger').classList.remove('open');
+  document.getElementById('typeSearch').value='';
+  updateProgress();
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#typePicker')){
+    const dd=document.getElementById('typeDropdown');
+    if(dd){dd.style.display='none';document.getElementById('typeTrigger')?.classList.remove('open');}
+  }
+});
+
+// ─── TOGGLES ────────────────────────────────────────────────────────
+function setToggle(key,val){
+  state[key]=val;
+  // Find all buttons with id starting with key
+  document.querySelectorAll(`[id^="${key}"]`).forEach(b=>{
+    if(b.tagName==='BUTTON') b.className='toggle-btn';
+  });
+  // Find matching button
+  const ids={
+    ein:{yes:'einYes',no:'einNo',pending:'einPending'},
+    assets:{yes:'assetsYes',some:'assetsSome',no:'assetsNo'},
+    yt:{yes:'ytYes',no:'ytNo'},ytVid:{yes:'ytVidYes',no:'ytVidNo'},
+    gbp:{yes:'gbpYes',no:'gbpNo',unsure:'gbpUnsure'},
+    install:{yes:'installYes',no:'installNo',help:'installHelp'},
+    iframe:{yes:'iframeYes',no:'iframeNo'},
+    adsAcct:{exists:'adsAcctExists',new:'adsAcctNew',grant:'adsAcctGrant',suspended:'adsAcctSuspended'},
+    webAccess:{yes:'webAccessYes',no:'webAccessNo',maybe:'webAccessMaybe'},
+    prevAds:{yes:'prevAdsYes',no:'prevAdsNo'},
+  };
+  const map=ids[key];
+  if(map&&map[val]){const btn=document.getElementById(map[val]);if(btn)btn.className='toggle-btn active';}
+}
+function showIf(id,show){
+  const el=document.getElementById(id);
+  if(el)el.style.display=show?'flex':'none';
+}
+
+// ─── TECH STATUS ────────────────────────────────────────────────────
+function renderTechStatus(){
+  const row=document.getElementById('techStatusRow');if(!row)return;
+  row.innerHTML=TECH_ITEMS.map(item=>`
+    <div class="status-card" id="tech_${btoa(item).replace(/=/g,'')}" >
+      <div class="status-card-label">${item}</div>
+      <div class="status-card-opts">
+        <button type="button" class="status-opt ${state.techStatus[item]==='yes'?'yes':''}" onclick="setTechStatus('${escQ(item)}','yes')">Yes ✓</button>
+        <button type="button" class="status-opt ${state.techStatus[item]==='no'?'no':''}" onclick="setTechStatus('${escQ(item)}','no')">No</button>
+        <button type="button" class="status-opt ${state.techStatus[item]==='unsure'?'unsure':''}" onclick="setTechStatus('${escQ(item)}','unsure')">Not sure</button>
+        ${item.includes('Ad Grants')?`<button type="button" class="status-opt ${state.techStatus[item]==='applied'?'applied':''}" onclick="setTechStatus('${escQ(item)}','applied')">Applied</button>`:''}
+      </div>
+    </div>`).join('');
+}
+function setTechStatus(item,val){
+  state.techStatus[item]=val;
+  renderTechStatus();
+}
+
+// ─── KEYWORDS ───────────────────────────────────────────────────────
+function addKeyword(type){
+  const input=document.getElementById(type+'KeywordInput');
+  const val=input.value.trim();if(!val)return;
+  state[type+'Keywords'].push(val);input.value='';
+  renderKeywords(type);
+}
+function removeKeyword(type,idx){state[type+'Keywords'].splice(idx,1);renderKeywords(type);}
+function renderKeywords(type){
+  const el=document.getElementById(type+'KeywordTags');if(!el)return;
+  el.innerHTML=state[type+'Keywords'].map((k,i)=>
+    `<span class="keyword-tag ${type}"><span>${k}</span><span class="keyword-tag-remove" onclick="removeKeyword('${type}',${i})">×</span></span>`
+  ).join('');
+}
+
+// ─── CONVERSION URLs ────────────────────────────────────────────────
+function renderConversionUrls(){
+  const el=document.getElementById('conversionUrlList');if(!el)return;
+  el.innerHTML=state.conversionUrls.map((row,i)=>`
+    <div class="url-row">
+      <select style="max-width:140px;flex-shrink:0" onchange="state.conversionUrls[${i}].label=this.value">
+        ${CONV_URL_LABELS.map(l=>`<option ${row.label===l?'selected':''}>${l}</option>`).join('')}
+      </select>
+      <input type="url" value="${row.url}" placeholder="https://yoursite.org/donate" oninput="state.conversionUrls[${i}].url=this.value">
+      <span class="url-remove" onclick="removeConversionUrl(${i})">×</span>
+    </div>`).join('');
+}
+function addConversionUrl(){state.conversionUrls.push({label:'Other',url:''});renderConversionUrls();}
+function removeConversionUrl(i){state.conversionUrls.splice(i,1);renderConversionUrls();}
+
+// ─── PROGRESS ───────────────────────────────────────────────────────
+function updateProgress(){
+  const checks=[
+    !!document.getElementById('org_name')?.value.trim(),
+    !!document.getElementById('org_url')?.value.trim(),
+    !!state.npType,
+    !!document.getElementById('city')?.value.trim(),
+    !!document.getElementById('state')?.value,
+    !!document.getElementById('mission')?.value.trim(),
+    state.campaignTypes.length>0,
+    !!state.primaryGoal,
+    !!document.getElementById('contact_name')?.value.trim(),
+    !!document.getElementById('contact_email')?.value.trim(),
+  ];
+  const p=Math.round(checks.filter(Boolean).length/checks.length*100);
+  const fill=document.getElementById('progressFill'),pct=document.getElementById('progressPct');
+  if(fill)fill.style.width=p+'%';
+  if(pct)pct.textContent=p+'%';
+}
+
+// ─── STEP NAVIGATION ────────────────────────────────────────────────
+function goToStep(n){
+  document.querySelectorAll('.form-section').forEach((s,i)=>{
+    s.className='form-section'+(i===n?' active':'');
+  });
+  document.querySelectorAll('.step-tab').forEach((t,i)=>{
+    t.className='step-tab'+(i===n?' active':i<n?' done':'');
+  });
+  state.currentStep=n;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextStep(){
+  if(state.currentStep<7) goToStep(state.currentStep+1);
+}
+function prevStep(){
+  if(state.currentStep>0) goToStep(state.currentStep-1);
+}
+
+// ─── SUBMIT ─────────────────────────────────────────────────────────
+async function handleSubmit(){
+  const req={
+    'Organization Name':document.getElementById('org_name').value.trim(),
+    'Website URL':document.getElementById('org_url').value.trim(),
+    'Organization Type':state.npType,
+    'City':document.getElementById('city').value.trim(),
+    'State':document.getElementById('state').value,
+    'Mission Statement':document.getElementById('mission').value.trim(),
+    'Contact Name':document.getElementById('contact_name').value.trim(),
+    'Contact Email':document.getElementById('contact_email').value.trim(),
+  };
+  const missing=Object.entries(req).filter(([,v])=>!v).map(([k])=>k);
+  if(missing.length){
+    alert('Please complete these required fields:\n\n• '+missing.join('\n• '));
+    // Jump to first step with missing field
+    if(!req['Organization Name']||!req['Website URL']||!req['Organization Type']||!req['City']||!req['State']||!req['Mission Statement']) goToStep(0);
+    else if(!req['Contact Name']||!req['Contact Email']) goToStep(7);
+    return;
+  }
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;btn.textContent='Submitting…';
+
+  const payload={
+    access_key:'8fbbf96d-63b4-42d6-a881-53a960e9999d',
+    subject:'New Google Ads Intake: '+req['Organization Name'],
+    from_name:'SAP AdWords Intake',
+    // Step 0
+    org_name:req['Organization Name'],
+    org_url:req['Website URL'],
+    np_type:state.npType,
+    ein_status:state.ein,
+    founded:document.getElementById('founded').value,
+    city:req['City'],state:req['State'],
+    service_areas:state.serviceAreas.join(', '),
+    mission:req['Mission Statement'],
+    elevator_pitch:document.getElementById('elevator_pitch').value.trim(),
+    key_stats:document.getElementById('key_stats').value.trim(),
+    // Step 1
+    audience_types:state.audienceTypes.join(', '),
+    ideal_supporter:document.getElementById('ideal_supporter').value.trim(),
+    age_ranges:state.ageRanges.join(', '),
+    geo_targeting:state.geo.join(', '),
+    specific_geo:document.getElementById('specific_geo').value.trim(),
+    // Step 2
+    campaign_types:state.campaignTypes.join(', '),
+    primary_goal:state.primaryGoal,
+    secondary_goals:state.secondaryGoals.join(', '),
+    success_definition:document.getElementById('success_definition').value.trim(),
+    paid_budget:document.getElementById('paid_budget').value,
+    seasonal:document.getElementById('seasonal').value.trim(),
+    upcoming_campaigns:document.getElementById('upcoming_campaigns').value.trim(),
+    // Step 3
+    tones:state.tones.join(', '),
+    tagline:document.getElementById('tagline').value.trim(),
+    include_keywords:state.includeKeywords.join(', '),
+    exclude_keywords:state.excludeKeywords.join(', '),
+    legal_restrictions:document.getElementById('legal_restrictions').value.trim(),
+    success_stories:document.getElementById('success_stories').value.trim(),
+    avoid_messaging:document.getElementById('avoid_messaging').value.trim(),
+    // Step 4
+    has_assets:state.assets,
+    asset_link:document.getElementById('asset_link').value.trim(),
+    has_youtube:state.yt,
+    yt_url:document.getElementById('yt_url').value.trim(),
+    yt_subs:document.getElementById('yt_subs').value.trim(),
+    yt_video:state.ytVid,
+    social_platforms:state.socialPlatforms.join(', '),
+    social_handles:document.getElementById('social_handles').value.trim(),
+    google_business_profile:state.gbp,
+    // Step 5
+    website_builder:document.getElementById('website_builder').value,
+    web_managers:state.webManagers.join(', '),
+    can_install_code:state.install,
+    tech_status:JSON.stringify(state.techStatus),
+    donation_processor:document.getElementById('donation_processor').value,
+    has_iframes:state.iframe,
+    iframe_urls:document.getElementById('iframe_urls').value.trim(),
+    conversion_urls:state.conversionUrls.filter(r=>r.url).map(r=>`${r.label}: ${r.url}`).join('\n'),
+    other_tools:document.getElementById('other_tools').value.trim(),
+    staging_url:document.getElementById('staging_url').value.trim(),
+    // Step 6
+    access_needed:state.accessItems.join(', '),
+    ads_account_status:state.adsAcct,
+    existing_links:document.getElementById('existing_links').value.trim(),
+    website_access:state.webAccess,
+    prev_ads_manager:state.prevAds,
+    prev_worked:document.getElementById('prev_worked').value.trim(),
+    prev_issues:document.getElementById('prev_issues').value.trim(),
+    referral_source:document.getElementById('referral_source').value,
+    extra_notes:document.getElementById('extra_notes').value.trim(),
+    // Step 7
+    contact_name:req['Contact Name'],
+    contact_email:req['Contact Email'],
+    contact_phone:document.getElementById('contact_phone').value.trim(),
+    contact_title:document.getElementById('contact_title').value.trim(),
+    comm_methods:state.commMethods.join(', '),
+    best_time:document.getElementById('best_time').value.trim(),
+    secondary_contact:document.getElementById('secondary_contact').value.trim(),
+    ed_name:document.getElementById('ed_name').value.trim(),
+  };
+
+  try{
+    const res=await fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const json=await res.json();
+    if(!json.success)throw new Error(json.message||'Submission failed');
+    document.getElementById('mainForm').style.display='none';
+    document.getElementById('thankYouScreen').style.display='block';
+    window.scrollTo(0,0);
+  }catch(err){
+    btn.disabled=false;btn.textContent='Submit Intake Form 🎯';
+    alert('Submission failed: '+(err.message||'Unknown error')+'\n\nPlease try again or email hello@sponsorapurpose.org');
+  }
+}
+</script>
+</body>
+</html>
