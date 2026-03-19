@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1136,14 +1137,36 @@ async function handleSubmit(){
     ed_name:document.getElementById('ed_name').value.trim(),
   };
 
+  const SHEET_URL='https://script.google.com/macros/s/AKfycbwjXbHnXmx55W4NWEEQygtAHSxTzdr1LsRlBkw-nKjW6sOyGRSW9xOHIGNhwVkC64Yv/exec';
+
   try{
-    const res=await fetch('https://api.web3forms.com/submit',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(payload)
-    });
-    const json=await res.json();
-    if(!json.success)throw new Error(json.message||'Submission failed');
+    // Fire both endpoints simultaneously
+    const [sheetRes, emailRes] = await Promise.allSettled([
+      fetch(SHEET_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload),
+        mode:'no-cors'
+      }),
+      fetch('https://api.web3forms.com/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify(payload)
+      })
+    ]);
+
+    // Web3Forms gives us a real response to check
+    let emailOk=false;
+    if(emailRes.status==='fulfilled'){
+      const json=await emailRes.value.json();
+      emailOk=json.success;
+    }
+
+    // Sheet uses no-cors so we can't read the response — assume ok if fetch didn't throw
+    const sheetOk=sheetRes.status==='fulfilled';
+
+    if(!sheetOk&&!emailOk) throw new Error('Both submission endpoints failed');
+
     document.getElementById('mainForm').style.display='none';
     document.getElementById('thankYouScreen').style.display='block';
     window.scrollTo(0,0);
