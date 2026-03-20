@@ -1139,37 +1139,82 @@ async function handleSubmit(){
   const SHEET_URL='https://script.google.com/macros/s/AKfycbzPYFeo6uyxQRhijj8aJ4jG7_UxwU7GbTcu9kllVUMC_1kllggzN2s-tst_-Gubg2BY/exec';
 
   try{
-    // Send to Google Sheet via iframe form trick (bypasses CORS)
-    let iframe = document.getElementById('hidden_sheet_iframe');
-    if(!iframe){
-      iframe = document.createElement('iframe');
-      iframe.name = 'hidden_sheet_iframe';
-      iframe.id = 'hidden_sheet_iframe';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-    }
-    const sheetForm = document.createElement('form');
-    sheetForm.method = 'POST';
-    sheetForm.action = SHEET_URL;
-    sheetForm.target = 'hidden_sheet_iframe';
-    sheetForm.style.display = 'none';
-    const sheetInput = document.createElement('input');
-    sheetInput.type = 'hidden';
-    sheetInput.name = 'payload';
-    sheetInput.value = JSON.stringify(payload);
-    sheetForm.appendChild(sheetInput);
-    document.body.appendChild(sheetForm);
-    sheetForm.submit();
-    document.body.removeChild(sheetForm);
+    // Fire to Slack
+    const slackWebhook = 'https://hooks.slack.com/services/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';
+    const campaignList = payload.campaign_types ? payload.campaign_types.split(', ').slice(0,4).join(', ') : 'Not specified';
+    const techStatus = payload.tech_status ? JSON.parse(payload.tech_status) : {};
+    const ga4 = techStatus['Google Analytics (GA4)'] || 'unknown';
+    const gtm = techStatus['Google Tag Manager'] || 'unknown';
+    const grants = techStatus['Google Ad Grants'] || 'unknown';
 
-    // Also send to Web3Forms for email notification
-    const emailRes = await fetch('https://api.web3forms.com/submit',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(payload)
-    });
-    const json = await emailRes.json();
-    if(!json.success) throw new Error(json.message||'Submission failed');
+    const slackMsg = {
+      text: '🎯 New Google Ads Intake',
+      blocks: [
+        {
+          type: 'header',
+          text: {type: 'plain_text', text: '🎯 New Google Ads Client Intake'}
+        },
+        {
+          type: 'section',
+          fields: [
+            {type: 'mrkdwn', text: '*Organization*\n' + (payload.org_name||'—')},
+            {type: 'mrkdwn', text: '*Type*\n' + (payload.np_type||'—')},
+            {type: 'mrkdwn', text: '*Location*\n' + (payload.city||'—') + ', ' + (payload.state||'—')},
+            {type: 'mrkdwn', text: '*Website*\n' + (payload.org_url||'—')}
+          ]
+        },
+        {
+          type: 'section',
+          fields: [
+            {type: 'mrkdwn', text: '*Campaigns Requested*\n' + campaignList},
+            {type: 'mrkdwn', text: '*Donation Processor*\n' + (payload.donation_processor||'—')},
+            {type: 'mrkdwn', text: '*GA4*\n' + ga4},
+            {type: 'mrkdwn', text: '*GTM*\n' + gtm}
+          ]
+        },
+        {
+          type: 'section',
+          fields: [
+            {type: 'mrkdwn', text: '*Ad Grants Status*\n' + grants},
+            {type: 'mrkdwn', text: '*Ads Account*\n' + (payload.ads_account_status||'—')}
+          ]
+        },
+        {
+          type: 'section',
+          text: {type: 'mrkdwn', text: '*Contact*\n' + (payload.contact_name||'—') + ' — ' + (payload.contact_email||'—') + (payload.contact_phone ? ' · ' + payload.contact_phone : '')}
+        },
+        {
+          type: 'section',
+          text: {type: 'mrkdwn', text: '*Mission*\n_' + (payload.mission||'—').substring(0,200) + '_'}
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'context',
+          elements: [{type: 'mrkdwn', text: '📋 Create a Canvas for this client in #google-ads to track their setup and tasks'}]
+        }
+      ]
+    };
+
+    // Fire Slack + Web3Forms simultaneously
+    const [slackRes, emailRes] = await Promise.allSettled([
+      fetch(slackWebhook, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(slackMsg)
+      }),
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        body: JSON.stringify(payload)
+      })
+    ]);
+
+    const emailOk = emailRes.status === 'fulfilled' && (await emailRes.value.json()).success;
+    const slackOk = slackRes.status === 'fulfilled' && slackRes.value.ok;
+
+    if (!emailOk && !slackOk) throw new Error('All submission endpoints failed');
 
     document.getElementById('mainForm').style.display='none';
     document.getElementById('thankYouScreen').style.display='block';
