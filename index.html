@@ -38,7 +38,7 @@ body{font-family:'Rethink Sans',sans-serif;background:var(--bg);color:var(--text
 .step-nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.06)}
 .step-nav-inner{max-width:900px;margin:0 auto;padding:0 32px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
 .step-nav-inner::-webkit-scrollbar{display:none}
-.step-tab{display:flex;align-items:center;gap:7px;padding:14px 16px;font-size:12px;font-weight:700;color:var(--subtle);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;flex-shrink:0;font-family:inherit}
+.step-tab{display:flex;align-items:center;gap:7px;padding:14px 12px;font-size:11px;font-weight:700;color:var(--subtle);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;flex-shrink:0;font-family:inherit}
 .step-tab:hover{color:var(--primary)}
 .step-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
 .step-tab.done{color:var(--secondary)}
@@ -48,7 +48,7 @@ body{font-family:'Rethink Sans',sans-serif;background:var(--bg);color:var(--text
 
 /* LAYOUT */
 .form-wrap{max-width:900px;margin:0 auto;padding:24px 32px 80px}
-@media(max-width:600px){.form-wrap{padding:16px 16px 60px}.header-inner{padding:24px 20px 28px}.step-nav-inner{padding:0 16px}.step-tab{padding:12px 10px;font-size:11px}}
+@media(max-width:600px){.form-wrap{padding:16px 16px 60px}.header-inner{padding:24px 20px 28px}.step-nav-inner{padding:0 16px}.step-tab{padding:12px 8px;font-size:10px}}
 
 /* SECTIONS */
 .form-section{display:none}
@@ -83,55 +83,59 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .chip.on{border-color:var(--primary);background:var(--primary-light);color:#004f78}
 .chip.on-amber{border-color:var(--ads-accent);background:var(--ads-accent-light);color:#92400E}
 
+/* MULTI-SELECT with OTHER */
+.multi-select-wrap{display:flex;flex-direction:column;gap:8px}
+.multi-select-chips{display:flex;flex-wrap:wrap;gap:6px;max-height:200px;overflow-y:auto;padding:4px 0}
+.multi-select-chips::-webkit-scrollbar{width:4px}
+.multi-select-chips::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:2px}
+.multi-select-other{display:flex;gap:8px;margin-top:4px}
+.multi-select-other input{flex:1}
+.multi-select-other button{padding:10px 16px;background:var(--primary);color:white;border:none;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+
 /* TOGGLE */
 .toggle-group{display:flex;gap:8px;flex-wrap:wrap}
 .toggle-btn{flex:1;min-width:100px;padding:10px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:all .12s;background:white;color:var(--muted);font-family:inherit;text-align:center}
 .toggle-btn:hover{border-color:var(--primary);color:var(--primary)}
 .toggle-btn.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark)}
 
-/* STATUS BADGES */
-.status-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.status-card{border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;cursor:pointer;transition:all .15s;background:white}
-.status-card:hover{border-color:var(--primary)}
-.status-card.selected{border-color:var(--primary);background:var(--primary-light)}
-.status-card.selected-yes{border-color:var(--secondary);background:#f0fdf4}
-.status-card.selected-no{border-color:#ef4444;background:#fef2f2}
-.status-card.selected-unsure{border-color:var(--ads-accent);background:var(--ads-accent-light)}
-.status-card-label{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
-.status-card-opts{display:flex;gap:6px;flex-wrap:wrap}
-.status-opt{padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--muted);font-family:inherit;transition:all .12s}
-.status-opt:hover{border-color:var(--primary);color:var(--primary)}
-.status-opt.yes{border-color:var(--secondary);background:#f0fdf4;color:#166534}
-.status-opt.no{border-color:#ef4444;background:#fef2f2;color:#991b1b}
-.status-opt.unsure{border-color:var(--ads-accent);background:var(--ads-accent-light);color:#92400E}
-.status-opt.applied{border-color:#8b5cf6;background:#f5f3ff;color:#6d28d9}
+/* CONVERSION URL BUILDER */
+.conversion-list{display:flex;flex-direction:column;gap:12px}
+.conversion-item{background:#f8fafc;border:1.5px solid var(--border);border-radius:14px;padding:16px;position:relative}
+.conversion-item-header{display:flex;gap:12px;margin-bottom:12px;align-items:center}
+.conversion-item-header select{flex:1;max-width:200px}
+.conversion-item-remove{width:28px;height:28px;border-radius:8px;border:none;background:#fee2e2;color:#dc2626;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.conversion-item-remove:hover{background:#fecaca}
+.conversion-item-body{display:flex;flex-direction:column;gap:10px}
+.conversion-type-row{display:flex;gap:8px;flex-wrap:wrap}
+.conversion-type-btn{padding:8px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;background:white;color:var(--muted);font-family:inherit}
+.conversion-type-btn:hover{border-color:var(--primary);color:var(--primary)}
+.conversion-type-btn.active{border-color:var(--secondary);background:#f0fdf4;color:#166534}
+.conversion-add-btn{display:flex;align-items:center;gap:6px;padding:12px 18px;border-radius:12px;border:2px dashed var(--primary);background:rgba(0,131,198,.04);color:var(--primary);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;width:fit-content}
+.conversion-add-btn:hover{background:rgba(0,131,198,.1);border-style:solid}
 
-/* KEYWORD BUILDER */
-.keyword-input-row{display:flex;gap:8px}
-.keyword-input-row input{flex:1}
-.keyword-add-btn{padding:11px 16px;background:var(--primary);color:white;border:none;border-radius:12px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .15s}
-.keyword-add-btn:hover{background:var(--primary-dark)}
-.keyword-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:10px}
-.keyword-tag{display:flex;align-items:center;gap:5px;padding:5px 10px 5px 12px;border-radius:100px;font-size:12px;font-weight:600}
-.keyword-tag.include{background:#f0fdf4;border:1.5px solid #bbf7d0;color:#166534}
-.keyword-tag.exclude{background:#fef2f2;border:1.5px solid #fecaca;color:#991b1b}
-.keyword-tag-remove{cursor:pointer;opacity:.6;font-size:14px;line-height:1}
-.keyword-tag-remove:hover{opacity:1}
+/* ORG SPECIFIC SECTION */
+.org-specific-section{display:none;animation:fadeIn .3s ease}
+.org-specific-section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.org-fields-grid{display:grid;gap:18px}
 
-/* URL LIST */
-.url-list{display:flex;flex-direction:column;gap:8px}
-.url-row{display:flex;gap:8px;align-items:center}
-.url-row input{flex:1}
-.url-row-label{font-size:12px;font-weight:700;color:var(--muted);min-width:90px;text-align:right;flex-shrink:0}
-.url-remove{color:var(--subtle);cursor:pointer;font-size:18px;line-height:1;flex-shrink:0;transition:color .1s}
-.url-remove:hover{color:#ef4444}
-.url-add-btn{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:10px;border:1.5px dashed rgba(0,131,198,.4);background:rgba(0,131,198,.05);color:var(--primary);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;margin-top:4px;width:fit-content}
-.url-add-btn:hover{background:rgba(0,131,198,.12);border-color:var(--primary)}
+/* COLLAPSIBLE FIELD GROUP */
+.field-collapse{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;background:white}
+.field-collapse-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;background:#f8fafc;border-bottom:1px solid transparent;transition:all .15s}
+.field-collapse-header:hover{background:#f1f5f9}
+.field-collapse-header.open{border-bottom-color:var(--border)}
+.field-collapse-title{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px}
+.field-collapse-title span{font-size:15px}
+.field-collapse-arrow{width:20px;height:20px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);transition:transform .2s}
+.field-collapse-header.open .field-collapse-arrow{transform:rotate(180deg)}
+.field-collapse-body{display:none;padding:16px}
+.field-collapse-body.open{display:block}
 
 /* INFO BOX */
 .info-box{background:rgba(0,131,198,.06);border:1px solid rgba(0,131,198,.2);border-radius:12px;padding:12px 16px;font-size:12px;color:#334155;line-height:1.6;display:flex;gap:10px}
 .info-box-icon{font-size:16px;flex-shrink:0;margin-top:1px}
 .info-box.amber{background:var(--ads-accent-light);border-color:rgba(245,158,11,.3)}
+.info-box.green{background:#f0fdf4;border-color:rgba(61,170,105,.3)}
 
 /* NAV BUTTONS */
 .nav-buttons{display:flex;gap:12px;margin-top:24px;align-items:center}
@@ -164,7 +168,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .thankyou-footer{text-align:center;margin-top:24px;font-size:13px;color:var(--subtle)}
 .thankyou-footer a{color:var(--primary);font-weight:600;text-decoration:none}
 
-/* TYPE PICKER (reused from original) */
+/* TYPE PICKER */
 .type-picker{position:relative;width:100%}
 .type-trigger{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;min-height:52px;border:1.5px solid var(--border);border-radius:12px;background:white;cursor:pointer;transition:border-color .15s,box-shadow .15s;user-select:none}
 .type-trigger:hover,.type-trigger.open{border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,131,198,.12)}
@@ -200,7 +204,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       </div>
       <div class="thankyou-icon">🎯</div>
       <h2>We're on it — thank you!</h2>
-      <p>Your Google Ads intake has been submitted. Our team will review your account details and campaign goals within 1–2 business days.</p>
+      <p>Your Google Ads intake has been submitted. Our team will review your account details and campaign goals within 1-2 business days.</p>
     </div>
   </div>
   <div class="thankyou-body">
@@ -231,7 +235,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div class="header-bottom">
         <div>
           <h1>Let's launch your <span>Google Ad Grants</span> campaign.</h1>
-          <p class="header-desc">Tell us about your organization, goals, and current setup. Takes about 10–15 minutes — goes directly to our ads team.</p>
+          <p class="header-desc">Tell us about your organization, goals, and current setup. Takes about 10-15 minutes — goes directly to our ads team.</p>
         </div>
         <div class="progress-bar-wrap">
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
@@ -244,14 +248,15 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   <!-- STEP NAV -->
   <div class="step-nav">
     <div class="step-nav-inner" id="stepNav">
-      <div class="step-tab active" onclick="goToStep(0)" id="stab0"><div class="step-dot">1</div>Organization</div>
-      <div class="step-tab" onclick="goToStep(1)" id="stab1"><div class="step-dot">2</div>Audience</div>
-      <div class="step-tab" onclick="goToStep(2)" id="stab2"><div class="step-dot">3</div>Campaigns</div>
-      <div class="step-tab" onclick="goToStep(3)" id="stab3"><div class="step-dot">4</div>Messaging</div>
-      <div class="step-tab" onclick="goToStep(4)" id="stab4"><div class="step-dot">5</div>Assets</div>
-      <div class="step-tab" onclick="goToStep(5)" id="stab5"><div class="step-dot">6</div>Technical</div>
-      <div class="step-tab" onclick="goToStep(6)" id="stab6"><div class="step-dot">7</div>Access</div>
-      <div class="step-tab" onclick="goToStep(7)" id="stab7"><div class="step-dot">8</div>Contact</div>
+      <div class="step-tab active" onclick="goToStep(0)"><div class="step-dot">1</div>Organization</div>
+      <div class="step-tab" onclick="goToStep(1)"><div class="step-dot">2</div>Programs</div>
+      <div class="step-tab" onclick="goToStep(2)"><div class="step-dot">3</div>Audience</div>
+      <div class="step-tab" onclick="goToStep(3)"><div class="step-dot">4</div>Campaigns</div>
+      <div class="step-tab" onclick="goToStep(4)"><div class="step-dot">5</div>Messaging</div>
+      <div class="step-tab" onclick="goToStep(5)"><div class="step-dot">6</div>Assets</div>
+      <div class="step-tab" onclick="goToStep(6)"><div class="step-dot">7</div>Technical</div>
+      <div class="step-tab" onclick="goToStep(7)"><div class="step-dot">8</div>Access</div>
+      <div class="step-tab" onclick="goToStep(8)"><div class="step-dot">9</div>Contact</div>
     </div>
   </div>
 
@@ -294,16 +299,16 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
           </div>
           <div class="field-row">
             <div class="field-group half">
-              <label>EIN / 501(c)(3) Confirmed?</label>
+              <label>EIN / 501(c)(3) Status</label>
               <div class="toggle-group">
-                <button type="button" class="toggle-btn" id="einYes" onclick="setToggle('ein','yes')">Yes ✓</button>
-                <button type="button" class="toggle-btn" id="einNo" onclick="setToggle('ein','no')">Not yet</button>
-                <button type="button" class="toggle-btn" id="einPending" onclick="setToggle('ein','pending')">Pending</button>
+                <button type="button" class="toggle-btn" onclick="setToggle('ein','yes')">Yes ✓</button>
+                <button type="button" class="toggle-btn" onclick="setToggle('ein','no')">Not yet</button>
+                <button type="button" class="toggle-btn" onclick="setToggle('ein','pending')">Pending</button>
               </div>
             </div>
             <div class="field-group half">
               <label>Year Founded <span class="hint">Optional</span></label>
-              <input type="number" id="founded" placeholder="e.g. 2018" min="1800" max="2025">
+              <input type="number" id="founded" placeholder="e.g. 2018" min="1800" max="2026">
             </div>
           </div>
           <div class="field-row">
@@ -331,22 +336,62 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
             <label>Elevator Pitch <span class="hint">One sentence — what makes you unique?</span></label>
             <input type="text" id="elevator_pitch" placeholder="e.g. We're the only no-kill shelter in Flathead County serving 1,200+ animals per year.">
           </div>
+        </div>
+      </div>
+
+      <!-- AI-NEEDED UNIVERSAL FIELDS -->
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">✨</span><span class="section-title">What Makes You Stand Out</span><span class="section-subtitle">For ad copy</span></div>
+        <div class="section-body">
           <div class="field-group">
-            <label>Key Stats / Proof Points <span class="hint">Numbers that show your impact</span></label>
-            <textarea id="key_stats" placeholder="e.g. Rescued 847 animals last year, 94% adoption rate, 0% euthanasia policy…" style="min-height:70px"></textarea>
+            <label>Primary Differentiator <span class="hint">What's your "only" or "first" claim?</span></label>
+            <input type="text" id="differentiator" placeholder="e.g. Only no-kill shelter in the county, First to offer free spay/neuter, Largest wildlife rehab in the state">
+          </div>
+          <div class="field-group">
+            <label>Key Impact Numbers <span class="hint">Stats that prove your impact</span></label>
+            <textarea id="impact_stats" placeholder="e.g. 847 animals rescued last year, 94% adoption rate, 15,000 meals served monthly, 98% of donations go directly to programs" style="min-height:70px"></textarea>
+          </div>
+          <div class="field-group">
+            <label>Why Act Now? <span class="hint">What urgency can we use in ads?</span></label>
+            <input type="text" id="urgency_hook" placeholder="e.g. Shelter at capacity, Matching gift doubles donations through Dec 31, Only 10 spots left in program">
           </div>
         </div>
       </div>
+
       <div class="nav-buttons">
-        <button class="btn-next" onclick="nextStep()">Continue to Audience →</button>
-        <span class="step-counter">Step 1 of 8</span>
+        <button class="btn-next" onclick="nextStep()">Continue to Programs →</button>
+        <span class="step-counter">Step 1 of 9</span>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════
-         STEP 1 — AUDIENCE
+         STEP 1 — PROGRAMS (ORG-SPECIFIC)
     ═══════════════════════════════════════════════════ -->
     <div class="form-section" id="step1">
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">📋</span><span class="section-title">Your Programs & Services</span><span class="section-subtitle">Based on your org type</span></div>
+        <div class="section-body">
+          <div class="info-box green" id="orgTypePrompt">
+            <span class="info-box-icon">👆</span>
+            <div>Select your organization type on the previous step to see relevant fields here.</div>
+          </div>
+          
+          <!-- Dynamic org-specific fields render here -->
+          <div id="orgSpecificFields"></div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-next" onclick="nextStep()">Continue to Audience →</button>
+        <span class="step-counter">Step 2 of 9</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 2 — AUDIENCE
+    ═══════════════════════════════════════════════════ -->
+    <div class="form-section" id="step2">
       <div class="section-card">
         <div class="section-header"><span class="section-icon">👥</span><span class="section-title">Target Audience</span></div>
         <div class="section-body">
@@ -356,7 +401,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
           </div>
           <div class="field-group">
             <label>Describe your ideal supporter / visitor</label>
-            <textarea id="ideal_supporter" placeholder="e.g. Local families with children aged 30–50, dog lovers, homeowners in the metro area who care about animal welfare…" style="min-height:80px"></textarea>
+            <textarea id="ideal_supporter" placeholder="e.g. Local families with children aged 30-50, dog lovers, homeowners in the metro area who care about animal welfare…" style="min-height:80px"></textarea>
           </div>
           <div class="field-group">
             <label>Age Range of Primary Audience</label>
@@ -367,7 +412,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
             <div class="chip-group" id="geoGroup"></div>
           </div>
           <div class="field-group">
-            <label>Specific Cities / Regions to Target <span class="hint">Optional — paste if known</span></label>
+            <label>Specific Cities / Regions to Target <span class="hint">Optional — list specific areas</span></label>
             <input type="text" id="specific_geo" placeholder="e.g. Greater Seattle area, King County, Bellevue, Kirkland…">
           </div>
         </div>
@@ -375,14 +420,14 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div class="nav-buttons">
         <button class="btn-back" onclick="prevStep()">← Back</button>
         <button class="btn-next" onclick="nextStep()">Continue to Campaigns →</button>
-        <span class="step-counter">Step 2 of 8</span>
+        <span class="step-counter">Step 3 of 9</span>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════
-         STEP 2 — CAMPAIGNS
+         STEP 3 — CAMPAIGNS
     ═══════════════════════════════════════════════════ -->
-    <div class="form-section" id="step2">
+    <div class="form-section" id="step3">
       <div class="section-card">
         <div class="section-header"><span class="section-icon">🎯</span><span class="section-title">Campaign Goals</span></div>
         <div class="section-body">
@@ -408,19 +453,19 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
           </div>
           <div class="field-row">
             <div class="field-group half">
-              <label>Monthly Non-Grant Budget <span class="hint">Optional paid spend beyond grants</span></label>
+              <label>Monthly Non-Grant Budget <span class="hint">Optional paid spend</span></label>
               <select id="paid_budget">
                 <option value="">Not planning paid spend</option>
                 <option>Under $500/mo</option>
-                <option>$500–$1,000/mo</option>
-                <option>$1,000–$2,500/mo</option>
-                <option>$2,500–$5,000/mo</option>
+                <option>$500-$1,000/mo</option>
+                <option>$1,000-$2,500/mo</option>
+                <option>$2,500-$5,000/mo</option>
                 <option>$5,000+/mo</option>
               </select>
             </div>
             <div class="field-group half">
               <label>Seasonal Priorities</label>
-              <input type="text" id="seasonal" placeholder="e.g. End of year giving, spring adoption events, GivingTuesday">
+              <input type="text" id="seasonal" placeholder="e.g. End of year giving, spring events, GivingTuesday">
             </div>
           </div>
           <div class="field-group">
@@ -432,14 +477,14 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div class="nav-buttons">
         <button class="btn-back" onclick="prevStep()">← Back</button>
         <button class="btn-next" onclick="nextStep()">Continue to Messaging →</button>
-        <span class="step-counter">Step 3 of 8</span>
+        <span class="step-counter">Step 4 of 9</span>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════
-         STEP 3 — MESSAGING
+         STEP 4 — MESSAGING
     ═══════════════════════════════════════════════════ -->
-    <div class="form-section" id="step3">
+    <div class="form-section" id="step4">
       <div class="section-card">
         <div class="section-header"><span class="section-icon">✍️</span><span class="section-title">Messaging & Content</span></div>
         <div class="section-body">
@@ -453,19 +498,19 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
           </div>
           <div class="field-group">
             <label>✅ Keywords / Phrases to INCLUDE <span class="hint">Words that resonate with your audience</span></label>
-            <div class="keyword-input-row">
+            <div class="multi-select-other">
               <input type="text" id="includeKeywordInput" placeholder="e.g. rescue, adopt, no-kill, community…" onkeydown="if(event.key==='Enter'){event.preventDefault();addKeyword('include')}">
-              <button type="button" class="keyword-add-btn" onclick="addKeyword('include')">+ Add</button>
+              <button type="button" onclick="addKeyword('include')">+ Add</button>
             </div>
-            <div class="keyword-tags" id="includeKeywordTags"></div>
+            <div class="chip-group" id="includeKeywordTags" style="margin-top:8px"></div>
           </div>
           <div class="field-group">
             <label>🚫 Keywords / Phrases to EXCLUDE <span class="hint">Words you never want in your ads</span></label>
-            <div class="keyword-input-row">
+            <div class="multi-select-other">
               <input type="text" id="excludeKeywordInput" placeholder="e.g. free dogs, cheap, euthanasia…" onkeydown="if(event.key==='Enter'){event.preventDefault();addKeyword('exclude')}">
-              <button type="button" class="keyword-add-btn" onclick="addKeyword('exclude')" style="background:#ef4444">+ Add</button>
+              <button type="button" onclick="addKeyword('exclude')" style="background:#ef4444">+ Add</button>
             </div>
-            <div class="keyword-tags" id="excludeKeywordTags"></div>
+            <div class="chip-group" id="excludeKeywordTags" style="margin-top:8px"></div>
           </div>
           <div class="field-group">
             <label>Legal / Compliance Restrictions <span class="hint">Anything we legally cannot say?</span></label>
@@ -484,23 +529,23 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div class="nav-buttons">
         <button class="btn-back" onclick="prevStep()">← Back</button>
         <button class="btn-next" onclick="nextStep()">Continue to Assets →</button>
-        <span class="step-counter">Step 4 of 8</span>
+        <span class="step-counter">Step 5 of 9</span>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════
-         STEP 4 — ASSETS
+         STEP 5 — ASSETS
     ═══════════════════════════════════════════════════ -->
-    <div class="form-section" id="step4">
+    <div class="form-section" id="step5">
       <div class="section-card">
         <div class="section-header"><span class="section-icon">🖼️</span><span class="section-title">Creative Assets & Presence</span></div>
         <div class="section-body">
           <div class="field-group">
             <label>Do you have photos / videos we can use in ads?</label>
             <div class="toggle-group">
-              <button type="button" class="toggle-btn" id="assetsYes" onclick="setToggle('assets','yes')">Yes — lots</button>
-              <button type="button" class="toggle-btn" id="assetsSome" onclick="setToggle('assets','some')">Some</button>
-              <button type="button" class="toggle-btn" id="assetsNo" onclick="setToggle('assets','no')">Not really</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('assets','yes')">Yes — lots</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('assets','some')">Some</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('assets','no')">Not really</button>
             </div>
           </div>
           <div class="field-group">
@@ -510,11 +555,11 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
           <div class="field-group">
             <label>Do you have a YouTube Channel?</label>
             <div class="toggle-group">
-              <button type="button" class="toggle-btn" id="ytYes" onclick="setToggle('yt','yes');showIf('ytFields',true)">Yes</button>
-              <button type="button" class="toggle-btn" id="ytNo" onclick="setToggle('yt','no');showIf('ytFields',false)">No</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('yt','yes');showIf('ytFields',true)">Yes</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('yt','no');showIf('ytFields',false)">No</button>
             </div>
           </div>
-          <div id="ytFields" style="display:none;flex-direction:column;gap:14px">
+          <div id="ytFields" style="display:none;flex-direction:column;gap:14px;margin-top:12px">
             <div class="field-row">
               <div class="field-group half">
                 <label>YouTube Channel URL</label>
@@ -523,13 +568,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
               <div class="field-group half">
                 <label>Subscriber Count (approx)</label>
                 <input type="text" id="yt_subs" placeholder="e.g. ~500">
-              </div>
-            </div>
-            <div class="field-group">
-              <label>Do you have video content usable in ads?</label>
-              <div class="toggle-group">
-                <button type="button" class="toggle-btn" id="ytVidYes" onclick="setToggle('ytVid','yes')">Yes</button>
-                <button type="button" class="toggle-btn" id="ytVidNo" onclick="setToggle('ytVid','no')">No</button>
               </div>
             </div>
           </div>
@@ -544,9 +582,9 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
           <div class="field-group">
             <label>Do you have a Google Business Profile?</label>
             <div class="toggle-group">
-              <button type="button" class="toggle-btn" id="gbpYes" onclick="setToggle('gbp','yes')">Yes</button>
-              <button type="button" class="toggle-btn" id="gbpNo" onclick="setToggle('gbp','no')">No</button>
-              <button type="button" class="toggle-btn" id="gbpUnsure" onclick="setToggle('gbp','unsure')">Not sure</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('gbp','yes')">Yes</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('gbp','no')">No</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('gbp','unsure')">Not sure</button>
             </div>
           </div>
         </div>
@@ -554,14 +592,14 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div class="nav-buttons">
         <button class="btn-back" onclick="prevStep()">← Back</button>
         <button class="btn-next" onclick="nextStep()">Continue to Technical →</button>
-        <span class="step-counter">Step 5 of 8</span>
+        <span class="step-counter">Step 6 of 9</span>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════
-         STEP 5 — TECHNICAL
+         STEP 6 — TECHNICAL
     ═══════════════════════════════════════════════════ -->
-    <div class="form-section" id="step5">
+    <div class="form-section" id="step6">
       <div class="section-card">
         <div class="section-header"><span class="section-icon">⚙️</span><span class="section-title">Technical Setup</span></div>
         <div class="section-body">
@@ -584,19 +622,17 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
             <div class="chip-group" id="webManagerGroup"></div>
           </div>
           <div class="field-group">
-            <label>Can you install code / GTM on the site?</label>
+            <label>Can you install code / tracking on the site?</label>
             <div class="toggle-group">
-              <button type="button" class="toggle-btn" id="installYes" onclick="setToggle('install','yes')">Yes</button>
-              <button type="button" class="toggle-btn" id="installNo" onclick="setToggle('install','no')">No</button>
-              <button type="button" class="toggle-btn" id="installHelp" onclick="setToggle('install','help')">Need help</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('install','yes')">Yes, I can</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('install','no')">No</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('install','help')">Need SAP to do it</button>
             </div>
           </div>
-
           <div class="field-group">
             <label>Current Setup Status <span class="hint">Click each to set status</span></label>
-            <div class="status-row" id="techStatusRow"></div>
+            <div id="techStatusRow" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px"></div>
           </div>
-
           <div class="field-group">
             <label>Current Donation Processor</label>
             <select id="donation_processor">
@@ -610,89 +646,118 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
               <option>Virtuous</option><option>SponsorAPurpose (SAP)</option><option>None yet</option><option>Other</option>
             </select>
           </div>
+        </div>
+      </div>
 
+      <!-- CONVERSION TRACKING -->
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">📊</span><span class="section-title">Conversion Tracking Setup</span><span class="section-subtitle">We'll track these as goals</span></div>
+        <div class="section-body">
+          <div class="info-box amber">
+            <span class="info-box-icon">🎯</span>
+            <div>Tell us the key pages/actions you want to track. We'll set up GA4 events and Google Ads conversions automatically.</div>
+          </div>
+          <div class="conversion-list" id="conversionList"></div>
+          <button type="button" class="conversion-add-btn" onclick="addConversion()">+ Add conversion to track</button>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header"><span class="section-icon">🔧</span><span class="section-title">Tracking Installation</span></div>
+        <div class="section-body">
           <div class="field-group">
-            <label>Do you have off-site forms or iFrames for key conversions?</label>
+            <label>How should we set up tracking?</label>
             <div class="toggle-group">
-              <button type="button" class="toggle-btn" id="iframeYes" onclick="setToggle('iframe','yes');showIf('iframeUrlFields',true)">Yes</button>
-              <button type="button" class="toggle-btn" id="iframeNo" onclick="setToggle('iframe','no');showIf('iframeUrlFields',false)">No</button>
-            </div>
-            <div id="iframeUrlFields" style="display:none;margin-top:12px">
-              <div class="info-box amber" style="margin-bottom:10px">
-                <span class="info-box-icon">⚠️</span>
-                <div>Off-site iFrames can break conversion tracking. List each one so we can set up the right workarounds.</div>
-              </div>
-              <textarea id="iframe_urls" placeholder="e.g. Donate: givebutter.com/widget&#10;Adopt: shelterluv.com/matchme/adopt&#10;Foster: airtable.com/form/foster" style="min-height:80px"></textarea>
+              <button type="button" class="toggle-btn" onclick="setToggle('trackingInstall','self')">I'll install the code myself</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('trackingInstall','access')">Give SAP access to install</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('trackingInstall','dev')">My developer will install</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('trackingInstall','call')">Schedule a setup call</button>
             </div>
           </div>
-
-          <div class="field-group">
-            <label>Key Conversion Pages <span class="hint">Paste URLs for pages we'll be driving traffic to</span></label>
-            <div class="url-list" id="conversionUrlList"></div>
-            <button type="button" class="url-add-btn" onclick="addConversionUrl()">+ Add conversion page</button>
-          </div>
-
-          <div class="field-group">
-            <label>Other Tools / Integrations You Use</label>
-            <input type="text" id="other_tools" placeholder="e.g. Bloomerang CRM, Mailchimp, Salesforce, ShelterLuv, PetFinder, Pawlytics…">
-          </div>
-          <div class="field-group">
-            <label>Staging Site URL <span class="hint">If applicable</span></label>
-            <input type="url" id="staging_url" placeholder="https://staging.yoursite.org">
+          <div id="trackingAccessFields" style="display:none;flex-direction:column;gap:14px;margin-top:12px">
+            <div class="info-box">
+              <span class="info-box-icon">🔒</span>
+              <div>We'll send a secure link to share access. Never put passwords directly in this form.</div>
+            </div>
+            <div class="field-group">
+              <label>Website Login URL <span class="hint">Where do you log in to edit your site?</span></label>
+              <input type="url" id="website_login_url" placeholder="e.g. yoursite.com/wp-admin or yoursite.squarespace.com">
+            </div>
+            <div class="field-group">
+              <label>Developer Contact <span class="hint">If you have one</span></label>
+              <input type="text" id="dev_contact" placeholder="Name and email of your web developer">
+            </div>
           </div>
         </div>
       </div>
+
       <div class="nav-buttons">
         <button class="btn-back" onclick="prevStep()">← Back</button>
         <button class="btn-next" onclick="nextStep()">Continue to Access →</button>
-        <span class="step-counter">Step 6 of 8</span>
+        <span class="step-counter">Step 7 of 9</span>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════
-         STEP 6 — ACCESS
+         STEP 7 — ACCESS
     ═══════════════════════════════════════════════════ -->
-    <div class="form-section" id="step6">
+    <div class="form-section" id="step7">
       <div class="section-card">
-        <div class="section-header"><span class="section-icon">🔑</span><span class="section-title">Account Access Needed</span></div>
+        <div class="section-header"><span class="section-icon">🔑</span><span class="section-title">Account Access & Status</span></div>
         <div class="section-body">
           <div class="info-box">
             <span class="info-box-icon">🔒</span>
             <div>We'll send you invitations for each platform — you never need to share passwords. This just tells us what to request access to.</div>
           </div>
+
           <div class="field-group">
-            <label>Access Required <span class="hint">Select all that apply</span></label>
+            <label>Google for Nonprofits Status</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" onclick="setToggle('g4np','yes')">Have it ✓</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('g4np','applied')">Applied</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('g4np','no')">Need to apply</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('g4np','unsure')">Not sure</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Google Ad Grants Status</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" onclick="setToggle('adGrants','active')">Active ✓</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('adGrants','applied')">Applied</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('adGrants','need')">Need to apply</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('adGrants','suspended')">Suspended</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('adGrants','unsure')">Not sure</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>TechSoup Registration</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn" onclick="setToggle('techsoup','yes')">Registered ✓</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('techsoup','no')">Not yet</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('techsoup','unsure')">Not sure</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Access We'll Need <span class="hint">Select all that apply</span></label>
             <div class="chip-group" id="accessGroup"></div>
           </div>
+
           <div class="field-group">
-            <label>Google Ads Account Status</label>
-            <div class="toggle-group">
-              <button type="button" class="toggle-btn" id="adsAcctExists" onclick="setToggle('adsAcct','exists')">Account exists</button>
-              <button type="button" class="toggle-btn" id="adsAcctNew" onclick="setToggle('adsAcct','new')">Need to create</button>
-              <button type="button" class="toggle-btn" id="adsAcctGrant" onclick="setToggle('adsAcct','grant')">Have Ad Grants</button>
-              <button type="button" class="toggle-btn" id="adsAcctSuspended" onclick="setToggle('adsAcct','suspended')">Suspended</button>
-            </div>
+            <label>Existing Google Ads / Analytics IDs <span class="hint">Paste if you have them</span></label>
+            <textarea id="existing_links" placeholder="e.g. Google Ads Customer ID: 123-456-7890&#10;Analytics Property ID: G-XXXXXXXXXX" style="min-height:80px"></textarea>
           </div>
-          <div class="field-group">
-            <label>Existing Google Ads / Analytics Links <span class="hint">Paste share links or account IDs if you have them</span></label>
-            <textarea id="existing_links" placeholder="e.g. Google Ads Customer ID: 123-456-7890&#10;Analytics Property ID: G-XXXXXXXXXX&#10;Looker Studio report: https://lookerstudio.google.com/…" style="min-height:80px"></textarea>
-          </div>
-          <div class="field-group">
-            <label>Website Backend Access</label>
-            <div class="toggle-group">
-              <button type="button" class="toggle-btn" id="webAccessYes" onclick="setToggle('webAccess','yes')">Yes — can provide</button>
-              <button type="button" class="toggle-btn" id="webAccessNo" onclick="setToggle('webAccess','no')">No</button>
-              <button type="button" class="toggle-btn" id="webAccessMaybe" onclick="setToggle('webAccess','maybe')">Maybe</button>
-            </div>
-          </div>
+
           <div class="field-group">
             <label>Have you worked with a Google Ads manager before?</label>
             <div class="toggle-group">
-              <button type="button" class="toggle-btn" id="prevAdsYes" onclick="setToggle('prevAds','yes');showIf('prevAdsFields',true)">Yes</button>
-              <button type="button" class="toggle-btn" id="prevAdsNo" onclick="setToggle('prevAds','no');showIf('prevAdsFields',false)">No — first time</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('prevAds','yes');showIf('prevAdsFields',true)">Yes</button>
+              <button type="button" class="toggle-btn" onclick="setToggle('prevAds','no');showIf('prevAdsFields',false)">No — first time</button>
             </div>
           </div>
-          <div id="prevAdsFields" style="display:none;flex-direction:column;gap:14px">
+          <div id="prevAdsFields" style="display:none;flex-direction:column;gap:14px;margin-top:12px">
             <div class="field-group">
               <label>What worked well with your previous manager?</label>
               <textarea id="prev_worked" placeholder="e.g. Good reporting, responsive communication…" style="min-height:60px"></textarea>
@@ -721,14 +786,14 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div class="nav-buttons">
         <button class="btn-back" onclick="prevStep()">← Back</button>
         <button class="btn-next" onclick="nextStep()">Continue to Contact →</button>
-        <span class="step-counter">Step 7 of 8</span>
+        <span class="step-counter">Step 8 of 9</span>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════
-         STEP 7 — CONTACT
+         STEP 8 — CONTACT
     ═══════════════════════════════════════════════════ -->
-    <div class="form-section" id="step7">
+    <div class="form-section" id="step8">
       <div class="section-card">
         <div class="section-header"><span class="section-icon">👤</span><span class="section-title">Contact Information</span></div>
         <div class="section-body">
@@ -758,7 +823,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
           </div>
           <div class="field-group">
             <label>Best Time to Reach You</label>
-            <input type="text" id="best_time" placeholder="e.g. Weekdays 9am–5pm PT, prefer email first">
+            <input type="text" id="best_time" placeholder="e.g. Weekdays 9am-5pm PT, prefer email first">
           </div>
           <div class="field-group">
             <label>Secondary Contact <span class="hint">Optional — name + email</span></label>
@@ -775,12 +840,12 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
         <div class="section-header" style="background:transparent;border-bottom-color:rgba(245,158,11,.2)">
           <span class="section-icon">✅</span>
           <span class="section-title">Ready to submit?</span>
-          <span class="section-subtitle">Review your information above before sending</span>
+          <span class="section-subtitle">Review your information above</span>
         </div>
         <div class="section-body">
           <div class="info-box amber">
             <span class="info-box-icon">🎯</span>
-            <div>Your intake goes directly to our Google Ads team. We'll review your setup and campaign goals, then reach out within <strong>1–2 business days</strong> to schedule your kickoff.</div>
+            <div>Your intake goes directly to our Google Ads team. We'll review your setup and campaign goals, then reach out within <strong>1-2 business days</strong> to schedule your kickoff.</div>
           </div>
         </div>
       </div>
@@ -788,7 +853,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div class="nav-buttons">
         <button class="btn-back" onclick="prevStep()">← Back</button>
         <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">Submit Intake Form 🎯</button>
-        <span class="step-counter">Step 8 of 8</span>
+        <span class="step-counter">Step 9 of 9</span>
       </div>
     </div>
 
@@ -796,432 +861,1653 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 </div><!-- /mainForm -->
 
 <script>
-// ─── DATA ───────────────────────────────────────────────────────────
-const NP_TYPES=[
-  {name:'Advocacy / Policy',emoji:'📣'},{name:'Animal Welfare',emoji:'🐾'},
-  {name:'Arts & Culture',emoji:'🎭'},{name:'Civic Engagement',emoji:'🗳️'},
-  {name:'Community Development',emoji:'🏘️'},{name:'Disability Services',emoji:'♿'},
-  {name:'Disaster Relief',emoji:'🆘'},{name:'Economic Development',emoji:'📈'},
-  {name:'Education',emoji:'📚'},{name:'Environmental',emoji:'🌿'},
-  {name:'Faith-Based',emoji:'✝️'},{name:'Food Security',emoji:'🥗'},
-  {name:'Foundation / Grantmaking',emoji:'🏦'},{name:'Health & Medical',emoji:'🏥'},
-  {name:'Historical Preservation',emoji:'🏛️'},{name:'Homeless & Housing',emoji:'🏠'},
-  {name:'Human Services',emoji:'🤝'},{name:'Immigration & Refugee',emoji:'🤲'},
-  {name:'International Aid',emoji:'🌍'},{name:'Legal Aid',emoji:'⚖️'},
-  {name:'LGBTQ+',emoji:'🏳️‍🌈'},{name:'Library & Literacy',emoji:'📖'},
-  {name:'Mental Health',emoji:'🧠'},{name:'Racial Justice',emoji:'✊'},
-  {name:'Science & Research',emoji:'🔬'},{name:'Sports & Recreation',emoji:'⚽'},
-  {name:'Substance Recovery',emoji:'💙'},{name:'Technology Access',emoji:'💻'},
-  {name:'Veterans & Military',emoji:'🎖️'},{name:'Youth & Children',emoji:'🧒'}
+// ═══════════════════════════════════════════════════════════════════════════
+// ORG TYPE SCHEMA - All 30 types with their fields
+// ═══════════════════════════════════════════════════════════════════════════
+
+const ORG_TYPES = [
+  {name:'Advocacy / Policy',emoji:'📣',key:'advocacy'},
+  {name:'Animal Welfare',emoji:'🐾',key:'animal'},
+  {name:'Arts & Culture',emoji:'🎭',key:'arts'},
+  {name:'Civic Engagement',emoji:'🗳️',key:'civic'},
+  {name:'Community Development',emoji:'🏘️',key:'community'},
+  {name:'Disability Services',emoji:'♿',key:'disability'},
+  {name:'Disaster Relief',emoji:'🆘',key:'disaster'},
+  {name:'Economic Development',emoji:'📈',key:'economic'},
+  {name:'Education',emoji:'📚',key:'education'},
+  {name:'Environmental',emoji:'🌿',key:'environmental'},
+  {name:'Faith-Based',emoji:'✝️',key:'faith'},
+  {name:'Food Security',emoji:'🥗',key:'food'},
+  {name:'Foundation / Grantmaking',emoji:'🏦',key:'foundation'},
+  {name:'Health & Medical',emoji:'🏥',key:'health'},
+  {name:'Historical Preservation',emoji:'🏛️',key:'historical'},
+  {name:'Homeless & Housing',emoji:'🏠',key:'housing'},
+  {name:'Human Services',emoji:'🤝',key:'human'},
+  {name:'Immigration & Refugee',emoji:'🤲',key:'immigration'},
+  {name:'International Aid',emoji:'🌍',key:'international'},
+  {name:'Legal Aid',emoji:'⚖️',key:'legal'},
+  {name:'LGBTQ+',emoji:'🏳️‍🌈',key:'lgbtq'},
+  {name:'Library & Literacy',emoji:'📖',key:'literacy'},
+  {name:'Mental Health',emoji:'🧠',key:'mental'},
+  {name:'Racial Justice',emoji:'✊',key:'racial'},
+  {name:'Science & Research',emoji:'🔬',key:'science'},
+  {name:'Sports & Recreation',emoji:'⚽',key:'sports'},
+  {name:'Substance Recovery',emoji:'💙',key:'substance'},
+  {name:'Technology Access',emoji:'💻',key:'technology'},
+  {name:'Veterans & Military',emoji:'🎖️',key:'veterans'},
+  {name:'Youth & Children',emoji:'🧒',key:'youth'}
 ];
 
-const SERVICE_AREAS=['Local (city/county)','Statewide','Regional (multi-state)','National','International'];
-const AUDIENCE_TYPES=['General public donors','Major gift donors','Corporate sponsors','Volunteers','Potential adopters','Foster families','Event attendees','Grant funders','Legal / professional community','Students / youth','Seniors','Families with children','Pet owners','Local businesses','Media / press','Other'];
-const AGE_RANGES=['18–24','25–34','35–44','45–54','55–64','65+','All ages'];
-const GEO_TARGETING=['Hyperlocal (city only)','Metro area','County','Statewide','Regional (multi-state)','National'];
-const CAMPAIGN_TYPES=['Donations — one-time','Donations — recurring/monthly','Adopt a pet / person / animal','Foster program','Volunteer recruitment','Event promotion','General awareness','Shop / merchandise','Job opportunities','Professional services (legal, consulting, etc.)','Program enrollment','Membership','Sponsorships','Grant awareness','Education / training','Newsletter signups','Eco-tourism / experiences','Emergency fundraising','Capital campaign','Other'];
-const CONVERSION_GOALS=['Donate / Give Now','Volunteer Sign-Up','Adopt','Foster','Event Registration','Contact Form','Program Application','Newsletter Signup','Membership Sign-Up','Sponsorship Inquiry','Job Application','Schedule a Visit','Download Resource','Watch Video'];
-const TONES=['Warm & Hopeful','Bold & Urgent','Professional & Trustworthy','Playful & Friendly','Faith-Centered','Community-Driven','Creative & Artistic','Educational / Informative','Inspirational','Activist / Advocacy-driven'];
-const SOCIAL_PLATFORMS=['Facebook','Instagram','TikTok','LinkedIn','X / Twitter','YouTube','Pinterest','Threads','None'];
-const WEB_MANAGERS=['Ourselves (staff)','A volunteer','An agency','A developer / contractor','No one currently'];
-const TECH_ITEMS=['Google Ads Account','Google Ad Grants','Google Analytics (GA4)','Google Tag Manager','Google Search Console','Google Business Profile'];
-const ACCESS_ITEMS=['Google Ads (Admin)','Google Analytics (Admin)','Google Tag Manager (Admin)','Google Search Console','YouTube Channel','Website Backend'];
-const COMM_METHODS=['Email','Phone call','Text / SMS','Slack','Zoom / Video call'];
-const CONV_URL_LABELS=['Donate page','Adopt page','Foster page','Volunteer page','Events page','Contact page','Other'];
 
-// ─── STATE ──────────────────────────────────────────────────────────
-let state={
-  currentStep:0,
-  npType:'',npEmoji:'',
-  ein:'',assets:'',yt:'',ytVid:'',gbp:'',install:'',iframe:'',
-  adsAcct:'',webAccess:'',prevAds:'',
-  serviceAreas:[],audienceTypes:[],ageRanges:[],geo:[],
-  campaignTypes:[],primaryGoal:'',secondaryGoals:[],
-  tones:[],socialPlatforms:[],webManagers:[],accessItems:[],commMethods:[],
-  techStatus:{},
-  includeKeywords:[],excludeKeywords:[],
-  conversionUrls:[{label:'Donate page',url:''},{label:'',url:''}]
+// Org-specific field definitions - ALL 30 TYPES
+const ORG_FIELDS = {
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 1. ADVOCACY / POLICY
+  // ═══════════════════════════════════════════════════════════════════════
+  advocacy: {
+    title: 'Advocacy & Policy Work',
+    fields: [
+      {
+        id: 'issue_focus',
+        label: '📢 Issue Focus',
+        hint: 'What issues do you advocate for?',
+        options: ['Affordable housing','Animal rights','Campaign finance reform','Child welfare','Civil liberties','Climate & environment','Criminal justice reform','Disability rights','Economic justice','Education policy','Election integrity','Food policy','Gun policy','Healthcare access','Human rights','Immigration reform','Indigenous rights','Labor rights','LGBTQ+ rights','Media & press freedom','Mental health policy','Privacy & digital rights','Racial justice','Reproductive rights','Senior issues','Tax policy','Transportation','Veterans issues','Voting rights','Water & utilities','Womens rights']
+      },
+      {
+        id: 'advocacy_type',
+        label: '🎯 Advocacy Type',
+        hint: 'How do you create change?',
+        options: ['Lobbying (501c4)','Grassroots organizing','Coalition building','Public education campaigns','Research & policy analysis','Ballot initiatives','Legal advocacy/litigation','Direct action','Media campaigns','Voter mobilization','Corporate accountability','Legislative testimony','Regulatory comments','Community organizing','Petition drives']
+      },
+      {
+        id: 'advocacy_audience',
+        label: '👥 Target Audience',
+        hint: 'Who are you trying to reach or mobilize?',
+        options: ['General public','Voters','Legislators (state)','Legislators (federal)','Local officials','Regulatory agencies','Corporate decision-makers','Media/journalists','Affected communities','Allied organizations','Students/youth','Faith communities']
+      },
+      {
+        id: 'advocacy_stance',
+        label: '📋 Stance / Framing',
+        hint: 'How do you frame your position?',
+        type: 'single',
+        options: ['Nonpartisan/neutral','Progressive','Conservative','Bipartisan','Single-issue focused','Intersectional']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 2. ANIMAL WELFARE
+  // ═══════════════════════════════════════════════════════════════════════
+  animal: {
+    title: 'Animal Welfare Programs',
+    fields: [
+      {
+        id: 'species_focus',
+        label: '🐕 Species Focus',
+        hint: 'What animals do you work with?',
+        options: ['Dogs','Cats','Puppies / kittens (neonatal)','Rabbits','Guinea pigs / small animals','Birds (companion)','Reptiles','Horses / equine','Donkeys / mules','Pigs (companion)','Goats','Sheep','Cows / cattle','Chickens / poultry','Farm animals (general)','Wildlife (general)','Wildlife - mammals','Wildlife - birds / raptors','Wildlife - marine','Exotic animals','Breed-specific']
+      },
+      {
+        id: 'animal_services',
+        label: '🏠 Services Offered',
+        hint: 'What do you do for animals?',
+        options: ['Adoption (general)','Foster program','Sponsor an animal','Sanctuary / lifetime care','Rescue / intake','Owner surrender','Stray intake','Transfer from other shelters','Hoarding case response','Disaster response','TNR (trap-neuter-return)','Spay/neuter services','Low-cost vet clinic','Vaccination clinics','Microchipping','Behavioral rehabilitation','Training classes','Pet food bank','Pet supplies assistance','Humane education','Wildlife rehabilitation','Wildlife hotline','Mobile adoption events','Prison programs','Therapy animal programs']
+      },
+      {
+        id: 'shelter_status',
+        label: '🏥 Shelter Status',
+        hint: 'Your save rate / policy',
+        type: 'single',
+        options: ['No-kill (90%+ save rate)','Low-kill','Open admission','Limited admission','Rescue-only (no shelter)','Foster-based rescue','Sanctuary only']
+      },
+      {
+        id: 'special_programs',
+        label: '⭐ Special Programs',
+        hint: 'Unique initiatives you offer',
+        options: ['Senior pet adoption','Senior citizen discounts','Special needs animals','Hospice foster','Bottle baby foster','Prison training programs','Veteran companion programs','Therapy dog training','Barn cat program','Bonded pair placement','Large breed program','Reading to dogs','Youth volunteer program']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 3. ARTS & CULTURE
+  // ═══════════════════════════════════════════════════════════════════════
+  arts: {
+    title: 'Arts & Culture Programs',
+    fields: [
+      {
+        id: 'art_form',
+        label: '🎭 Art Form / Discipline',
+        hint: 'What art forms do you focus on?',
+        options: ['Theater / drama','Musical theater','Dance (ballet)','Dance (contemporary/modern)','Dance (cultural/folk)','Opera','Orchestra / symphonic','Chamber music','Choral / vocal','Jazz','World music','Visual arts (painting/drawing)','Sculpture','Photography','Film / cinema','Documentary','Digital / new media art','Installation art','Performance art','Literary arts / poetry','Puppetry','Circus arts','Comedy / improv','Multidisciplinary']
+      },
+      {
+        id: 'arts_programming',
+        label: '📋 Programming Type',
+        hint: 'What do you offer?',
+        options: ['Performances / productions','Exhibitions / galleries','Classes / workshops (youth)','Classes / workshops (adult)','Artist residencies','Grants to artists','Commissions','Festivals / events','Free community events','School programs (in-school)','School programs (field trips)','After-school programs','Summer camps','Senior programs','Accessibility programs','Touring productions','Public art installations','Online / virtual programs']
+      },
+      {
+        id: 'arts_venue',
+        label: '🏛️ Venue / Space',
+        hint: 'Where do programs happen?',
+        options: ['Own theater/performance hall','Own gallery/museum','Community center','Schools','Parks / outdoor','Mobile / touring','Partner venues','Virtual / online','No fixed venue']
+      },
+      {
+        id: 'arts_audience',
+        label: '👥 Target Audience',
+        hint: 'Who do you serve?',
+        options: ['General public','Children / youth','Teens','Families','Adults','Seniors','Artists / professionals','Students','Underserved communities','People with disabilities','Schools','Tourists / visitors']
+      },
+      {
+        id: 'cultural_focus',
+        label: '🌍 Cultural Focus',
+        hint: 'Any specific cultural tradition?',
+        options: ['African American','Asian American','Latino/Hispanic','Native American/Indigenous','Middle Eastern','European classical','Folk / traditional American','African','Caribbean','South Asian','East Asian','Pacific Islander','Jewish','LGBTQ+','Multicultural / diverse','No specific focus']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 4. CIVIC ENGAGEMENT
+  // ═══════════════════════════════════════════════════════════════════════
+  civic: {
+    title: 'Civic Engagement Programs',
+    fields: [
+      {
+        id: 'civic_focus',
+        label: '🗳️ Focus Area',
+        hint: 'What aspect of civic life?',
+        options: ['Voter registration','Voter education','Get out the vote (GOTV)','Candidate forums','Ballot measure education','Census participation','Civic education (youth)','Civic education (adult)','Citizenship preparation','Community leadership development','Neighborhood organizing','Public meeting participation','Government accountability','Transparency / open data','Redistricting / representation']
+      },
+      {
+        id: 'civic_population',
+        label: '👥 Target Population',
+        hint: 'Who are you engaging?',
+        options: ['General public','First-time voters','Young voters (18-29)','Communities of color','Immigrant communities','Low-income communities','Rural communities','Urban communities','Native communities','Formerly incarcerated','New citizens','Non-English speakers','Seniors','Students','People with disabilities']
+      },
+      {
+        id: 'civic_services',
+        label: '📋 Services / Activities',
+        hint: 'How do you engage people?',
+        options: ['Voter registration drives','Voter guides / scorecards','Candidate questionnaires','Town halls / forums','Canvassing / door-knocking','Phone banking','Text banking','Digital organizing','Citizenship classes','Civic workshops','Leadership training','Community meetings','Petition drives','Public comment coordination','Election monitoring']
+      },
+      {
+        id: 'civic_stance',
+        label: '📊 Stance',
+        hint: 'Your political positioning',
+        type: 'single',
+        options: ['Strictly nonpartisan','501c3 (no candidate endorsement)','501c4 (may endorse)','Bipartisan','Issue-focused (not candidate)']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 5. COMMUNITY DEVELOPMENT
+  // ═══════════════════════════════════════════════════════════════════════
+  community: {
+    title: 'Community Development Programs',
+    fields: [
+      {
+        id: 'community_focus',
+        label: '🏘️ Focus Area',
+        hint: 'What aspects of community do you develop?',
+        options: ['Affordable housing development','Commercial/retail revitalization','Small business support','Workforce development','Financial empowerment','Homeownership','Community land trusts','Cooperative development','Infrastructure improvement','Public space activation','Neighborhood safety','Community organizing','Leadership development','Capacity building','Coalition building']
+      },
+      {
+        id: 'community_target',
+        label: '📍 Target Community',
+        hint: 'What type of community?',
+        options: ['Urban neighborhood','Rural community','Small town / Main Street','Tribal / Native community','Immigrant community','Low-income community','BIPOC community','Mixed-income','Historic district','Industrial / transitioning','Downtown / central business','Suburban']
+      },
+      {
+        id: 'community_beneficiaries',
+        label: '👥 Who Benefits',
+        hint: 'Primary beneficiaries',
+        options: ['Residents (general)','Low-income families','First-time homebuyers','Small business owners','Entrepreneurs','Youth','Seniors','Immigrants','Artists / creatives','Local workers','Tenants','Landlords / property owners']
+      },
+      {
+        id: 'community_programs',
+        label: '📋 Programs / Services',
+        hint: 'What do you offer?',
+        options: ['Micro-loans','Down payment assistance','Home repair programs','Financial coaching','Credit counseling','Small business loans','Business technical assistance','Job training','Workforce placement','Facade improvement grants','Community planning','Resident organizing','Leadership training','Youth programs','Community events']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 6. DISABILITY SERVICES
+  // ═══════════════════════════════════════════════════════════════════════
+  disability: {
+    title: 'Disability Services',
+    fields: [
+      {
+        id: 'disability_types',
+        label: '♿ Disability Types Served',
+        hint: 'What disabilities do you serve?',
+        options: ['Physical disabilities','Mobility impairments','Visual impairments / blindness','Hearing impairments / Deaf','Deaf-blind','Intellectual disabilities','Developmental disabilities','Autism spectrum','Down syndrome','Cerebral palsy','Spinal cord injuries','Traumatic brain injury','Multiple sclerosis','Muscular dystrophy','Learning disabilities','ADHD','Mental health disabilities','Chronic illness','Rare diseases','All disabilities']
+      },
+      {
+        id: 'disability_ages',
+        label: '👥 Age Groups',
+        hint: 'Who do you serve?',
+        options: ['Infants / early intervention (0-3)','Children (3-12)','Teens (13-17)','Transition-age youth (18-21)','Adults (22-64)','Seniors (65+)','All ages','Families / caregivers']
+      },
+      {
+        id: 'disability_services',
+        label: '📋 Services Offered',
+        hint: 'What services do you provide?',
+        options: ['Advocacy / rights protection','Benefits navigation (SSI/SSDI)','Care coordination','Case management','Day programs','Education advocacy / IEPs','Employment services','Group homes / residential','Home modifications','Independent living skills','In-home support','Information & referral','Legal services','Life skills training','Parent / family support','Peer support','Recreation & social','Respite care','Self-advocacy training','Technology / assistive devices','Therapy services','Transportation','Transition planning','Vocational training']
+      },
+      {
+        id: 'disability_approach',
+        label: '🎯 Approach',
+        hint: 'Your philosophy',
+        options: ['Person-centered','Self-determination','Independent living','Inclusion-focused','Family-centered','Peer-led','Rights-based','Medical model','Social model']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 7. DISASTER RELIEF
+  // ═══════════════════════════════════════════════════════════════════════
+  disaster: {
+    title: 'Disaster Relief Services',
+    fields: [
+      {
+        id: 'disaster_types',
+        label: '🆘 Disaster Types',
+        hint: 'What disasters do you respond to?',
+        options: ['Hurricanes / tropical storms','Tornadoes','Floods','Wildfires','Earthquakes','Tsunamis','Winter storms / blizzards','Drought','Extreme heat','Volcanic eruptions','Landslides / mudslides','House fires','Industrial accidents','Public health emergencies','Refugee crises','Conflict / war zones','All disasters']
+      },
+      {
+        id: 'disaster_phase',
+        label: '📋 Response Phase',
+        hint: 'When do you engage?',
+        options: ['Preparedness / planning','Immediate response (0-72 hours)','Short-term relief (1-4 weeks)','Medium-term recovery (1-6 months)','Long-term recovery (6+ months)','Rebuilding','Resilience / mitigation','All phases']
+      },
+      {
+        id: 'disaster_geography',
+        label: '🌍 Geographic Scope',
+        hint: 'Where do you respond?',
+        options: ['Local only','Regional','Statewide','National (US)','North America','Central America / Caribbean','South America','Europe','Africa','Middle East','Asia','Pacific Islands','Global / wherever needed']
+      },
+      {
+        id: 'disaster_services',
+        label: '🤝 Services Provided',
+        hint: 'What do you offer?',
+        options: ['Search and rescue','Emergency shelter','Food / water distribution','Medical care','Mental health / crisis counseling','Volunteer coordination','Donations management','Cash assistance','Home repair','Rebuilding','Debris removal','Muck-out / cleaning','Case management','Benefits navigation','Legal assistance','Child care','Animal rescue','Supply distribution','Logistics / transportation']
+      },
+      {
+        id: 'disaster_credentials',
+        label: '📜 Credentials / Affiliations',
+        hint: 'Any certifications or networks?',
+        options: ['NVOAD member','FEMA partner','Red Cross partner','Faith-based network','Community emergency response team (CERT)','Medical reserve corps','Volunteer organization','501c3 registered','None / independent']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 8. ECONOMIC DEVELOPMENT
+  // ═══════════════════════════════════════════════════════════════════════
+  economic: {
+    title: 'Economic Development Programs',
+    fields: [
+      {
+        id: 'econ_focus',
+        label: '📈 Focus Area',
+        hint: 'What economic issues?',
+        options: ['Small business development','Microenterprise','Social enterprise','Worker cooperatives','Workforce development','Job creation','Industry attraction','Commercial revitalization','Main Street programs','Innovation / startups','Manufacturing','Rural economic development','Minority business development','Women-owned business support','Veteran-owned business support','Green / sustainable business']
+      },
+      {
+        id: 'econ_population',
+        label: '👥 Target Population',
+        hint: 'Who do you serve?',
+        options: ['Entrepreneurs (general)','First-time business owners','Minority entrepreneurs','Women entrepreneurs','Veteran entrepreneurs','Immigrant entrepreneurs','Youth entrepreneurs','Low-income individuals','Unemployed / underemployed','Returning citizens','People with disabilities','Rural residents','Urban residents']
+      },
+      {
+        id: 'econ_industry',
+        label: '🏭 Industry Focus',
+        hint: 'Any specific industries?',
+        options: ['No specific industry','Food / beverage / restaurants','Retail','Professional services','Construction / trades','Manufacturing','Technology','Healthcare','Agriculture','Creative / arts','Childcare','Personal services','Transportation / logistics','Green / clean energy','Tourism / hospitality']
+      },
+      {
+        id: 'econ_programs',
+        label: '📋 Programs / Services',
+        hint: 'What do you offer?',
+        options: ['Business planning assistance','Micro-loans','Small business loans','Loan packaging / referrals','Technical assistance','Mentorship / coaching','Incubator / accelerator','Co-working space','Training workshops','Financial literacy','Credit building','Procurement assistance','Marketing support','Legal assistance','Accounting / bookkeeping help','Networking events','Trade shows / expos']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 9. EDUCATION
+  // ═══════════════════════════════════════════════════════════════════════
+  education: {
+    title: 'Education Programs',
+    fields: [
+      {
+        id: 'edu_level',
+        label: '📚 Education Level',
+        hint: 'What level do you serve?',
+        options: ['Early childhood (0-5)','Pre-K / preschool','Elementary (K-5)','Middle school (6-8)','High school (9-12)','GED / adult basic education','Community college','Four-year college','Graduate / professional','Vocational / trade','Continuing education','All levels']
+      },
+      {
+        id: 'edu_program_type',
+        label: '📋 Program Type',
+        hint: 'What kind of education?',
+        options: ['School (operate a school)','Charter school','After-school programs','Before-school programs','Summer programs','Tutoring','Mentoring','College prep / access','Scholarship provider','Teacher training','Curriculum development','STEM / STEAM','Arts education','Environmental education','Financial literacy','Career exploration','Internships / apprenticeships','Parent engagement','Advocacy / policy']
+      },
+      {
+        id: 'edu_students',
+        label: '👥 Target Students',
+        hint: 'Who do you serve?',
+        options: ['All students','Low-income students','First-generation college','Students of color','Immigrant students','English language learners','Students with disabilities','Gifted students','At-risk youth','Juvenile justice involved','Foster youth','Homeless students','Rural students','Girls / young women','Boys / young men','LGBTQ+ students','Adult learners','Parents / families']
+      },
+      {
+        id: 'edu_subject',
+        label: '📖 Subject Focus',
+        hint: 'Any subject specialization?',
+        options: ['No specific subject','Reading / literacy','Math','Science','Technology / coding','Engineering','Arts (visual)','Arts (performing)','Music','Writing','Social studies / history','Foreign languages','Life skills','Financial literacy','Health / wellness','Environmental science','Career / vocational']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 10. ENVIRONMENTAL
+  // ═══════════════════════════════════════════════════════════════════════
+  environmental: {
+    title: 'Environmental Programs',
+    fields: [
+      {
+        id: 'env_focus',
+        label: '🌿 Focus Area',
+        hint: 'What environmental issues?',
+        options: ['Climate change / mitigation','Clean energy / renewables','Energy efficiency','Air quality','Water quality','Water conservation','Ocean / marine','Land conservation','Forest conservation','Wetlands','Wildlife habitat','Endangered species','Biodiversity','Sustainable agriculture','Food systems','Waste reduction / recycling','Composting','Plastic pollution','Environmental justice','Urban greening','Parks / open space','Trails / recreation','Watershed protection']
+      },
+      {
+        id: 'env_action_type',
+        label: '🎯 Action Type',
+        hint: 'How do you create change?',
+        options: ['Land acquisition / conservation','Habitat restoration','Tree planting','Cleanups / stewardship','Scientific research','Monitoring / data collection','Policy advocacy','Legal action / litigation','Education (K-12)','Education (public)','Sustainable living programs','Green jobs training','Community organizing','Coalition building','Corporate engagement','Technical assistance','Certification programs']
+      },
+      {
+        id: 'env_ecosystem',
+        label: '🏞️ Ecosystem Focus',
+        hint: 'What environments?',
+        options: ['Forests','Grasslands / prairies','Wetlands / marshes','Rivers / streams','Lakes','Coastal / beaches','Ocean / marine','Mountains','Desert','Urban parks','Urban streams / watersheds','Farmland','Gardens','All ecosystems']
+      },
+      {
+        id: 'env_geographic',
+        label: '📍 Geographic Focus',
+        hint: 'Where do you work?',
+        options: ['Local / neighborhood','City-wide','County / regional','Statewide','Multi-state region','National','International','Specific watershed','Specific habitat/preserve']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 11. FAITH-BASED
+  // ═══════════════════════════════════════════════════════════════════════
+  faith: {
+    title: 'Faith-Based Programs',
+    fields: [
+      {
+        id: 'faith_tradition',
+        label: '✝️ Faith Tradition',
+        hint: 'Your religious affiliation',
+        options: ['Catholic','Protestant (mainline)','Protestant (evangelical)','Baptist','Methodist','Lutheran','Presbyterian','Episcopal/Anglican','Pentecostal','Non-denominational Christian','Interfaith/multi-faith','Jewish (Reform)','Jewish (Conservative)','Jewish (Orthodox)','Muslim (Sunni)','Muslim (Shia)','Buddhist','Hindu','Sikh','Bahai','Unitarian Universalist','Quaker','Mormon/LDS','Other Christian','Other faith','Spiritual (non-religious)']
+      },
+      {
+        id: 'faith_services',
+        label: '📋 Service Focus',
+        hint: 'What services do you provide?',
+        options: ['Food pantry / meals','Clothing / household goods','Emergency financial assistance','Housing assistance','Homeless services','Refugee / immigrant services','Addiction recovery','Prison ministry / reentry','Youth programs','Senior services','Counseling / pastoral care','Health services','Education / tutoring','Disaster relief','International missions','Community development','Advocacy / social justice','Interfaith dialogue','Spiritual direction']
+      },
+      {
+        id: 'faith_population',
+        label: '👥 Who You Serve',
+        hint: 'Your client/member base',
+        options: ['Congregation members only','Local community (all faiths)','People of same faith tradition','Homeless individuals','Immigrants / refugees','Families in need','Youth','Seniors','Prisoners / formerly incarcerated','People in addiction recovery','Anyone regardless of faith']
+      },
+      {
+        id: 'faith_inclusivity',
+        label: '🤝 Inclusivity Signals',
+        hint: 'Important for ad copy tone',
+        options: ['Serve all regardless of faith','No religious requirements','Faith-informed but secular services','Welcoming to all backgrounds','LGBTQ+ affirming','Multicultural / diverse','Services in multiple languages','Proselytizing not part of services']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 12. FOOD SECURITY
+  // ═══════════════════════════════════════════════════════════════════════
+  food: {
+    title: 'Food Security Programs',
+    fields: [
+      {
+        id: 'food_service_type',
+        label: '🥗 Service Type',
+        hint: 'What food services?',
+        options: ['Food pantry / food bank','Hot meals / soup kitchen','Mobile food pantry','Home-delivered meals','School meals / backpack program','Summer meals','Senior meals','Food rescue / recovery','Community garden','Urban farm','Farmers market','SNAP outreach / enrollment','WIC support','Nutrition education','Cooking classes','Community kitchen / commercial kitchen','Food hub / distribution','Gleaning program']
+      },
+      {
+        id: 'food_population',
+        label: '👥 Who You Serve',
+        hint: 'Your client population',
+        options: ['Anyone in need','Low-income families','Children','Students (K-12)','College students','Seniors','Homebound individuals','Veterans','Homeless individuals','Immigrants / refugees','People with disabilities','People with chronic illness','SNAP recipients','WIC participants','Working families']
+      },
+      {
+        id: 'food_distribution',
+        label: '🚚 Distribution Model',
+        hint: 'How do you get food to people?',
+        options: ['Fixed location / walk-in','Drive-through distribution','Mobile / truck','Home delivery','Partner sites (churches, schools)','Pop-up / community events','Ship / mail (rural)','Client choice / shopping model','Pre-packed boxes','Combination']
+      },
+      {
+        id: 'food_sourcing',
+        label: '🌾 Food Sourcing',
+        hint: 'Where does your food come from?',
+        options: ['Food bank network (Feeding America)','Retail / grocery rescue','Restaurant rescue','Farm donations / gleaning','USDA commodities','Purchased wholesale','Community donations','Own garden / farm production','Food manufacturers','Multiple sources']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 13. FOUNDATION / GRANTMAKING
+  // ═══════════════════════════════════════════════════════════════════════
+  foundation: {
+    title: 'Grantmaking Focus',
+    fields: [
+      {
+        id: 'grant_focus',
+        label: '🏦 Funding Focus Areas',
+        hint: 'What do you fund?',
+        options: ['Arts & culture','Education (K-12)','Higher education','Health & healthcare','Mental health','Environment & conservation','Climate change','Human services','Housing & homelessness','Economic development','Workforce development','Food security','Youth development','Senior services','Disability services','Animal welfare','International development','Civic engagement','Social justice','Racial equity','LGBTQ+ issues','Womens issues','Veterans','Faith-based work','General operating support','Capacity building']
+      },
+      {
+        id: 'grant_geography',
+        label: '📍 Geographic Focus',
+        hint: 'Where do you fund?',
+        options: ['Local community only','City-wide','County / regional','Statewide','Multi-state region','National (US)','International','Specific countries','No geographic restriction']
+      },
+      {
+        id: 'grant_applicants',
+        label: '👥 Who Can Apply',
+        hint: 'Eligible applicants',
+        options: ['501c3 nonprofits only','All nonprofits','Schools / universities','Government agencies','Individuals (scholarships)','Individuals (fellowships)','Artists','Researchers','Social enterprises','Fiscally sponsored projects','Faith-based organizations','Grassroots / informal groups']
+      },
+      {
+        id: 'grant_types',
+        label: '📋 Grant Types',
+        hint: 'What kind of grants?',
+        options: ['General operating support','Program / project grants','Capital / building grants','Equipment grants','Capacity building','Technical assistance','Planning grants','Research grants','Scholarships','Fellowships','Emergency / rapid response','Multi-year grants','Challenge / matching grants','Seed funding / startups']
+      },
+      {
+        id: 'grant_size',
+        label: '💰 Typical Grant Size',
+        hint: 'Grant ranges',
+        options: ['Under $5,000','$5,000 - $25,000','$25,000 - $100,000','$100,000 - $500,000','$500,000 - $1 million','Over $1 million','Varies widely']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 14. HEALTH & MEDICAL
+  // ═══════════════════════════════════════════════════════════════════════
+  health: {
+    title: 'Health & Medical Services',
+    fields: [
+      {
+        id: 'health_focus',
+        label: '🏥 Health Focus',
+        hint: 'What health issues?',
+        options: ['Primary care','Preventive care','Chronic disease management','Diabetes','Heart disease','Cancer','HIV/AIDS','Hepatitis','Infectious disease','Maternal health','Reproductive health','Pediatric care','Geriatric care','Dental care','Vision care','Hearing care','Physical therapy','Occupational therapy','Speech therapy','Nutrition / dietetics','Obesity / weight management','Immunizations','Health screenings','Telemedicine','All healthcare']
+      },
+      {
+        id: 'health_service_type',
+        label: '📋 Service Type',
+        hint: 'How do you provide care?',
+        options: ['Free clinic','Low-cost clinic (sliding scale)','Federally Qualified Health Center (FQHC)','Mobile health clinic','Community health center','Hospital','Urgent care','Home health','Telehealth','Health education','Health screenings','Referrals / navigation','Transportation to care','Prescription assistance','Medical equipment loans','Disease management programs','Support groups','Advocacy / policy']
+      },
+      {
+        id: 'health_population',
+        label: '👥 Who You Serve',
+        hint: 'Your patient population',
+        options: ['Anyone / general public','Uninsured individuals','Underinsured individuals','Low-income individuals','Medicaid patients','Medicare patients','Children','Women','Men','Seniors','Pregnant women','Veterans','Homeless individuals','Immigrants (documented)','Immigrants (undocumented)','Refugees','Farmworkers','LGBTQ+ individuals','People with disabilities','Specific ethnic community']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 15. HISTORICAL PRESERVATION
+  // ═══════════════════════════════════════════════════════════════════════
+  historical: {
+    title: 'Historical Preservation Work',
+    fields: [
+      {
+        id: 'historical_focus',
+        label: '🏛️ Preservation Focus',
+        hint: 'What do you preserve?',
+        options: ['Historic buildings / architecture','Historic homes','Historic districts / neighborhoods','Archaeological sites','Battlefields / military sites','Industrial heritage','Agricultural heritage','Maritime / nautical','Railroad / transportation','Religious / sacred sites','Cemeteries','Monuments / memorials','Cultural landscapes','Gardens / designed landscapes','Collections / artifacts','Archives / documents','Oral histories','Traditions / intangible heritage']
+      },
+      {
+        id: 'historical_era',
+        label: '📅 Era Focus',
+        hint: 'What time period?',
+        options: ['Pre-colonial / Indigenous','Colonial era','Revolutionary era','Early republic','Civil War era','Reconstruction','Gilded Age','Progressive era','World War I era','Roaring 20s','Depression era','World War II era','Mid-century','Civil Rights era','Late 20th century','All eras / no specific era']
+      },
+      {
+        id: 'historical_cultural',
+        label: '🌍 Cultural Focus',
+        hint: 'Any cultural heritage?',
+        options: ['No specific culture','African American','Native American / Indigenous','Latino / Hispanic','Asian American','European immigrant','Jewish','Irish','Italian','Chinese','Japanese','African','Caribbean','General American','Local / regional','Multiple cultures']
+      },
+      {
+        id: 'historical_activities',
+        label: '📋 Activities',
+        hint: 'What do you do?',
+        options: ['Building restoration','Property ownership / stewardship','Historic house museum','Walking tours','Educational programs','School programs','Advocacy / policy','Historic designation assistance','Technical assistance','Grants to property owners','Revolving fund / loans','Easements','Research / documentation','Publications','Exhibits','Events / lectures','Reenactments']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 16. HOMELESS & HOUSING
+  // ═══════════════════════════════════════════════════════════════════════
+  housing: {
+    title: 'Housing & Homeless Services',
+    fields: [
+      {
+        id: 'housing_population',
+        label: '👥 Who You Serve',
+        hint: 'Your client population',
+        options: ['Single adults','Families with children','Unaccompanied youth (under 18)','Young adults (18-24)','Transition-age youth (aging out of foster care)','Pregnant individuals','Parenting teens','Veterans','Seniors/elderly','LGBTQ+ individuals','LGBTQ+ youth','Transgender individuals','Domestic violence survivors','Human trafficking survivors','People with mental illness','People with substance use disorders','People with co-occurring disorders','People with physical disabilities','People with developmental disabilities','People with HIV/AIDS','Formerly incarcerated/reentry','Chronically homeless','Newly homeless (prevention)','Immigrant families','Refugee families']
+      },
+      {
+        id: 'housing_services',
+        label: '🏠 Housing Services',
+        hint: 'Types of housing help you provide',
+        options: ['Emergency shelter (overnight)','Emergency shelter (24-hour)','Warming/cooling centers','Day shelter/drop-in center','Transitional housing','Rapid rehousing','Permanent supportive housing','Affordable housing placement','Housing navigation','Rental assistance (one-time)','Rental assistance (ongoing)','Security deposit assistance','Utility assistance','Eviction prevention','Landlord mediation','Fair housing advocacy','Homeownership programs','Shared housing/roommate matching','Host homes','Safe parking programs','Tiny home villages','Motel vouchers']
+      },
+      {
+        id: 'supportive_services',
+        label: '🤝 Supportive Services',
+        hint: 'Non-housing help you offer',
+        options: ['Case management','Individual therapy/counseling','Group therapy','Trauma-informed care','Psychiatric services','Medication management','Substance abuse treatment','Detox services','Harm reduction','Peer support/recovery coaching','Life skills workshops','Financial literacy/budgeting','Credit repair','Job readiness training','Job placement','Vocational training','GED/education programs','ESL classes','Computer/digital literacy','Parenting classes','Childcare (on-site)','Childcare assistance','Youth programming','Legal assistance','Benefits enrollment','ID/document recovery','Medical care','Dental care','Transportation assistance','Food/meals','Pet-friendly accommodations']
+      },
+      {
+        id: 'housing_approach',
+        label: '📋 Approach / Model',
+        hint: 'Your philosophy or model',
+        type: 'single',
+        options: ['Housing First','Low-barrier','Sober living (abstinence required)','Faith-based','Harm reduction','Trauma-informed','Gender-specific (women only)','Gender-specific (men only)','Family units','LGBTQ+ affirming','Culturally specific']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 17. HUMAN SERVICES
+  // ═══════════════════════════════════════════════════════════════════════
+  human: {
+    title: 'Human Services Programs',
+    fields: [
+      {
+        id: 'human_services',
+        label: '🤝 Services Offered',
+        hint: 'What services do you provide?',
+        options: ['Case management','Information & referral','Emergency financial assistance','Utility assistance','Rent/mortgage assistance','Food assistance','Clothing/household goods','Transportation assistance','Benefits enrollment (SNAP, Medicaid)','Tax preparation (VITA)','Financial counseling','Budgeting assistance','Employment services','Job training','Resume/interview help','Childcare assistance','Senior services','Disability services','Family support','Parenting classes','Home visiting','Crisis intervention','Holiday assistance','Back-to-school assistance','Prescription assistance','Thrift store / resale']
+      },
+      {
+        id: 'human_population',
+        label: '👥 Who You Serve',
+        hint: 'Your client population',
+        options: ['Anyone in need','Low-income individuals','Low-income families','Working poor','Unemployed individuals','Seniors','Children','Youth','Single parents','Veterans','People with disabilities','Immigrants','Refugees','Homeless individuals','Formerly incarcerated','People in crisis','Specific geographic area']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 18. IMMIGRATION & REFUGEE
+  // ═══════════════════════════════════════════════════════════════════════
+  immigration: {
+    title: 'Immigration & Refugee Services',
+    fields: [
+      {
+        id: 'immigration_population',
+        label: '👥 Population Served',
+        hint: 'Who do you serve?',
+        options: ['Refugees','Asylees','Asylum seekers','Unaccompanied minors','Immigrant families','DACA recipients','TPS holders','Undocumented immigrants','Documented immigrants','Naturalized citizens (support)','Mixed-status families','Trafficking survivors','Afghan arrivals','Ukrainian arrivals','Cuban/Haitian arrivals','Central American arrivals','All immigrants']
+      },
+      {
+        id: 'immigration_services',
+        label: '📋 Services Offered',
+        hint: 'What do you provide?',
+        options: ['Resettlement (initial)','Case management','Housing placement','Employment services','Job training','ESL / English classes','Citizenship classes','Naturalization assistance','Legal services (immigration)','Legal services (general)','Know Your Rights','Deportation defense','Family reunification','DACA renewals','Asylum applications','Visa assistance','Benefits enrollment','Health navigation','Mental health services','Cultural orientation','Youth programs','After-school programs','Translation / interpretation','Document assistance','Drivers license assistance','Community navigation','Advocacy / policy']
+      },
+      {
+        id: 'immigration_languages',
+        label: '🌐 Languages Served',
+        hint: 'Languages your team speaks',
+        options: ['Spanish','Arabic','Dari/Farsi','Pashto','Ukrainian','Russian','French','Swahili','Somali','Burmese','Karen','Nepali','Vietnamese','Mandarin','Cantonese','Korean','Haitian Creole','Portuguese','Tigrinya','Amharic','Hindi','Urdu','Tagalog','ASL']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 19. INTERNATIONAL AID
+  // ═══════════════════════════════════════════════════════════════════════
+  international: {
+    title: 'International Aid Programs',
+    fields: [
+      {
+        id: 'intl_focus',
+        label: '🌍 Focus Area',
+        hint: 'What issues do you address?',
+        options: ['Clean water / sanitation (WASH)','Food security / hunger','Agriculture / sustainable farming','Health / medical','Maternal & child health','Infectious disease (malaria, TB)','HIV/AIDS','Education','Girls education','Economic development','Microfinance','Womens empowerment','Child protection','Orphan care','Disaster relief','Refugee assistance','Conflict resolution / peacebuilding','Human rights','Anti-trafficking','Environmental conservation','Climate adaptation','Infrastructure','Community development']
+      },
+      {
+        id: 'intl_geography',
+        label: '📍 Geographic Focus',
+        hint: 'Where do you work?',
+        options: ['Sub-Saharan Africa','East Africa','West Africa','Southern Africa','North Africa / Middle East','South Asia','Southeast Asia','East Asia','Central Asia','Latin America','Central America','Caribbean','Eastern Europe','Pacific Islands','Global / multiple regions','Single country focus']
+      },
+      {
+        id: 'intl_approach',
+        label: '📋 Approach',
+        hint: 'How do you work?',
+        options: ['Direct implementation','Local partner support','Capacity building','Grants to local orgs','Technical assistance','Advocacy / policy','Research','Emergency response','Long-term development','Community-led development','Faith-based approach','Child sponsorship','Volunteer sending','Short-term missions','Medical missions']
+      },
+      {
+        id: 'intl_credentials',
+        label: '📜 Credentials',
+        hint: 'Any affiliations?',
+        options: ['USAID partner','UN partner','Charity Navigator rated','GuideStar Platinum','BBB Accredited','InterAction member','Evangelical Council member','Catholic agency','Member of consortium','None / independent']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 20. LEGAL AID
+  // ═══════════════════════════════════════════════════════════════════════
+  legal: {
+    title: 'Legal Aid Services',
+    fields: [
+      {
+        id: 'practice_areas',
+        label: '⚖️ Practice Areas',
+        hint: 'What legal issues do you help with?',
+        options: ['Asylum & immigration defense','Bankruptcy & debt relief','Child custody & visitation','Child support','Civil rights & discrimination','Consumer protection','Criminal defense (low-income)','Criminal record expungement/sealing','Disability benefits (SSDI/SSI)','Divorce & family law','Domestic violence protection orders','Education rights & IEP advocacy','Elder law & guardianship','Employment discrimination','Eviction defense & tenant rights','Fair housing','Foster care & child welfare','Healthcare access & Medicaid','Homeless legal services','Human trafficking survivors','Immigration (general)','Juvenile justice','LGBTQ+ rights','Name & gender marker changes','Parental rights','Prisoners\' rights','Public benefits (SNAP, TANF, WIC)','Reentry services (post-incarceration)','Social Security appeals','Tax controversies','Unemployment appeals','Veterans benefits','Voting rights restoration','Wage theft & workers\' rights','Workers\' compensation','Wills & estate planning']
+      },
+      {
+        id: 'legal_population',
+        label: '👥 Who You Serve',
+        hint: 'Your client population',
+        options: ['Low-income individuals/families','Seniors/elderly','Veterans','Immigrants (documented)','Immigrants (undocumented)','Refugees & asylum seekers','DACA recipients','Children & youth','Domestic violence survivors','Human trafficking survivors','People with disabilities','People with mental illness','Homeless individuals','Formerly incarcerated','Currently incarcerated','LGBTQ+ individuals','Native American/Indigenous','Farmworkers','Small business owners','Nonprofits']
+      },
+      {
+        id: 'legal_service_type',
+        label: '📋 Service Types',
+        hint: 'How you deliver legal help',
+        options: ['Full legal representation','Brief advice clinics','Legal hotline','Self-help workshops','Document preparation','Court accompaniment','Know Your Rights training','Referrals to other attorneys','Mediation','Administrative hearings','Appeals','Impact litigation','Policy advocacy','Community education']
+      },
+      {
+        id: 'languages_offered',
+        label: '🌐 Languages Offered',
+        hint: 'Languages your team speaks',
+        options: ['English','Spanish','Mandarin','Cantonese','Vietnamese','Korean','Tagalog','Russian','Arabic','Farsi/Persian','French','Haitian Creole','Portuguese','Hindi','Punjabi','ASL / Deaf services']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 21. LGBTQ+
+  // ═══════════════════════════════════════════════════════════════════════
+  lgbtq: {
+    title: 'LGBTQ+ Programs',
+    fields: [
+      {
+        id: 'lgbtq_population',
+        label: '🏳️‍🌈 Population Focus',
+        hint: 'Who do you primarily serve?',
+        options: ['All LGBTQ+ individuals','Gay men','Lesbian women','Bisexual individuals','Transgender individuals','Trans women','Trans men','Non-binary individuals','Queer individuals','Questioning individuals','Intersex individuals','LGBTQ+ youth','LGBTQ+ seniors','LGBTQ+ families','LGBTQ+ parents','LGBTQ+ people of color','LGBTQ+ immigrants','LGBTQ+ people with disabilities','LGBTQ+ veterans','HIV+ individuals']
+      },
+      {
+        id: 'lgbtq_services',
+        label: '📋 Services Offered',
+        hint: 'What do you provide?',
+        options: ['Community center / drop-in','Youth programs','Senior programs','Support groups','Peer support','Mental health counseling','HIV/STI testing','HIV prevention (PrEP)','Health services','Trans health navigation','Hormone therapy referrals','Surgery referrals','Legal name/gender change','Legal services','Housing assistance','Homeless services','Employment services','Anti-violence programs','Crisis hotline','Advocacy / policy','Pride events','Social events','Cultural programming','Education / training','Family acceptance programs']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 22. LIBRARY & LITERACY
+  // ═══════════════════════════════════════════════════════════════════════
+  literacy: {
+    title: 'Library & Literacy Programs',
+    fields: [
+      {
+        id: 'literacy_focus',
+        label: '📖 Focus Area',
+        hint: 'What literacy issues?',
+        options: ['Early literacy (0-5)','Children\'s literacy','Teen literacy','Adult literacy','Family literacy','ESL / English learners','GED preparation','Workforce literacy','Digital literacy','Financial literacy','Health literacy','Civic literacy','Information literacy','Reading intervention','Writing skills','Book access / distribution']
+      },
+      {
+        id: 'literacy_programs',
+        label: '📋 Program Type',
+        hint: 'What do you offer?',
+        options: ['Library (operate a library)','Little Free Libraries','Book distribution','Mobile library / bookmobile','Reading programs','Storytimes','Summer reading','Tutoring (1-on-1)','Tutoring (group)','Volunteer tutor training','ESL classes','GED classes','Computer classes','Homework help','After-school programs','Family reading nights','Author events','Literacy advocacy']
+      },
+      {
+        id: 'literacy_population',
+        label: '👥 Who You Serve',
+        hint: 'Your participants',
+        options: ['All ages','Infants/toddlers','Preschoolers','Elementary students','Middle schoolers','High schoolers','Adults','Seniors','Immigrants / ESL learners','Low-income families','Incarcerated individuals','Rural communities','Urban communities']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 23. MENTAL HEALTH
+  // ═══════════════════════════════════════════════════════════════════════
+  mental: {
+    title: 'Mental Health Services',
+    fields: [
+      {
+        id: 'mental_focus',
+        label: '🧠 Focus Area',
+        hint: 'What mental health issues?',
+        options: ['General mental health','Depression','Anxiety','PTSD / trauma','Bipolar disorder','Schizophrenia / psychosis','Personality disorders','Eating disorders','OCD','ADHD','Autism (mental health support)','Grief & loss','Stress management','Anger management','Relationship issues','Family conflict','Domestic violence trauma','Sexual assault trauma','Suicide prevention','Self-harm','Crisis intervention','Dual diagnosis','Serious mental illness (SMI)']
+      },
+      {
+        id: 'mental_services',
+        label: '📋 Service Type',
+        hint: 'What do you provide?',
+        options: ['Individual therapy','Group therapy','Family therapy','Couples therapy','Child therapy','Play therapy','Art therapy','Psychiatric services','Medication management','Psychological testing','Crisis hotline','Crisis intervention','Mobile crisis team','Peer support','Support groups','Intensive outpatient (IOP)','Partial hospitalization (PHP)','Residential treatment','Case management','Care coordination','Psychoeducation','Wellness / prevention programs','School-based counseling','Workplace EAP','Telehealth / online']
+      },
+      {
+        id: 'mental_population',
+        label: '👥 Who You Serve',
+        hint: 'Your client population',
+        options: ['Anyone / general public','Children','Adolescents','Adults','Seniors','Families','LGBTQ+ individuals','Veterans','First responders','Healthcare workers','Survivors of trauma','Domestic violence survivors','Sexual assault survivors','People in crisis','People with serious mental illness','Co-occurring disorders','Low-income / uninsured','Specific cultural community']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 24. RACIAL JUSTICE
+  // ═══════════════════════════════════════════════════════════════════════
+  racial: {
+    title: 'Racial Justice Work',
+    fields: [
+      {
+        id: 'racial_focus',
+        label: '✊ Focus Area',
+        hint: 'What aspects of racial justice?',
+        options: ['Criminal justice reform','Police accountability','Mass incarceration','Voting rights','Economic equity','Wealth gap','Housing discrimination','Education equity','Healthcare disparities','Environmental justice','Immigration justice','Hate crime prevention','Anti-racism education','Reparations','DEI consulting/training','Media representation','Arts & culture','Community organizing','Policy / legislative','Research / data']
+      },
+      {
+        id: 'racial_community',
+        label: '👥 Community Focus',
+        hint: 'Which communities?',
+        options: ['Black / African American','Latino / Hispanic','Asian American','Native American / Indigenous','Pacific Islander','Middle Eastern / North African','Multi-racial','All BIPOC communities','Immigrant communities','Specific ethnic community']
+      },
+      {
+        id: 'racial_actions',
+        label: '📋 Action Types',
+        hint: 'How do you create change?',
+        options: ['Community organizing','Direct action / protest','Policy advocacy','Litigation / legal action','Research & reports','Public education','Media campaigns','Coalition building','Leadership development','Youth organizing','Voter mobilization','Mutual aid','Direct services','Capacity building','Grantmaking','DEI training','Consulting']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 25. SCIENCE & RESEARCH
+  // ═══════════════════════════════════════════════════════════════════════
+  science: {
+    title: 'Science & Research Programs',
+    fields: [
+      {
+        id: 'science_area',
+        label: '🔬 Research/Science Area',
+        hint: 'What fields?',
+        options: ['Biology / life sciences','Chemistry','Physics','Earth science / geology','Environmental science','Climate science','Marine science / oceanography','Space / astronomy','Medical research','Cancer research','Disease-specific research','Public health','Neuroscience','Psychology','Social science','Economics','Computer science / AI','Engineering','Agriculture','Archaeology','Conservation biology','Ecology','Genetics','Nanotechnology','General science']
+      },
+      {
+        id: 'science_programs',
+        label: '📋 Program Type',
+        hint: 'What do you offer?',
+        options: ['Research (conduct studies)','Research funding / grants','Science education (K-12)','Science education (public)','Museum / science center','Planetarium','Aquarium','Nature center','Field research stations','Citizen science','Science festivals','Lectures / seminars','Teacher training','Student internships','Research fellowships','Science policy / advocacy','Science communication','Publications']
+      },
+      {
+        id: 'science_audience',
+        label: '👥 Target Audience',
+        hint: 'Who do you serve?',
+        options: ['General public','K-12 students','College students','Graduate students','Teachers','Researchers / scientists','Policymakers','Media / journalists','Families','Underrepresented groups in STEM','Girls / women in STEM']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 26. SPORTS & RECREATION
+  // ═══════════════════════════════════════════════════════════════════════
+  sports: {
+    title: 'Sports & Recreation Programs',
+    fields: [
+      {
+        id: 'sports_activities',
+        label: '⚽ Sports / Activities',
+        hint: 'What activities do you offer?',
+        options: ['Soccer','Basketball','Baseball / softball','Football','Volleyball','Swimming','Track & field','Tennis','Golf','Gymnastics','Wrestling','Martial arts','Boxing','Hockey','Lacrosse','Rugby','Rowing / crew','Cycling','Running / jogging','Skateboarding','Surfing','Skiing / snowboarding','Fishing','Hunting','Archery','Climbing','Hiking / outdoor recreation','Camping','General fitness','Dance','Cheerleading','Esports / gaming','Multiple sports']
+      },
+      {
+        id: 'sports_population',
+        label: '👥 Who You Serve',
+        hint: 'Your participants',
+        options: ['All ages','Children (under 12)','Teens','Adults','Seniors','Girls / women','Boys / men','People with disabilities','Adaptive / wheelchair sports','Special Olympics','Low-income youth','At-risk youth','LGBTQ+ athletes','Veterans','Families']
+      },
+      {
+        id: 'sports_programs',
+        label: '📋 Program Type',
+        hint: 'What do you offer?',
+        options: ['Recreational leagues','Competitive leagues','Travel / club teams','Individual instruction','Group classes','Camps (day)','Camps (overnight)','After-school programs','Mentoring through sports','Life skills through sports','Academic support','College prep / recruiting','Coaching training','Referee / official training','Facility operation','Equipment lending','Scholarships / fee assistance']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 27. SUBSTANCE RECOVERY
+  // ═══════════════════════════════════════════════════════════════════════
+  substance: {
+    title: 'Substance Recovery Services',
+    fields: [
+      {
+        id: 'substance_focus',
+        label: '💙 Substance Focus',
+        hint: 'What substances/addictions?',
+        options: ['All substances','Alcohol','Opioids / heroin','Prescription opioids','Fentanyl','Methamphetamine','Cocaine / crack','Marijuana','Benzodiazepines','Prescription drugs (general)','Nicotine / tobacco','Gambling addiction','Process addictions','Dual diagnosis (co-occurring)']
+      },
+      {
+        id: 'substance_services',
+        label: '📋 Service Type',
+        hint: 'What do you provide?',
+        options: ['Prevention / education','Screening / assessment','Detox (medical)','Detox (social)','Inpatient / residential','Outpatient treatment','Intensive outpatient (IOP)','Partial hospitalization','MAT (medication-assisted treatment)','Suboxone / buprenorphine','Methadone','Naltrexone / Vivitrol','Individual counseling','Group therapy','Family therapy','12-step facilitation','SMART Recovery','Sober living / recovery housing','Peer support / recovery coaching','Crisis services','Overdose prevention','Naloxone distribution','Harm reduction','Recovery support services','Employment support','Case management','Aftercare / continuing care']
+      },
+      {
+        id: 'substance_population',
+        label: '👥 Who You Serve',
+        hint: 'Your client population',
+        options: ['Adults (general)','Adolescents','Young adults (18-25)','Women','Men','Pregnant / postpartum women','Parents','LGBTQ+ individuals','Veterans','First responders','Healthcare professionals','Justice-involved individuals','Homeless individuals','People with co-occurring disorders','Specific cultural community','Families of those in addiction']
+      },
+      {
+        id: 'substance_approach',
+        label: '🎯 Treatment Approach',
+        hint: 'Your philosophy',
+        options: ['Abstinence-based','Harm reduction','MAT-friendly','12-step based','Evidence-based only','Holistic / integrative','Faith-based','Trauma-informed','Gender-responsive','Culturally specific','Family-centered']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 28. TECHNOLOGY ACCESS
+  // ═══════════════════════════════════════════════════════════════════════
+  technology: {
+    title: 'Technology Access Programs',
+    fields: [
+      {
+        id: 'tech_focus',
+        label: '💻 Focus Area',
+        hint: 'What tech access issues?',
+        options: ['Device access (computers)','Device access (tablets)','Device access (smartphones)','Internet access / broadband','WiFi hotspots','Digital literacy training','Computer skills','Smartphone skills','Internet safety','Coding / programming','Web development','Data science','Cybersecurity','Tech career pathways','STEM education','Assistive technology','Telehealth access','Remote learning support','Remote work support','Senior technology','Accessibility / adaptive tech']
+      },
+      {
+        id: 'tech_population',
+        label: '👥 Who You Serve',
+        hint: 'Your participants',
+        options: ['General public','Low-income individuals','Students (K-12)','College students','Seniors','People with disabilities','Veterans','Job seekers','Small businesses','Nonprofits','Rural communities','Urban communities','Immigrant communities','Non-English speakers','Women in tech','BIPOC in tech','LGBTQ+ in tech']
+      },
+      {
+        id: 'tech_programs',
+        label: '📋 Program Type',
+        hint: 'What do you offer?',
+        options: ['Computer lab / center','Device distribution','Device refurbishment','Internet subsidy assistance','WiFi hotspot lending','Basic computer classes','Advanced computer classes','Coding bootcamps','After-school tech programs','Summer tech camps','Career training','Job placement','Mentorship','Internships','Tech support / help desk','Telehealth training','Digital navigator program']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 29. VETERANS & MILITARY
+  // ═══════════════════════════════════════════════════════════════════════
+  veterans: {
+    title: 'Veterans & Military Services',
+    fields: [
+      {
+        id: 'vet_population',
+        label: '🎖️ Population Served',
+        hint: 'Who do you serve?',
+        options: ['All veterans','Post-9/11 veterans','Vietnam veterans','Korea veterans','WWII veterans','Gulf War veterans','Combat veterans','Non-combat veterans','Disabled veterans','Women veterans','LGBTQ+ veterans','Minority veterans','Homeless veterans','Justice-involved veterans','Veterans with PTSD','Veterans with TBI','Veterans with MST','Transitioning service members','National Guard / Reserves','Military families','Gold Star families','Caregivers of veterans']
+      },
+      {
+        id: 'vet_services',
+        label: '📋 Services Offered',
+        hint: 'What do you provide?',
+        options: ['Benefits navigation','VA claims assistance','Appeals assistance','Housing assistance','Homeless services','Emergency financial assistance','Employment services','Job training','Career counseling','Resume / interview help','Entrepreneurship support','Education assistance (GI Bill)','Scholarship programs','Legal services','Mental health counseling','PTSD treatment','Substance abuse treatment','Peer support','Support groups','Suicide prevention','Crisis services','Medical care navigation','Adaptive sports','Recreation programs','Service dogs','Companion animals','Transportation','Food assistance','Family support','Caregiver support','Transition assistance','Mentorship','Women veteran programs']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // 30. YOUTH & CHILDREN
+  // ═══════════════════════════════════════════════════════════════════════
+  youth: {
+    title: 'Youth & Children Programs',
+    fields: [
+      {
+        id: 'youth_ages',
+        label: '🧒 Age Range',
+        hint: 'What ages do you serve?',
+        options: ['Infants (0-1)','Toddlers (1-3)','Preschool (3-5)','Elementary (5-10)','Tweens (10-13)','Teens (13-18)','Young adults (18-24)','All children (0-18)','All youth (0-24)']
+      },
+      {
+        id: 'youth_focus',
+        label: '📋 Focus Area',
+        hint: 'What issues do you address?',
+        options: ['After-school programs','Before-school programs','Summer programs','Youth development (general)','Academic support / tutoring','STEM education','Arts education','Sports / athletics','Leadership development','Civic engagement','Career exploration','Job readiness / employment','Mentoring','Life skills','Financial literacy','Health education','Mental health support','Substance abuse prevention','Violence prevention','Gang prevention','Teen pregnancy prevention','Juvenile justice intervention','Runaway / homeless youth','Foster youth support','Youth in crisis','Family strengthening']
+      },
+      {
+        id: 'youth_population',
+        label: '👥 Who You Serve',
+        hint: 'Your youth population',
+        options: ['All youth','Low-income youth','At-risk youth','Foster youth','Homeless youth','Runaway youth','Justice-involved youth','Youth with disabilities','LGBTQ+ youth','Pregnant / parenting teens','First-generation students','Immigrant youth','Refugee youth','Youth of color','Girls','Boys','Rural youth','Urban youth']
+      }
+    ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // DEFAULT FALLBACK
+  // ═══════════════════════════════════════════════════════════════════════
+  default: {
+    title: 'Your Programs & Services',
+    fields: [
+      {
+        id: 'main_services',
+        label: '📋 Main Services',
+        hint: 'What services do you provide?',
+        options: [],
+        freeform: true
+      },
+      {
+        id: 'population_served',
+        label: '👥 Who You Serve',
+        hint: 'Your primary audience',
+        options: [],
+        freeform: true
+      }
+    ]
+  }
 };
 
-// ─── INIT ───────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded',()=>{
-  renderChips('serviceAreaGroup',SERVICE_AREAS,'serviceAreas',false);
-  renderChips('audienceTypeGroup',AUDIENCE_TYPES,'audienceTypes',false);
-  renderChips('ageRangeGroup',AGE_RANGES,'ageRanges',false);
-  renderChips('geoGroup',GEO_TARGETING,'geo',false);
-  renderChips('campaignTypeGroup',CAMPAIGN_TYPES,'campaignTypes',false);
-  renderChips('primaryGoalGroup',CONVERSION_GOALS,'primaryGoal',true);
-  renderChips('secondaryGoalGroup',CONVERSION_GOALS,'secondaryGoals',false);
-  renderChips('toneGroup',TONES,'tones',false);
-  renderChips('socialGroup',SOCIAL_PLATFORMS,'socialPlatforms',false);
-  renderChips('webManagerGroup',WEB_MANAGERS,'webManagers',false);
-  renderChips('accessGroup',ACCESS_ITEMS,'accessItems',false);
-  renderChips('commMethodGroup',COMM_METHODS,'commMethods',false);
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SHARED OPTIONS
+// ═══════════════════════════════════════════════════════════════════════════
+
+const SERVICE_AREAS = ['Local (city/county)','Statewide','Regional (multi-state)','National','International'];
+const AUDIENCE_TYPES = ['General public donors','Major gift donors','Corporate sponsors','Volunteers','Potential adopters','Foster families','Event attendees','Grant funders','Students / youth','Seniors','Families with children','Pet owners','Local businesses','Media / press','Other'];
+const AGE_RANGES = ['18-24','25-34','35-44','45-54','55-64','65+','All ages'];
+const GEO_TARGETING = ['Hyperlocal (city only)','Metro area','County','Statewide','Regional (multi-state)','National'];
+const CAMPAIGN_TYPES = ['Donations — one-time','Donations — recurring/monthly','Adopt a pet / person / cause','Foster program','Volunteer recruitment','Event promotion','General awareness','Shop / merchandise','Job opportunities','Professional services','Program enrollment','Membership','Sponsorships','Education / training','Newsletter signups','Emergency fundraising','Other'];
+const CONVERSION_GOALS = ['Donate / Give Now','Volunteer Sign-Up','Adopt','Foster','Event Registration','Contact Form','Program Application','Newsletter Signup','Membership Sign-Up','Sponsorship Inquiry','Job Application','Schedule a Visit','Download Resource','Watch Video','Other'];
+const TONES = ['Warm & Hopeful','Bold & Urgent','Professional & Trustworthy','Playful & Friendly','Faith-Centered','Community-Driven','Educational / Informative','Inspirational','Activist / Advocacy-driven'];
+const SOCIAL_PLATFORMS = ['Facebook','Instagram','TikTok','LinkedIn','X / Twitter','YouTube','Pinterest','Threads','None'];
+const WEB_MANAGERS = ['Ourselves (staff)','A volunteer','An agency','A developer / contractor','No one currently'];
+const TECH_ITEMS = ['Google Ads Account','Google Ad Grants','Google Analytics (GA4)','Google Tag Manager','Google Search Console','Google Business Profile'];
+const ACCESS_ITEMS = ['Google Ads (Admin)','Google Analytics (Admin)','Google Tag Manager (Admin)','Google Search Console','YouTube Channel','Website Backend'];
+const COMM_METHODS = ['Email','Phone call','Text / SMS','Slack','Zoom / Video call'];
+const CONVERSION_PAGE_TYPES = ['Donate page','Thank you page','Adoption page','Foster page','Volunteer page','Event page','Contact page','Program signup','Newsletter signup','Other'];
+const CONVERSION_TRACKING_TYPES = ['Page view (thank-you page)','Form submission','Button click','Specific URL contains'];
+
+// ═══════════════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════════════
+
+let state = {
+  currentStep: 0,
+  totalSteps: 9,
+  npType: '',
+  npTypeKey: '',
+  npEmoji: '',
+  toggles: {},
+  chips: {
+    serviceAreas: [],
+    audienceTypes: [],
+    ageRanges: [],
+    geo: [],
+    campaignTypes: [],
+    primaryGoal: '',
+    secondaryGoals: [],
+    tones: [],
+    socialPlatforms: [],
+    webManagers: [],
+    accessItems: [],
+    commMethods: []
+  },
+  orgFields: {},
+  techStatus: {},
+  includeKeywords: [],
+  excludeKeywords: [],
+  conversions: []
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════════════
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Render chip groups
+  renderChips('serviceAreaGroup', SERVICE_AREAS, 'serviceAreas');
+  renderChips('audienceTypeGroup', AUDIENCE_TYPES, 'audienceTypes');
+  renderChips('ageRangeGroup', AGE_RANGES, 'ageRanges');
+  renderChips('geoGroup', GEO_TARGETING, 'geo');
+  renderChips('campaignTypeGroup', CAMPAIGN_TYPES, 'campaignTypes');
+  renderChips('primaryGoalGroup', CONVERSION_GOALS, 'primaryGoal', true);
+  renderChips('secondaryGoalGroup', CONVERSION_GOALS, 'secondaryGoals');
+  renderChips('toneGroup', TONES, 'tones');
+  renderChips('socialGroup', SOCIAL_PLATFORMS, 'socialPlatforms');
+  renderChips('webManagerGroup', WEB_MANAGERS, 'webManagers');
+  renderChips('accessGroup', ACCESS_ITEMS, 'accessItems');
+  renderChips('commMethodGroup', COMM_METHODS, 'commMethods');
+  
   renderTechStatus();
-  renderConversionUrls();
+  addConversion(); // Add first conversion slot
   updateProgress();
 });
 
-// ─── CHIPS ──────────────────────────────────────────────────────────
-function renderChips(id,items,key,single){
-  const el=document.getElementById(id);
-  if(!el)return;
-  el.innerHTML=items.map(v=>`<button type="button" class="chip" onclick="toggleChip(this,'${key}','${escQ(v)}',${single})">${v}</button>`).join('');
-}
-function toggleChip(el,key,val,single){
-  if(single){
-    el.parentElement.querySelectorAll('.chip').forEach(c=>c.className='chip');
-    el.className='chip on';state[key]=val;
-  } else {
-    const arr=state[key],i=arr.indexOf(val);
-    if(i!==-1){arr.splice(i,1);el.className='chip';}
-    else{arr.push(val);el.className='chip on';}
-  }
-  updateProgress();
-}
-function escQ(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+// ═══════════════════════════════════════════════════════════════════════════
+// CHIPS
+// ═══════════════════════════════════════════════════════════════════════════
 
-// ─── TYPE PICKER ────────────────────────────────────────────────────
-function buildTypeList(filter){
-  const listEl=document.getElementById('typeList');if(!listEl)return;
-  const q=(filter||'').toLowerCase().trim();
-  const matches=NP_TYPES.filter(t=>!q||t.name.toLowerCase().includes(q));
-  if(!matches.length){listEl.innerHTML=`<div class="type-no-results">No results for "${filter}"</div>`;return;}
-  listEl.innerHTML=matches.map(t=>{
-    const sel=state.npType===t.name;
-    return`<div class="type-option${sel?' selected':''}" onclick="selectType('${escQ(t.name)}','${t.emoji}')">
-      <span class="type-option-emoji">${t.emoji}</span>
-      <span class="type-option-name">${t.name}</span>
-      ${sel?'<span class="type-option-check">✓</span>':''}
-    </div>`;
-  }).join('');
-}
-function toggleTypePicker(){
-  const dd=document.getElementById('typeDropdown'),tr=document.getElementById('typeTrigger');
-  const open=dd.style.display!=='none';
-  if(open){dd.style.display='none';tr.classList.remove('open');}
-  else{buildTypeList('');dd.style.display='block';tr.classList.add('open');setTimeout(()=>document.getElementById('typeSearch')?.focus(),50);}
-}
-function filterTypes(v){buildTypeList(v);}
-function selectType(name,emoji){
-  state.npType=name;state.npEmoji=emoji;
-  const lbl=document.getElementById('typeTriggerLabel'),em=document.getElementById('typeTriggerEmoji');
-  if(lbl){lbl.textContent=name;lbl.classList.remove('empty');lbl.style.cssText='font-size:15px;font-weight:700;color:var(--navy)';}
-  if(em){em.textContent=emoji;em.style.display='inline';}
-  document.getElementById('typeDropdown').style.display='none';
-  document.getElementById('typeTrigger').classList.remove('open');
-  document.getElementById('typeSearch').value='';
-  updateProgress();
-}
-document.addEventListener('click',e=>{
-  if(!e.target.closest('#typePicker')){
-    const dd=document.getElementById('typeDropdown');
-    if(dd){dd.style.display='none';document.getElementById('typeTrigger')?.classList.remove('open');}
-  }
-});
-
-// ─── TOGGLES ────────────────────────────────────────────────────────
-function setToggle(key,val){
-  state[key]=val;
-  // Find all buttons with id starting with key
-  document.querySelectorAll(`[id^="${key}"]`).forEach(b=>{
-    if(b.tagName==='BUTTON') b.className='toggle-btn';
-  });
-  // Find matching button
-  const ids={
-    ein:{yes:'einYes',no:'einNo',pending:'einPending'},
-    assets:{yes:'assetsYes',some:'assetsSome',no:'assetsNo'},
-    yt:{yes:'ytYes',no:'ytNo'},ytVid:{yes:'ytVidYes',no:'ytVidNo'},
-    gbp:{yes:'gbpYes',no:'gbpNo',unsure:'gbpUnsure'},
-    install:{yes:'installYes',no:'installNo',help:'installHelp'},
-    iframe:{yes:'iframeYes',no:'iframeNo'},
-    adsAcct:{exists:'adsAcctExists',new:'adsAcctNew',grant:'adsAcctGrant',suspended:'adsAcctSuspended'},
-    webAccess:{yes:'webAccessYes',no:'webAccessNo',maybe:'webAccessMaybe'},
-    prevAds:{yes:'prevAdsYes',no:'prevAdsNo'},
-  };
-  const map=ids[key];
-  if(map&&map[val]){const btn=document.getElementById(map[val]);if(btn)btn.className='toggle-btn active';}
-}
-function showIf(id,show){
-  const el=document.getElementById(id);
-  if(el)el.style.display=show?'flex':'none';
-}
-
-// ─── TECH STATUS ────────────────────────────────────────────────────
-function renderTechStatus(){
-  const row=document.getElementById('techStatusRow');if(!row)return;
-  row.innerHTML=TECH_ITEMS.map(item=>`
-    <div class="status-card" id="tech_${btoa(item).replace(/=/g,'')}" >
-      <div class="status-card-label">${item}</div>
-      <div class="status-card-opts">
-        <button type="button" class="status-opt ${state.techStatus[item]==='yes'?'yes':''}" onclick="setTechStatus('${escQ(item)}','yes')">Yes ✓</button>
-        <button type="button" class="status-opt ${state.techStatus[item]==='no'?'no':''}" onclick="setTechStatus('${escQ(item)}','no')">No</button>
-        <button type="button" class="status-opt ${state.techStatus[item]==='unsure'?'unsure':''}" onclick="setTechStatus('${escQ(item)}','unsure')">Not sure</button>
-        ${item.includes('Ad Grants')?`<button type="button" class="status-opt ${state.techStatus[item]==='applied'?'applied':''}" onclick="setTechStatus('${escQ(item)}','applied')">Applied</button>`:''}
-      </div>
-    </div>`).join('');
-}
-function setTechStatus(item,val){
-  state.techStatus[item]=val;
-  renderTechStatus();
-}
-
-// ─── KEYWORDS ───────────────────────────────────────────────────────
-function addKeyword(type){
-  const input=document.getElementById(type+'KeywordInput');
-  const val=input.value.trim();if(!val)return;
-  state[type+'Keywords'].push(val);input.value='';
-  renderKeywords(type);
-}
-function removeKeyword(type,idx){state[type+'Keywords'].splice(idx,1);renderKeywords(type);}
-function renderKeywords(type){
-  const el=document.getElementById(type+'KeywordTags');if(!el)return;
-  el.innerHTML=state[type+'Keywords'].map((k,i)=>
-    `<span class="keyword-tag ${type}"><span>${k}</span><span class="keyword-tag-remove" onclick="removeKeyword('${type}',${i})">×</span></span>`
+function renderChips(id, items, key, single = false) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = items.map(v => 
+    `<button type="button" class="chip" onclick="toggleChip(this,'${key}','${escQ(v)}',${single})">${v}</button>`
   ).join('');
 }
 
-// ─── CONVERSION URLs ────────────────────────────────────────────────
-function renderConversionUrls(){
-  const el=document.getElementById('conversionUrlList');if(!el)return;
-  el.innerHTML=state.conversionUrls.map((row,i)=>`
-    <div class="url-row">
-      <select style="max-width:140px;flex-shrink:0" onchange="state.conversionUrls[${i}].label=this.value">
-        ${CONV_URL_LABELS.map(l=>`<option ${row.label===l?'selected':''}>${l}</option>`).join('')}
-      </select>
-      <input type="url" value="${row.url}" placeholder="https://yoursite.org/donate" oninput="state.conversionUrls[${i}].url=this.value">
-      <span class="url-remove" onclick="removeConversionUrl(${i})">×</span>
-    </div>`).join('');
+function toggleChip(el, key, val, single) {
+  if (single) {
+    el.parentElement.querySelectorAll('.chip').forEach(c => c.className = 'chip');
+    el.className = 'chip on';
+    state.chips[key] = val;
+  } else {
+    const arr = state.chips[key];
+    const i = arr.indexOf(val);
+    if (i !== -1) {
+      arr.splice(i, 1);
+      el.className = 'chip';
+    } else {
+      arr.push(val);
+      el.className = 'chip on';
+    }
+  }
+  updateProgress();
 }
-function addConversionUrl(){state.conversionUrls.push({label:'Other',url:''});renderConversionUrls();}
-function removeConversionUrl(i){state.conversionUrls.splice(i,1);renderConversionUrls();}
 
-// ─── PROGRESS ───────────────────────────────────────────────────────
-function updateProgress(){
-  const checks=[
+function escQ(s) {
+  return s.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TYPE PICKER
+// ═══════════════════════════════════════════════════════════════════════════
+
+function buildTypeList(filter) {
+  const listEl = document.getElementById('typeList');
+  if (!listEl) return;
+  const q = (filter || '').toLowerCase().trim();
+  const matches = ORG_TYPES.filter(t => !q || t.name.toLowerCase().includes(q));
+  if (!matches.length) {
+    listEl.innerHTML = `<div class="type-no-results">No results for "${filter}"</div>`;
+    return;
+  }
+  listEl.innerHTML = matches.map(t => {
+    const sel = state.npType === t.name;
+    return `<div class="type-option${sel ? ' selected' : ''}" onclick="selectType('${escQ(t.name)}','${t.emoji}','${t.key}')">
+      <span class="type-option-emoji">${t.emoji}</span>
+      <span class="type-option-name">${t.name}</span>
+      ${sel ? '<span class="type-option-check">✓</span>' : ''}
+    </div>`;
+  }).join('');
+}
+
+function toggleTypePicker() {
+  const dd = document.getElementById('typeDropdown');
+  const tr = document.getElementById('typeTrigger');
+  const open = dd.style.display !== 'none';
+  if (open) {
+    dd.style.display = 'none';
+    tr.classList.remove('open');
+  } else {
+    buildTypeList('');
+    dd.style.display = 'block';
+    tr.classList.add('open');
+    setTimeout(() => document.getElementById('typeSearch')?.focus(), 50);
+  }
+}
+
+function filterTypes(v) {
+  buildTypeList(v);
+}
+
+function selectType(name, emoji, key) {
+  state.npType = name;
+  state.npEmoji = emoji;
+  state.npTypeKey = key;
+  
+  const lbl = document.getElementById('typeTriggerLabel');
+  const em = document.getElementById('typeTriggerEmoji');
+  if (lbl) {
+    lbl.textContent = name;
+    lbl.classList.remove('empty');
+  }
+  if (em) {
+    em.textContent = emoji;
+    em.style.display = 'inline';
+  }
+  
+  document.getElementById('typeDropdown').style.display = 'none';
+  document.getElementById('typeTrigger').classList.remove('open');
+  document.getElementById('typeSearch').value = '';
+  
+  // Render org-specific fields
+  renderOrgSpecificFields(key);
+  updateProgress();
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('#typePicker')) {
+    const dd = document.getElementById('typeDropdown');
+    if (dd) {
+      dd.style.display = 'none';
+      document.getElementById('typeTrigger')?.classList.remove('open');
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ORG-SPECIFIC FIELDS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function renderOrgSpecificFields(key) {
+  const container = document.getElementById('orgSpecificFields');
+  const prompt = document.getElementById('orgTypePrompt');
+  
+  const config = ORG_FIELDS[key] || ORG_FIELDS.default;
+  
+  if (prompt) prompt.style.display = 'none';
+  
+  if (!config.fields || config.fields.length === 0) {
+    container.innerHTML = `
+      <div class="field-group">
+        <label>Describe your main programs and services</label>
+        <textarea id="org_programs_freeform" placeholder="Tell us about the key programs and services your organization offers..." style="min-height:120px"></textarea>
+      </div>
+      <div class="field-group">
+        <label>Who do you primarily serve?</label>
+        <textarea id="org_population_freeform" placeholder="Describe your primary audience or beneficiaries..." style="min-height:80px"></textarea>
+      </div>
+    `;
+    return;
+  }
+  
+  let html = '';
+  
+  config.fields.forEach(field => {
+    const isSingle = field.type === 'single';
+    html += `
+      <div class="field-collapse">
+        <div class="field-collapse-header" onclick="toggleCollapse(this)">
+          <span class="field-collapse-title">${field.label}</span>
+          <span class="field-collapse-arrow">▼</span>
+        </div>
+        <div class="field-collapse-body">
+          ${field.hint ? `<p style="font-size:12px;color:var(--muted);margin-bottom:12px">${field.hint}</p>` : ''}
+          <div class="chip-group" id="org_${field.id}">
+            ${field.options.map(opt => 
+              `<button type="button" class="chip" onclick="toggleOrgChip(this,'${field.id}','${escQ(opt)}',${isSingle})">${opt}</button>`
+            ).join('')}
+          </div>
+          <div class="multi-select-other" style="margin-top:12px">
+            <input type="text" id="org_${field.id}_other" placeholder="Other (specify)..." onkeydown="if(event.key==='Enter'){event.preventDefault();addOrgOther('${field.id}')}">
+            <button type="button" onclick="addOrgOther('${field.id}')">+ Add</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+  
+  // Initialize state for org fields
+  config.fields.forEach(field => {
+    if (!state.orgFields[field.id]) {
+      state.orgFields[field.id] = field.type === 'single' ? '' : [];
+    }
+  });
+}
+
+function toggleCollapse(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function toggleOrgChip(el, fieldId, val, single) {
+  if (single) {
+    el.parentElement.querySelectorAll('.chip').forEach(c => c.className = 'chip');
+    el.className = 'chip on';
+    state.orgFields[fieldId] = val;
+  } else {
+    if (!state.orgFields[fieldId]) state.orgFields[fieldId] = [];
+    const arr = state.orgFields[fieldId];
+    const i = arr.indexOf(val);
+    if (i !== -1) {
+      arr.splice(i, 1);
+      el.className = 'chip';
+    } else {
+      arr.push(val);
+      el.className = 'chip on';
+    }
+  }
+}
+
+function addOrgOther(fieldId) {
+  const input = document.getElementById(`org_${fieldId}_other`);
+  const val = input.value.trim();
+  if (!val) return;
+  
+  if (!state.orgFields[fieldId]) state.orgFields[fieldId] = [];
+  
+  if (Array.isArray(state.orgFields[fieldId])) {
+    state.orgFields[fieldId].push(val);
+  } else {
+    state.orgFields[fieldId] = val;
+  }
+  
+  // Add chip to UI
+  const chipGroup = document.getElementById(`org_${fieldId}`);
+  const chip = document.createElement('button');
+  chip.type = 'button';
+  chip.className = 'chip on';
+  chip.textContent = val;
+  chip.onclick = function() {
+    const arr = state.orgFields[fieldId];
+    const i = arr.indexOf(val);
+    if (i !== -1) arr.splice(i, 1);
+    this.remove();
+  };
+  chipGroup.appendChild(chip);
+  
+  input.value = '';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TOGGLES
+// ═══════════════════════════════════════════════════════════════════════════
+
+function setToggle(key, val) {
+  state.toggles[key] = val;
+  
+  // Update UI - find all buttons in the same group
+  event.target.parentElement.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  
+  // Handle conditional fields
+  if (key === 'trackingInstall' && val === 'access') {
+    showIf('trackingAccessFields', true);
+  } else if (key === 'trackingInstall') {
+    showIf('trackingAccessFields', false);
+  }
+}
+
+function showIf(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = show ? 'flex' : 'none';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TECH STATUS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function renderTechStatus() {
+  const row = document.getElementById('techStatusRow');
+  if (!row) return;
+  
+  row.innerHTML = TECH_ITEMS.map(item => {
+    const id = item.replace(/[^a-zA-Z]/g, '');
+    return `
+      <div style="border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;background:white">
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px">${item}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button type="button" class="chip" style="padding:5px 10px;font-size:11px" onclick="setTechStatus('${escQ(item)}','yes',this)">Yes ✓</button>
+          <button type="button" class="chip" style="padding:5px 10px;font-size:11px" onclick="setTechStatus('${escQ(item)}','no',this)">No</button>
+          <button type="button" class="chip" style="padding:5px 10px;font-size:11px" onclick="setTechStatus('${escQ(item)}','unsure',this)">Not sure</button>
+          ${item.includes('Grants') ? `<button type="button" class="chip" style="padding:5px 10px;font-size:11px" onclick="setTechStatus('${escQ(item)}','applied',this)">Applied</button>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function setTechStatus(item, val, btn) {
+  state.techStatus[item] = val;
+  btn.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// KEYWORDS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function addKeyword(type) {
+  const input = document.getElementById(type + 'KeywordInput');
+  const val = input.value.trim();
+  if (!val) return;
+  
+  state[type + 'Keywords'].push(val);
+  input.value = '';
+  renderKeywords(type);
+}
+
+function removeKeyword(type, idx) {
+  state[type + 'Keywords'].splice(idx, 1);
+  renderKeywords(type);
+}
+
+function renderKeywords(type) {
+  const el = document.getElementById(type + 'KeywordTags');
+  if (!el) return;
+  
+  const colorClass = type === 'include' ? 'on' : 'on-amber';
+  el.innerHTML = state[type + 'Keywords'].map((k, i) =>
+    `<button type="button" class="chip ${colorClass}" onclick="removeKeyword('${type}',${i})" style="padding-right:8px">${k} ×</button>`
+  ).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CONVERSIONS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function addConversion() {
+  const id = Date.now();
+  state.conversions.push({
+    id,
+    pageType: '',
+    url: '',
+    trackingType: ''
+  });
+  renderConversions();
+}
+
+function removeConversion(id) {
+  state.conversions = state.conversions.filter(c => c.id !== id);
+  renderConversions();
+}
+
+function updateConversion(id, field, value) {
+  const conv = state.conversions.find(c => c.id === id);
+  if (conv) conv[field] = value;
+}
+
+function setConversionType(id, type, btn) {
+  const conv = state.conversions.find(c => c.id === id);
+  if (conv) conv.trackingType = type;
+  btn.parentElement.querySelectorAll('.conversion-type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function renderConversions() {
+  const list = document.getElementById('conversionList');
+  if (!list) return;
+  
+  list.innerHTML = state.conversions.map((conv, idx) => `
+    <div class="conversion-item">
+      <div class="conversion-item-header">
+        <select onchange="updateConversion(${conv.id},'pageType',this.value)">
+          <option value="">What type of page?</option>
+          ${CONVERSION_PAGE_TYPES.map(t => `<option ${conv.pageType === t ? 'selected' : ''}>${t}</option>`).join('')}
+        </select>
+        ${idx > 0 ? `<button type="button" class="conversion-item-remove" onclick="removeConversion(${conv.id})">×</button>` : ''}
+      </div>
+      <div class="conversion-item-body">
+        <input type="url" placeholder="Page URL (e.g. yoursite.org/donate)" value="${conv.url || ''}" oninput="updateConversion(${conv.id},'url',this.value)">
+        <div style="font-size:12px;font-weight:600;color:var(--muted);margin-top:4px">How should we track this?</div>
+        <div class="conversion-type-row">
+          ${CONVERSION_TRACKING_TYPES.map(t => 
+            `<button type="button" class="conversion-type-btn ${conv.trackingType === t ? 'active' : ''}" onclick="setConversionType(${conv.id},'${escQ(t)}',this)">${t}</button>`
+          ).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════════════════
+
+function goToStep(n) {
+  document.querySelectorAll('.form-section').forEach((s, i) => {
+    s.className = 'form-section' + (i === n ? ' active' : '');
+  });
+  document.querySelectorAll('.step-tab').forEach((t, i) => {
+    t.className = 'step-tab' + (i === n ? ' active' : i < n ? ' done' : '');
+  });
+  state.currentStep = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (state.currentStep < state.totalSteps - 1) goToStep(state.currentStep + 1);
+}
+
+function prevStep() {
+  if (state.currentStep > 0) goToStep(state.currentStep - 1);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PROGRESS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function updateProgress() {
+  const checks = [
     !!document.getElementById('org_name')?.value.trim(),
     !!document.getElementById('org_url')?.value.trim(),
     !!state.npType,
     !!document.getElementById('city')?.value.trim(),
     !!document.getElementById('state')?.value,
     !!document.getElementById('mission')?.value.trim(),
-    state.campaignTypes.length>0,
-    !!state.primaryGoal,
+    state.chips.campaignTypes.length > 0,
+    !!state.chips.primaryGoal,
     !!document.getElementById('contact_name')?.value.trim(),
     !!document.getElementById('contact_email')?.value.trim(),
   ];
-  const p=Math.round(checks.filter(Boolean).length/checks.length*100);
-  const fill=document.getElementById('progressFill'),pct=document.getElementById('progressPct');
-  if(fill)fill.style.width=p+'%';
-  if(pct)pct.textContent=p+'%';
+  const p = Math.round(checks.filter(Boolean).length / checks.length * 100);
+  const fill = document.getElementById('progressFill');
+  const pct = document.getElementById('progressPct');
+  if (fill) fill.style.width = p + '%';
+  if (pct) pct.textContent = p + '%';
 }
 
-// ─── STEP NAVIGATION ────────────────────────────────────────────────
-function goToStep(n){
-  document.querySelectorAll('.form-section').forEach((s,i)=>{
-    s.className='form-section'+(i===n?' active':'');
-  });
-  document.querySelectorAll('.step-tab').forEach((t,i)=>{
-    t.className='step-tab'+(i===n?' active':i<n?' done':'');
-  });
-  state.currentStep=n;
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function nextStep(){
-  if(state.currentStep<7) goToStep(state.currentStep+1);
-}
-function prevStep(){
-  if(state.currentStep>0) goToStep(state.currentStep-1);
-}
+// ═══════════════════════════════════════════════════════════════════════════
+// SUBMIT
+// ═══════════════════════════════════════════════════════════════════════════
 
-// ─── SUBMIT ─────────────────────────────────────────────────────────
-async function handleSubmit(){
-  const req={
-    'Organization Name':document.getElementById('org_name').value.trim(),
-    'Website URL':document.getElementById('org_url').value.trim(),
-    'Organization Type':state.npType,
-    'City':document.getElementById('city').value.trim(),
-    'State':document.getElementById('state').value,
-    'Mission Statement':document.getElementById('mission').value.trim(),
-    'Contact Name':document.getElementById('contact_name').value.trim(),
-    'Contact Email':document.getElementById('contact_email').value.trim(),
+async function handleSubmit() {
+  const req = {
+    'Organization Name': document.getElementById('org_name').value.trim(),
+    'Website URL': document.getElementById('org_url').value.trim(),
+    'Organization Type': state.npType,
+    'City': document.getElementById('city').value.trim(),
+    'State': document.getElementById('state').value,
+    'Mission Statement': document.getElementById('mission').value.trim(),
+    'Contact Name': document.getElementById('contact_name').value.trim(),
+    'Contact Email': document.getElementById('contact_email').value.trim(),
   };
-  const missing=Object.entries(req).filter(([,v])=>!v).map(([k])=>k);
-  if(missing.length){
-    alert('Please complete these required fields:\n\n• '+missing.join('\n• '));
-    // Jump to first step with missing field
-    if(!req['Organization Name']||!req['Website URL']||!req['Organization Type']||!req['City']||!req['State']||!req['Mission Statement']) goToStep(0);
-    else if(!req['Contact Name']||!req['Contact Email']) goToStep(7);
+  
+  const missing = Object.entries(req).filter(([,v]) => !v).map(([k]) => k);
+  if (missing.length) {
+    alert('Please complete these required fields:\n\n• ' + missing.join('\n• '));
     return;
   }
-  const btn=document.getElementById('submitBtn');
-  btn.disabled=true;btn.textContent='Submitting…';
-
-  const payload={
-    access_key:'8fbbf96d-63b4-42d6-a881-53a960e9999d',
-    subject:'New Google Ads Intake: '+req['Organization Name'],
-    from_name:'SAP AdWords Intake',
-    // Step 0
-    org_name:req['Organization Name'],
-    org_url:req['Website URL'],
-    np_type:state.npType,
-    ein_status:state.ein,
-    founded:document.getElementById('founded').value,
-    city:req['City'],state:req['State'],
-    service_areas:state.serviceAreas.join(', '),
-    mission:req['Mission Statement'],
-    elevator_pitch:document.getElementById('elevator_pitch').value.trim(),
-    key_stats:document.getElementById('key_stats').value.trim(),
-    // Step 1
-    audience_types:state.audienceTypes.join(', '),
-    ideal_supporter:document.getElementById('ideal_supporter').value.trim(),
-    age_ranges:state.ageRanges.join(', '),
-    geo_targeting:state.geo.join(', '),
-    specific_geo:document.getElementById('specific_geo').value.trim(),
-    // Step 2
-    campaign_types:state.campaignTypes.join(', '),
-    primary_goal:state.primaryGoal,
-    secondary_goals:state.secondaryGoals.join(', '),
-    success_definition:document.getElementById('success_definition').value.trim(),
-    paid_budget:document.getElementById('paid_budget').value,
-    seasonal:document.getElementById('seasonal').value.trim(),
-    upcoming_campaigns:document.getElementById('upcoming_campaigns').value.trim(),
-    // Step 3
-    tones:state.tones.join(', '),
-    tagline:document.getElementById('tagline').value.trim(),
-    include_keywords:state.includeKeywords.join(', '),
-    exclude_keywords:state.excludeKeywords.join(', '),
-    legal_restrictions:document.getElementById('legal_restrictions').value.trim(),
-    success_stories:document.getElementById('success_stories').value.trim(),
-    avoid_messaging:document.getElementById('avoid_messaging').value.trim(),
-    // Step 4
-    has_assets:state.assets,
-    asset_link:document.getElementById('asset_link').value.trim(),
-    has_youtube:state.yt,
-    yt_url:document.getElementById('yt_url').value.trim(),
-    yt_subs:document.getElementById('yt_subs').value.trim(),
-    yt_video:state.ytVid,
-    social_platforms:state.socialPlatforms.join(', '),
-    social_handles:document.getElementById('social_handles').value.trim(),
-    google_business_profile:state.gbp,
-    // Step 5
-    website_builder:document.getElementById('website_builder').value,
-    web_managers:state.webManagers.join(', '),
-    can_install_code:state.install,
-    tech_status:JSON.stringify(state.techStatus),
-    donation_processor:document.getElementById('donation_processor').value,
-    has_iframes:state.iframe,
-    iframe_urls:document.getElementById('iframe_urls').value.trim(),
-    conversion_urls:state.conversionUrls.filter(r=>r.url).map(r=>`${r.label}: ${r.url}`).join('\n'),
-    other_tools:document.getElementById('other_tools').value.trim(),
-    staging_url:document.getElementById('staging_url').value.trim(),
-    // Step 6
-    access_needed:state.accessItems.join(', '),
-    ads_account_status:state.adsAcct,
-    existing_links:document.getElementById('existing_links').value.trim(),
-    website_access:state.webAccess,
-    prev_ads_manager:state.prevAds,
-    prev_worked:document.getElementById('prev_worked').value.trim(),
-    prev_issues:document.getElementById('prev_issues').value.trim(),
-    referral_source:document.getElementById('referral_source').value,
-    extra_notes:document.getElementById('extra_notes').value.trim(),
-    // Step 7
-    contact_name:req['Contact Name'],
-    contact_email:req['Contact Email'],
-    contact_phone:document.getElementById('contact_phone').value.trim(),
-    contact_title:document.getElementById('contact_title').value.trim(),
-    comm_methods:state.commMethods.join(', '),
-    best_time:document.getElementById('best_time').value.trim(),
-    secondary_contact:document.getElementById('secondary_contact').value.trim(),
-    ed_name:document.getElementById('ed_name').value.trim(),
+  
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+  
+  // Build full payload
+  const payload = {
+    access_key: '8fbbf96d-63b4-42d6-a881-53a960e9999d',
+    subject: 'New Google Ads Intake: ' + req['Organization Name'],
+    from_name: 'SAP AdWords Intake',
+    
+    // Step 0 - Organization
+    org_name: req['Organization Name'],
+    org_url: req['Website URL'],
+    np_type: state.npType,
+    np_type_key: state.npTypeKey,
+    ein_status: state.toggles.ein || '',
+    founded: document.getElementById('founded').value,
+    city: req['City'],
+    state: req['State'],
+    service_areas: state.chips.serviceAreas.join(', '),
+    mission: req['Mission Statement'],
+    elevator_pitch: document.getElementById('elevator_pitch').value.trim(),
+    differentiator: document.getElementById('differentiator').value.trim(),
+    impact_stats: document.getElementById('impact_stats').value.trim(),
+    urgency_hook: document.getElementById('urgency_hook').value.trim(),
+    
+    // Step 1 - Org-specific fields
+    org_fields: JSON.stringify(state.orgFields),
+    
+    // Step 2 - Audience
+    audience_types: state.chips.audienceTypes.join(', '),
+    ideal_supporter: document.getElementById('ideal_supporter').value.trim(),
+    age_ranges: state.chips.ageRanges.join(', '),
+    geo_targeting: state.chips.geo.join(', '),
+    specific_geo: document.getElementById('specific_geo').value.trim(),
+    
+    // Step 3 - Campaigns
+    campaign_types: state.chips.campaignTypes.join(', '),
+    primary_goal: state.chips.primaryGoal,
+    secondary_goals: state.chips.secondaryGoals.join(', '),
+    success_definition: document.getElementById('success_definition').value.trim(),
+    paid_budget: document.getElementById('paid_budget').value,
+    seasonal: document.getElementById('seasonal').value.trim(),
+    upcoming_campaigns: document.getElementById('upcoming_campaigns').value.trim(),
+    
+    // Step 4 - Messaging
+    tones: state.chips.tones.join(', '),
+    tagline: document.getElementById('tagline').value.trim(),
+    include_keywords: state.includeKeywords.join(', '),
+    exclude_keywords: state.excludeKeywords.join(', '),
+    legal_restrictions: document.getElementById('legal_restrictions').value.trim(),
+    success_stories: document.getElementById('success_stories').value.trim(),
+    avoid_messaging: document.getElementById('avoid_messaging').value.trim(),
+    
+    // Step 5 - Assets
+    has_assets: state.toggles.assets || '',
+    asset_link: document.getElementById('asset_link').value.trim(),
+    has_youtube: state.toggles.yt || '',
+    yt_url: document.getElementById('yt_url')?.value.trim() || '',
+    yt_subs: document.getElementById('yt_subs')?.value.trim() || '',
+    social_platforms: state.chips.socialPlatforms.join(', '),
+    social_handles: document.getElementById('social_handles').value.trim(),
+    google_business_profile: state.toggles.gbp || '',
+    
+    // Step 6 - Technical
+    website_builder: document.getElementById('website_builder').value,
+    web_managers: state.chips.webManagers.join(', '),
+    can_install_code: state.toggles.install || '',
+    tech_status: JSON.stringify(state.techStatus),
+    donation_processor: document.getElementById('donation_processor').value,
+    conversions: JSON.stringify(state.conversions),
+    tracking_install_method: state.toggles.trackingInstall || '',
+    website_login_url: document.getElementById('website_login_url')?.value.trim() || '',
+    dev_contact: document.getElementById('dev_contact')?.value.trim() || '',
+    
+    // Step 7 - Access
+    g4np_status: state.toggles.g4np || '',
+    ad_grants_status: state.toggles.adGrants || '',
+    techsoup_status: state.toggles.techsoup || '',
+    access_needed: state.chips.accessItems.join(', '),
+    existing_links: document.getElementById('existing_links').value.trim(),
+    prev_ads_manager: state.toggles.prevAds || '',
+    prev_worked: document.getElementById('prev_worked')?.value.trim() || '',
+    prev_issues: document.getElementById('prev_issues')?.value.trim() || '',
+    referral_source: document.getElementById('referral_source').value,
+    extra_notes: document.getElementById('extra_notes').value.trim(),
+    
+    // Step 8 - Contact
+    contact_name: req['Contact Name'],
+    contact_email: req['Contact Email'],
+    contact_phone: document.getElementById('contact_phone').value.trim(),
+    contact_title: document.getElementById('contact_title').value.trim(),
+    comm_methods: state.chips.commMethods.join(', '),
+    best_time: document.getElementById('best_time').value.trim(),
+    secondary_contact: document.getElementById('secondary_contact').value.trim(),
+    ed_name: document.getElementById('ed_name').value.trim(),
   };
-
-  const SHEET_URL='https://script.google.com/macros/s/AKfycbzPYFeo6uyxQRhijj8aJ4jG7_UxwU7GbTcu9kllVUMC_1kllggzN2s-tst_-Gubg2BY/exec';
-
-  try{
-    // Fire to Slack
-    const slackWebhook = 'https://hooks.slack.com/services/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';
-    const campaignList = payload.campaign_types ? payload.campaign_types.split(', ').slice(0,4).join(', ') : 'Not specified';
-    const techStatus = payload.tech_status ? JSON.parse(payload.tech_status) : {};
-    const ga4 = techStatus['Google Analytics (GA4)'] || 'unknown';
-    const gtm = techStatus['Google Tag Manager'] || 'unknown';
-    const grants = techStatus['Google Ad Grants'] || 'unknown';
-
-    const slackMsg = {
-      text: '🎯 New Google Ads Intake',
-      blocks: [
-        {
-          type: 'header',
-          text: {type: 'plain_text', text: '🎯 New Google Ads Client Intake'}
-        },
-        {
-          type: 'section',
-          fields: [
-            {type: 'mrkdwn', text: '*Organization*\n' + (payload.org_name||'—')},
-            {type: 'mrkdwn', text: '*Type*\n' + (payload.np_type||'—')},
-            {type: 'mrkdwn', text: '*Location*\n' + (payload.city||'—') + ', ' + (payload.state||'—')},
-            {type: 'mrkdwn', text: '*Website*\n' + (payload.org_url||'—')}
-          ]
-        },
-        {
-          type: 'section',
-          fields: [
-            {type: 'mrkdwn', text: '*Campaigns Requested*\n' + campaignList},
-            {type: 'mrkdwn', text: '*Donation Processor*\n' + (payload.donation_processor||'—')},
-            {type: 'mrkdwn', text: '*GA4*\n' + ga4},
-            {type: 'mrkdwn', text: '*GTM*\n' + gtm}
-          ]
-        },
-        {
-          type: 'section',
-          fields: [
-            {type: 'mrkdwn', text: '*Ad Grants Status*\n' + grants},
-            {type: 'mrkdwn', text: '*Ads Account*\n' + (payload.ads_account_status||'—')}
-          ]
-        },
-        {
-          type: 'section',
-          text: {type: 'mrkdwn', text: '*Contact*\n' + (payload.contact_name||'—') + ' — ' + (payload.contact_email||'—') + (payload.contact_phone ? ' · ' + payload.contact_phone : '')}
-        },
-        {
-          type: 'section',
-          text: {type: 'mrkdwn', text: '*Mission*\n_' + (payload.mission||'—').substring(0,200) + '_'}
-        },
-        {
-          type: 'divider'
-        },
-        {
-          type: 'context',
-          elements: [{type: 'mrkdwn', text: '📋 Create a Canvas for this client in #google-ads to track their setup and tasks'}]
-        }
-      ]
-    };
-
-    // Fire Slack + Web3Forms simultaneously
+  
+  // Slack message
+  const slackWebhook = 'https://hooks.slack.com/services/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';
+  const slackMsg = {
+    text: '🎯 New Google Ads Intake',
+    blocks: [
+      { type: 'header', text: { type: 'plain_text', text: '🎯 New Google Ads Client Intake' }},
+      { type: 'section', fields: [
+        { type: 'mrkdwn', text: '*Organization*\n' + payload.org_name },
+        { type: 'mrkdwn', text: '*Type*\n' + payload.np_type },
+        { type: 'mrkdwn', text: '*Location*\n' + payload.city + ', ' + payload.state },
+        { type: 'mrkdwn', text: '*Website*\n' + payload.org_url }
+      ]},
+      { type: 'section', fields: [
+        { type: 'mrkdwn', text: '*Ad Grants Status*\n' + (payload.ad_grants_status || 'Not specified') },
+        { type: 'mrkdwn', text: '*G4NP Status*\n' + (payload.g4np_status || 'Not specified') }
+      ]},
+      { type: 'section', text: { type: 'mrkdwn', text: '*Contact*\n' + payload.contact_name + ' — ' + payload.contact_email }},
+      { type: 'section', text: { type: 'mrkdwn', text: '*Differentiator*\n_' + (payload.differentiator || 'Not specified') + '_' }},
+      { type: 'divider' },
+      { type: 'context', elements: [{ type: 'mrkdwn', text: '📋 Form includes org-specific fields, conversion tracking, and technical setup details' }]}
+    ]
+  };
+  
+  try {
     const [slackRes, emailRes] = await Promise.allSettled([
       fetch(slackWebhook, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(slackMsg)
       }),
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
       })
     ]);
-
-    const emailOk = emailRes.status === 'fulfilled' && (await emailRes.value.json()).success;
-    const slackOk = slackRes.status === 'fulfilled' && slackRes.value.ok;
-
-    if (!emailOk && !slackOk) throw new Error('All submission endpoints failed');
-
-    document.getElementById('mainForm').style.display='none';
-    document.getElementById('thankYouScreen').style.display='block';
-    window.scrollTo(0,0);
-  }catch(err){
-    btn.disabled=false;btn.textContent='Submit Intake Form 🎯';
-    alert('Submission failed: '+(err.message||'Unknown error')+'\n\nPlease try again or email hello@sponsorapurpose.org');
+    
+    document.getElementById('mainForm').style.display = 'none';
+    document.getElementById('thankYouScreen').style.display = 'block';
+    window.scrollTo(0, 0);
+    
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit Intake Form 🎯';
+    alert('Submission failed: ' + (err.message || 'Unknown error') + '\n\nPlease try again or email hello@sponsorapurpose.org');
   }
 }
 </script>
