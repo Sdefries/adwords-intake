@@ -2382,8 +2382,11 @@ async function handleSubmit() {
   // Build full payload
   const payload = {
     access_key: '2825e558-31fc-4d95-a1f5-ccf6bda0c102',
+    botcheck: '', 
     subject: 'New Google Ads Intake: ' + req['Organization Name'],
     from_name: 'SAP AdWords Intake',
+
+    
     
     // Step 0 - Organization
     org_name: req['Organization Name'],
@@ -2498,19 +2501,17 @@ async function handleSubmit() {
   };
   
   try {
-    const [slackRes, emailRes] = await Promise.allSettled([
-      fetch(slackWebhook, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slackMsg)
-      }),
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-    ]);
+      const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
     
+    const result = await response.json();
+    
+    if (!result.success) {
+      throw new Error(result.message || 'Submission failed');
+    }
     document.getElementById('mainForm').style.display = 'none';
     document.getElementById('thankYouScreen').style.display = 'block';
     window.scrollTo(0, 0);
