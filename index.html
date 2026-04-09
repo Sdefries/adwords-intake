@@ -521,6 +521,16 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
             <textarea id="success_stories" placeholder="e.g. Buddy was rescued from a hoarding situation and adopted within 3 days — this kind of story resonates with our donors…" style="min-height:80px"></textarea>
           </div>
           <div class="field-group">
+            <label>📌 MUST Include in Ads <span class="hint">Specific things the AI should always work into ad copy</span></label>
+            <textarea id="must_include" placeholder="e.g. 
+• Always mention we're the ONLY no-kill shelter in the county
+• Include our 24/7 intake hotline: (555) 123-4567
+• Mention we never turn away an animal regardless of condition
+• Reference our 4.9★ Google rating
+• Include 'Since 1987' for trust
+• Spring Gala on April 15th — mention in all donation ads" style="min-height:120px"></textarea>
+          </div>
+          <div class="field-group">
             <label>Any Specific Messaging We Should Avoid?</label>
             <textarea id="avoid_messaging" placeholder="e.g. Avoid guilt-based language, don't mention euthanasia statistics, avoid comparing to other shelters…" style="min-height:70px"></textarea>
           </div>
@@ -912,7 +922,7 @@ const ORG_FIELDS = {
         id: 'issue_focus',
         label: '📢 Issue Focus',
         hint: 'What issues do you advocate for?',
-        options: ['Affordable housing','Animal rights','Campaign finance reform','Child welfare','Civil liberties','Climate & environment','Criminal justice reform','Disability rights','Economic justice','Education policy','Election integrity','Food policy','Gun policy','Healthcare access','Human rights','Immigration reform','Indigenous rights','Labor rights','LGBTQ+ rights','Media & press freedom','Mental health policy','Privacy & digital rights','Racial justice','Reproductive rights','Senior issues','Tax policy','Transportation','Veterans issues','Voting rights','Water & utilities','Womens rights']
+        options: ['Affordable housing','Animal welfare','Campaign finance reform','Child welfare','Civil liberties','Climate & environment','Criminal justice reform','Disability rights','Economic justice','Education policy','Election integrity','Food policy','Gun policy','Healthcare access','Human rights','Immigration reform','Indigenous rights','Labor rights','LGBTQ+ rights','Media & press freedom','Mental health policy','Privacy & digital rights','Racial justice','Reproductive rights','Senior issues','Tax policy','Transportation','Veterans issues','Voting rights','Water & utilities','Womens rights']
       },
       {
         id: 'advocacy_type',
@@ -2417,6 +2427,7 @@ async function handleSubmit() {
     exclude_keywords: state.excludeKeywords.join(', '),
     legal_restrictions: document.getElementById('legal_restrictions').value.trim(),
     success_stories: document.getElementById('success_stories').value.trim(),
+    must_include: document.getElementById('must_include').value.trim(),
     avoid_messaging: document.getElementById('avoid_messaging').value.trim(),
     
     // Step 5 - Assets
